@@ -1,0 +1,42 @@
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<div id="sidebar-wrapper" style="font-family: HelveticaNeue-Thin, HelveticaNeueW01-Thin, Helvetica, Arial, sans-serif;" th:fragment="nav">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+        <div class="text-center">
+            <a href="/">
+                <img src="/img/logo.png" width="50" />
+            </a>
+        </div>
+        <a href="/">Cubed</a>
+        </li>
+        <li>
+        <a href="/cubed">
+            <i class="icon icon-topic" style="font-size: 26px;display: block;"></i>
+            List
+        </a>
+        </li>
+        <li>
+        <a href="/deleted">
+            <i class="icon icon-delete" style="font-size: 26px;display: block;"></i>
+            Deleted
+        </a>
+        </li>
+        <li>
+            <a onclick="showSelectDatamartSchemaModal()">
+                <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                Datamart
+            </a>
+        </li>
+        <li>
+            <a onclick="showSelectFunnelSchemaModal()">
+                <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                Funnelmart
+            </a>
+        </li>
+        <div id="version" th:text="${version}">v0.0.0</div>
+    </ul>
+
+</div>
+

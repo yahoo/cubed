@@ -1,0 +1,6 @@
+targetDatabase: "schema1"
+targetTable: "secondly_data"
+disableFunnel: false
+userIdFields: 
+  - "cookie_one"
+  - "cookie_two"

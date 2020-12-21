@@ -1,0 +1,19 @@
+--- # Sample schema
+schemas:
+  - name: alpha
+    database: test
+    fields:
+      - name: one
+        id: 1
+        type: map<string,string>
+        keys:
+          - name: key_one
+            id: 1
+          - name: key_two
+            id: 2
+      - name: two
+        id: 2
+        type: string
+      - name: three
+        id: 3
+        type: string

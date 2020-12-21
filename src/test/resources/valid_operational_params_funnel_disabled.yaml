@@ -1,0 +1,4 @@
+oozieJobType: "hourly"
+oozieBackfillJobType: "hourly"
+disableFunnel: true
+disableBullet: true

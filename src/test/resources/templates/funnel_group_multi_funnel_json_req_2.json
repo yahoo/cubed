@@ -1,0 +1,162 @@
+{
+        "name": "sample_funnel_group_0621",
+        "schemaName": "schema1",
+        "description": "sample funnel group",
+        "owner": "",
+        "projections": [{
+                "column_id": "10",
+                "key": "",
+                "alias": "bc_ver",
+                "schema_name": "schema1"
+        }, {
+                "column_id": "32",
+                "key": "epolyvoreuid",
+                "alias": "eid",
+                "schema_name": "schema1"
+        }],
+        "steps": [{
+                "condition": "AND",
+                "rules": [{
+                        "id": "bcookie",
+                        "field": "bcookie",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "sss"
+                }, {
+                        "id": "bcookie_age",
+                        "field": "bcookie_age",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "as"
+                }],
+                "name": "advertise"
+        }, {
+                "condition": "AND",
+                "rules": [{
+                        "id": "browser_name",
+                        "field": "browser_name",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "ss"
+                }, {
+                        "condition": "OR",
+                        "rules": [{
+                                "id": "bcookie",
+                                "field": "bcookie",
+                                "type": "string",
+                                "input": "text",
+                                "operator": "equal",
+                                "value": "ss"
+                        }, {
+                                "id": "bcookie",
+                                "field": "bcookie",
+                                "type": "string",
+                                "input": "text",
+                                "operator": "equal",
+                                "value": "ssss"
+                        }]
+                }],
+                "name": "view_cart"
+        }, {
+                "condition": "AND",
+                "rules": [{
+                        "id": "cookie_info",
+                        "field": "cookie_info",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "is_null",
+                        "value": null
+                }],
+                "name": "payment"
+        }, {
+                "condition": "AND",
+                "rules": [{
+                        "id": "event",
+                        "field": "event",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "sds"
+                }, {
+                        "id": "click_info[*]",
+                        "field": "click_info[*]",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "fsf",
+                        "data": {},
+                        "subfield": ["sfs"]
+                }],
+                "name": "hesitate"
+        }, {
+                "condition": "AND",
+                "rules": [{
+                        "id": "click_info[*]",
+                        "field": "click_info[*]",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "fsf",
+                        "data": {},
+                        "subfield": ["sfs"]
+                }],
+                "name": "visa"
+        }],
+        "filter": {
+                "condition": "AND",
+                "rules": [{
+                        "id": "filter_tag",
+                        "field": "filter_tag",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "is_null",
+                        "value": null
+                }, {
+                        "id": "network",
+                        "field": "network",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "on"
+                }, {
+                        "id": "pty_family",
+                        "field": "pty_family",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "sports"
+                }, {
+                        "id": "pty_device",
+                        "field": "pty_device",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "desktop"
+                }, {
+                        "id": "event_family",
+                        "field": "event_family",
+                        "type": "string",
+                        "input": "text",
+                        "operator": "equal",
+                        "value": "view"
+                }]
+        },
+        "startDate": "20200620",
+        "queryRange": "1",
+        "repeatInterval": "1",
+        "endDate": "20200622",
+        "userIdColumn": "bcookie",
+        "stepNames": [
+                ["START", "advertise"],
+                ["advertise", "view_cart"],
+                ["advertise", "hesitate"],
+                ["advertise", "visa"],
+                ["view_cart", "payment"],
+                ["hesitate", "view_cart"],
+                ["visa", "payment"]
+        ],
+        "funnelNames":"{}"
+}

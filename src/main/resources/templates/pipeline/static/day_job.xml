@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<configuration>
+<property>
+  <name>mapreduce.map.output.compress</name>
+  <value>true</value>
+</property>
+<property>
+  <name>mapreduce.map.speculative</name>
+  <value>true</value>
+</property>
+<property>
+  <name>mapreduce.reduce.speculative</name>
+  <value>true</value>
+</property>
+<property>
+  <name>mapreduce.cluster.acls.enabled</name>
+  <value>true</value>
+</property>
+<property>
+  <name>mapreduce.job.acl-view-job</name>
+  <value>*</value>
+</property>
+<property>
+  <name>mapreduce.fileoutputcommitter.marksuccessfuljobs</name>
+  <value>false</value>
+</property>
+<property>
+  <name>mapreduce.map.memory.mb</name>
+  <value>3048</value>
+</property>
+<property>
+  <name>yarn.app.mapreduce.am.resource.mb</name>
+  <value>3584</value>
+</property>
+<property>
+  <name>yarn.app.mapreduce.am.command-opts</name>
+  <value>-Xmx3072m -XX:NewRatio=8 -Djava.net.preferIPv4Stack=true</value>
+</property>
+<property>
+    <name>hive.tez.auto.reducer.parallelism</name>
+    <value>true</value>
+</property>
+<property>
+    <name>hive.map.aggr</name>
+    <value>true</value>
+</property>
+<property>
+    <name>hive.exec.dynamic.partition.mode</name>
+    <value>nonstrict</value>
+</property>
+<property>
+    <name>hive.exec.dynamic.partition</name>
+    <value>true</value>
+</property>
+</configuration>

@@ -1,0 +1,36 @@
+# Bullet APIs URL
+bulletUrl: "https://bullet.cubed.com:4443/bullet/api/drpc"
+
+# Disable bullet validataion
+disableBullet: false
+
+# Disable funnel support
+disableFunnel: false
+
+# Oozie job type
+oozieJobType: "hourly"
+
+# Oozie backfill job type
+oozieBackfillJobType: "hourly"
+
+# Target table used in funnel queries
+funnelTargetTable: "hourly_data"
+
+# User id fields
+userIdFields: 
+  - "cookie_one"
+  - "cookie_two"
+
+# Default filters
+defaultFilters:
+  - id: "user_logged_in"
+    operator: "equal"
+    value: 1
+  - id: "browser"
+    operator: "equal"
+    value: "browser1"
+  - id: "debug_tag"
+    operator: "is_null"
+
+# Hql timestamp column attribute
+timestampColumnParam: "timestamp"

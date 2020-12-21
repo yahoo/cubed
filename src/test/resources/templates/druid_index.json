@@ -1,0 +1,79 @@
+{
+  "spec": {
+    "dataSchema": {
+      "dataSource": "cubed_newpipeline",
+      "granularitySpec": {
+        "intervals": [
+          "YEAR-MONTH-DAYTHOUR/PT1H"
+        ],
+        "segmentGranularity": "hour",
+        "queryGranularity": "hour"
+      },
+      "metricsSpec": [
+        {
+          "type": "longSum",
+          "name": "record_count",
+          "fieldName": "record_count"
+        },
+        {
+          "fieldName": "newfieldalias3",
+          "name": "newfieldalias3",
+          "type": "longSum"
+        },
+        {
+          "fieldName": "newfieldalias4",
+          "name": "newfieldalias4",
+          "type": "longMin"
+        },
+        {
+          "fieldName": "newfieldalias5",
+          "name": "newfieldalias5",
+          "type": "thetaSketch",
+          "isInputThetaSketch": true,
+          "size": 2048
+        }
+      ],
+      "parser": {
+        "parseSpec": {
+          "columns": [
+            "hour_unix_timestamp",
+            "record_count",
+            "newfieldalias1",
+            "newfieldalias2",
+            "newfieldalias3",
+            "newfieldalias4",
+            "newfieldalias5"
+          ],
+          "dimensionsSpec": {
+            "dimensions": [
+              "newfieldalias1",
+              "newfieldalias2"
+            ]
+          },
+          "format": "tsv",
+          "timestampSpec": {
+            "column": "hour_unix_timestamp",
+            "format": "millis"
+          }
+        },
+        "type": "string"
+      }
+    },
+    "ioConfig": {
+      "inputSpec": {
+        "paths": "/projects/cubed/newpipeline_YEAR_MONTH_DAY_HOUR",
+        "type": "static"
+      },
+      "type": "hadoop"
+    },
+    "tuningConfig": {
+      "type": "hadoop",
+      "ignoreInvalidRows": true,
+      "partitionsSpec": {
+        "type": "hashed",
+        "targetPartitionSize": 1000000
+      }
+    }
+  },
+  "type": "index_hadoop"
+}

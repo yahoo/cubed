@@ -1,0 +1,12 @@
+targetDatabase: "schema1"
+funnelTargetTable: "daily_data"
+
+# Default filters
+defaultFilters:
+  - id: "user_logged_in"
+    operator: "equal"
+    value: 1
+  - id: "browser"
+    operator: "equal"
+    value: "browser1"
+  - operator: "is_null"

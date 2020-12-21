@@ -1,0 +1,19 @@
+--- # Sample schema
+schemas:
+  - name: alpha
+    database: test
+    tables:
+      hourly_table: hourly_data
+      hourly_partition: dt=${YEAR}${MONTH}${DAY}${HOUR}
+      daily_table: daily_data
+      daily_partition: dt=${YEAR}${MONTH}${DAY}
+    fields:
+      - name: one
+        type: map<string,string>
+        keys:
+          - name: key_one
+          - name: key_two
+      - name: two
+        type: string
+      - name: three
+        type: string

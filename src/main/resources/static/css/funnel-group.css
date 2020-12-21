@@ -1,0 +1,332 @@
+/*!
+ * Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+ */
+
+:root {
+  --border-color: #cacaca;
+  --background-color: #ffffff;
+
+  --background-box-title: #f7f7f7;
+}
+
+.float-child {
+  float: left;
+  padding-right: 5px;
+}
+
+.wrapper {
+  width: 100%;
+  height: calc(60vh - 67px);
+  display: flex;
+}
+
+.col {
+  overflow: auto;
+  width: 300px;
+  height: 100%;
+  border-right: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color);
+}
+
+.col-full {
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  padding-top:10px;
+}
+
+.individual-funnel {
+  display: -webkit-flex; /* Safari */     
+  display: flex; /* Standard syntax */
+}
+
+.drag-drawflow {
+  overflow: auto;
+  float: left;
+  width: 58%;
+  border-top: 0.5px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  line-height: 45px;
+  cursor: move;
+  padding-left: 3px;
+  user-select: none;
+}
+
+.drag-drawflow-ops {
+  overflow: auto;
+  float: right;
+  width: 42%;
+  border-top: 0.5px solid var(--border-color);
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-left: 1px solid var(--border-color);
+  line-height: 45px;
+  padding-left: 2px;
+  user-select: none;
+}
+
+.composed-funnel-name-header {
+  overflow: auto;
+  float: left;
+  width: 15%;
+  border-top: 4px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 4px solid var(--border-color);
+  line-height: 45px;
+  padding-left: 3px;
+  /*text-align: center;*/
+  display: flex; /* not supported in IE10 and earlier versions */
+  justify-content: center; /* not supported in IE10 and earlier versions */
+  align-items: center; /* not supported in IE10 and earlier versions */
+}
+
+.composed-funnel-header {
+  overflow: auto;
+  float: left;
+  width: 70%;
+  border-top: 4px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  line-height: 45px;
+  padding-left: 3px;
+  font-size: 120%;
+  text-align: center;
+}
+
+.composed-funnel-ops-header {
+  overflow: auto;
+  float: right;
+  width: 15%;
+  border-top: 4px solid var(--border-color);
+  border-right: 4px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  line-height: 45px;
+  user-select: none;
+  /*text-align: center;*/
+  display: flex; /* not supported in IE10 and earlier versions */
+  justify-content: center; /* not supported in IE10 and earlier versions */
+  align-items: center; /* not supported in IE10 and earlier versions */
+}
+
+.composed-funnel-name {
+  overflow: auto;
+  float: left;
+  width: 15%;
+  border-top: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 4px solid var(--border-color);
+  line-height: 45px;
+  padding-left: 3px;
+  padding-right: 3px;
+  /*text-align: center;*/
+  display: flex; /* not supported in IE10 and earlier versions */
+  justify-content: center; /* not supported in IE10 and earlier versions */
+  align-items: center; /* not supported in IE10 and earlier versions */
+}
+
+.composed-funnel {
+  overflow: auto;
+  float: left;
+  width: 70%;
+  border-top: 2px solid var(--border-color);
+  border-right: 2px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  line-height: 45px;
+  padding-left: 3px;
+  font-weight: bold;
+  font-size: 120%;
+  text-align: left;
+}
+
+.composed-funnel-ops {
+  overflow: auto;
+  float: right;
+  width: 15%;
+  border-top: 2px solid var(--border-color);
+  border-right: 4px solid var(--border-color);
+  border-bottom: 2px solid var(--border-color);
+  border-left: 2px solid var(--border-color);
+  line-height: 45px;
+  user-select: none;
+  /*text-align: center;*/
+  display: flex; /* not supported in IE10 and earlier versions */
+  justify-content: center; /* not supported in IE10 and earlier versions */
+  align-items: center; /* not supported in IE10 and earlier versions */
+}
+
+.menu {
+  position: absolute;
+  height: 40px;
+  display: block;
+  background: white;
+  width: 100%;
+}
+.menu ul {
+  padding: 0px;
+  margin: 0px;
+  line-height: 40px;
+}
+
+.menu ul li {
+  display: inline-block;
+  margin-left: 10px;
+  border-right: 1px solid var(--border-color);
+  padding-right: 10px;
+  line-height: 40px;
+  cursor: pointer;
+}
+
+.menu ul li.selected {
+  font-weight: bold;
+}
+
+.btn-export {
+  float: right;
+  position: absolute;
+  top: 10px;
+  right: 75px;
+  color: white;
+  border: 1px solid #0e5ba3;
+  background: #6c00db;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 5;
+}
+
+.btn-clear {
+  float: right;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: white;
+  border: 1px solid #96015b;
+  background: #d9534f;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 5;
+}
+.swal-wide{
+    width:80% !important;
+}
+
+.btn-lock {
+  float: right;
+  position: absolute;
+  bottom: 10px;
+  right: 140px;
+  display: flex;
+  font-size: 24px;
+  color: white;
+  padding: 5px 10px;
+  background: #555555;
+  border-radius: 4px;
+  border-right: 1px solid var(--border-color);
+  z-index: 5;
+  cursor: pointer;
+}
+
+.bar-zoom {
+  float: right;
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: flex;
+  font-size: 24px;
+  color: white;
+  padding: 5px 10px;
+  background: #555555;
+  border-radius: 4px;
+  border-right: 1px solid var(--border-color);
+  z-index: 5;
+}
+.bar-zoom svg {
+  cursor: pointer;
+  padding-left: 10px;
+}
+.bar-zoom svg:nth-child(1) {
+  padding-left: 0px;
+}
+
+#drawflow {
+  position: relative;
+  width: calc(100vw - 449px);
+  height: calc(100% - 50px);
+  top: 40px;
+  background: var(--background-color);
+  background-size: 25px 25px;
+  background-image:
+   linear-gradient(to right, #f1f1f1 1px, transparent 1px),
+   linear-gradient(to bottom, #f1f1f1 1px, transparent 1px);
+}
+
+/* Editing Drawflow */
+
+.drawflow .drawflow-node {
+  background: var(--background-color);
+  border: 1px solid var(--border-color);
+  -webkit-box-shadow: 0 2px 15px 2px var(--border-color);
+  box-shadow: 0 2px 15px 2px var(--border-color);
+  padding: 4px;
+  width: 220px;
+}
+
+.drawflow .drawflow-node.selected  {
+  background: white;
+  border: 1px solid #4ea9ff;
+  -webkit-box-shadow: 0 2px 20px 2px #4ea9ff;
+  box-shadow: 0 2px 20px 2px #4ea9ff;
+}
+
+.drawflow .connection .main-path {
+  stroke: #4ea9ff;
+  stroke-width: 3px;
+}
+
+.drawflow .drawflow-node .input, .drawflow .drawflow-node .output {
+  height: 15px;
+  width: 15px;
+  border: 2px solid var(--border-color);
+}
+
+.drawflow .drawflow-node .input:hover, .drawflow .drawflow-node .output:hover {
+  background: #4ea9ff;
+}
+
+.drawflow .drawflow-node .output {
+  right: 0px;
+  background: #ffff66;
+}
+
+.drawflow .drawflow-node .input {
+  left: -15px;
+  background: #ccff33;
+}
+
+.drawflow > .drawflow-delete {
+  border: 2px solid #43b993;
+  background: white;
+  color: #43b993;
+  -webkit-box-shadow: 0 2px 20px 2px #43b993;
+  box-shadow: 0 2px 20px 2px #43b993;
+}
+
+.drawflow-delete {
+  border: 2px solid #4ea9ff;
+  background: white;
+  color: #4ea9ff;
+  -webkit-box-shadow: 0 2px 20px 2px #4ea9ff;
+  box-shadow: 0 2px 20px 2px #4ea9ff;
+}
+
+.drawflow-node.welcome {
+  width: 250px;
+}

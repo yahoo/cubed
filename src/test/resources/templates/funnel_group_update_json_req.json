@@ -1,0 +1,172 @@
+{"schemaName": "schema1",
+  "description": "test updated",
+  "owner": "john_doe",
+  "projections": [
+    {
+      "column_id": 4,
+      "key": "country",
+      "alias": "country",
+      "schema_name": "schema1"
+    },
+    {
+      "column_id": 5,
+      "key": null,
+      "alias": "logged_in",
+      "schema_name": "schema1"
+    }
+  ],
+  "steps": [
+    {
+      "name": "step1",
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event1"
+        },
+        {
+          "id": "cookie_one",
+          "field": "cookie_one",
+          "type": "string",
+          "input": "text",
+          "operator": "is_not_null",
+          "value": null
+        }
+      ]
+    },
+    {
+      "name": "step2",
+      "condition": "OR",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event2"
+        },
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "sth_else"
+        }
+      ]
+    },
+    {
+      "name": "step3",
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event3"
+        },
+        {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "cookie_one_age",
+              "field": "cookie_one_age",
+              "type": "string",
+              "input": "text",
+              "operator": "equal",
+              "value": "10"
+            },
+            {
+              "id": "cookie_one_info",
+              "field": "cookie_one_info",
+              "type": "string",
+              "input": "text",
+              "operator": "is_not_null",
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "step4",
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event4"
+        }
+      ]
+    },
+    {
+      "name": "step5",
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "payment_made"
+        }
+      ]
+    }
+  ],
+  "filter": {
+    "condition": "AND",
+    "rules": [
+      {
+        "id": "network_status",
+        "field": "network_status",
+        "type": "string",
+        "input": "text",
+        "operator": "equal",
+        "value": "on"
+      },
+      {
+        "id": "device",
+        "field": "device",
+        "type": "string",
+        "input": "text",
+        "operator": "equal",
+        "value": "mobile"
+      },
+      {
+        "id": "cookie_one",
+        "field": "cookie_one",
+        "type": "string",
+        "input": "text",
+        "operator": "is_not_null",
+        "value": null
+      }
+    ]
+  },
+  "startDate": "20200601",
+  "queryRange": "1",
+  "repeatInterval": "1",
+  "endDate": "20200602",
+  "userIdColumn": "cookie_one",
+  "stepNames": [
+    ["START", "step1"],
+    ["step1", "step2"],
+    ["step1", "step3"],
+    ["step2", "step4"],
+    ["step3", "step2"],
+    ["step3", "step4"],
+    ["step2", "step5"]
+  ],
+  "topology": "{'drawflow':{'Home':{'data':{'1':{'id':1,'name':'step1','data':{},'class':'step1','html':'step1','typenode':false,'inputs':{'input_1':{'connections':[]}},'outputs':{'output_1':{'connections':[{'node':'2','output':'input_1'},{'node':'3','output':'input_1'}]}},'pos_x':189,'pos_y':243},'2':{'id':2,'name':'step2','data':{},'class':'step2','html':'step2','typenode':false,'inputs':{'input_1':{'connections':[{'node':'1','input':'output_1'}]}},'outputs':{'output_1':{'connections':[{'node':'4','output':'input_1'},{'node':'3','output':'input_1'}]}},'pos_x':481,'pos_y':124},'3':{'id':3,'name':'step3','data':{},'class':'step3','html':'step3','typenode':false,'inputs':{'input_1':{'connections':[{'node':'1','input':'output_1'},{'node':'2','input':'output_1'}]}},'outputs':{'output_1':{'connections':[{'node':'4','output':'input_1'}]}},'pos_x':485,'pos_y':360},'4':{'id':4,'name':'step4','data':{},'class':'step4','html':'step4','typenode':false,'inputs':{'input_1':{'connections':[{'node':'2','input':'output_1'},{'node':'3','input':'output_1'}]}},'outputs':{'output_1':{'connections':[]}},'pos_x':808,'pos_y':245}}}}}",
+  "funnelNames":"{\"step1-step3-step2-step5\":\"funnel5\", \"step1-step2-step4\":\"funnel1\", \"step1-step2-step5\":\"funnel2\", \"step1-step3-step4\":\"funnel3\", \"step1-step3-step2-step4\":\"funnel4\"}"
+}

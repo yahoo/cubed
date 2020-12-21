@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<div id="updateConfirmModal" class="modal fade" role="dialog" th:fragment="updateConfirmModal">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Update pipeline? Only update the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span th:text="${viewPipeline != null} ? ${pipelineOwner}"></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="updateDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>

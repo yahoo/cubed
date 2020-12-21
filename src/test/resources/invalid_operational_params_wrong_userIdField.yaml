@@ -1,0 +1,5 @@
+targetDatabase: "schema1"
+funnelTargetTable: "daily_data"
+disableFunnel: false
+userIdFields: 
+  - "cookie_three"

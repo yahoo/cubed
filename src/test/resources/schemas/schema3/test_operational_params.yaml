@@ -1,0 +1,11 @@
+# Disable bullet validataion
+disableBullet: true
+
+# Disable funnel
+disableFunnel: true
+
+# Oozie job type
+oozieJobType: "hourly"
+
+# Oozie backfill job type
+oozieBackfillJobType: "hourly"

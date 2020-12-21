@@ -1,0 +1,34 @@
+---
+schemas:
+- tables:
+    daily_table: "daily_data"
+    daily_partition: "dt=${YEAR}${MONTH}${DAY}"
+  fields:
+  - name: "event_name"
+    type: "string"
+    id: 1
+  - name: "cookie_one"
+    type: "string"
+    id: 2
+  - name: "cookie_version"
+    type: "string"
+    id: 3
+  - name: "filter"
+    type: "map<string,boolean>"
+    id: 4
+    keys:
+    - name: "is_ok"
+      id: 4001
+    - name: "is_robot"
+      id: 4002
+  - name: "ip"
+    type: "string"
+    id: 5
+  - name: "timestamp"
+    type: "integer"
+    id: 6
+  - name: "cookie_two"
+    type: "string"
+    id: 7
+  name: "schema2"
+  database: "schema2"

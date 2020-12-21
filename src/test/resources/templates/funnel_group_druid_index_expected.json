@@ -1,0 +1,80 @@
+{
+  "spec": {
+    "dataSchema": {
+      "dataSource": "cubed_test",
+      "granularitySpec": {
+        "intervals": [
+          "YEAR-MONTH-DAY/P1D"
+        ],
+        "segmentGranularity": "day",
+        "queryGranularity": "day"
+      },
+      "metricsSpec": [
+        {
+          "fieldName": "id",
+          "name": "id",
+          "type": "thetaSketch",
+          "isInputThetaSketch": true,
+          "size": 262144
+        }
+      ],
+      "parser": {
+        "parseSpec": {
+          "columns": [
+            "date",
+            "country",
+            "logged_in",
+            "step",
+            "prev_step",
+            "funnel_name",
+            "id"
+          ],
+          "dimensionsSpec": {
+            "dimensions": [
+              "country",
+              "logged_in",
+              "step",
+              "prev_step",
+              "funnel_name"
+            ]
+          },
+          "format": "tsv",
+          "timestampSpec": {
+            "column": "date",
+            "format": "yyyyMMdd"
+          }
+        },
+        "type": "hadoopyString"
+      }
+    },
+    "ioConfig": {
+      "type": "hadoop",
+      "inputSpec": {
+        "type": "multi",
+        "children": [
+          {
+            "type": "static",
+            "paths": "hdfs:///projects/cubed/test_funnel2_YEAR_MONTH_DAY/"
+          },
+          {
+            "type": "static",
+            "paths": "hdfs:///projects/cubed/test_funnel1_YEAR_MONTH_DAY/"
+          },
+          {
+            "type": "static",
+            "paths": "hdfs:///projects/cubed/test_funnel3_YEAR_MONTH_DAY/"
+          }
+        ]
+      }
+    },
+    "tuningConfig": {
+      "type": "hadoop",
+      "ignoreInvalidRows": true,
+      "partitionsSpec": {
+        "type": "hashed",
+        "targetPartitionSize": 1000000
+      }
+    }
+  },
+  "type": "index_hadoop"
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<bundle-app xmlns="uri:oozie:bundle:0.1" name="${product_name}_${owner}">
+  <coordinator name="funnel_group">
+    <app-path>${project_path}/funnel_group/coordinator.xml</app-path>
+  </coordinator>
+  <coordinator name="funnel2">
+    <app-path>${project_path}/funnel_group/coordinator_test_funnel2.xml</app-path>
+  </coordinator>
+  <coordinator name="funnel1">
+    <app-path>${project_path}/funnel_group/coordinator_test_funnel1.xml</app-path>
+  </coordinator>
+  <coordinator name="funnel3">
+    <app-path>${project_path}/funnel_group/coordinator_test_funnel3.xml</app-path>
+  </coordinator>
+</bundle-app>

@@ -1,0 +1,50 @@
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<div id="selectDatamartSchemaModal" class="modal fade" role="dialog" th:fragment="selectDatamartSchemaModal">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="addColumnModalLabel">
+                    Please Select Schema
+                </h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="selectSchemaForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="datamart-schema-selector">Schema</label>
+                        <div class="col-sm-10">
+                            <select class="form-control width-all" id="datamart-schema-selector" style="width:100%">
+                                <option th:each="schema : ${schemas}" th:text="${schema}" th:value="${schema}"  th:selected="${defaultSchema==schema}">schema_name</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="submit-select-schema" onclick="showDatamart()" class="btn btn-success">Confirm</button>
+                            <button id="cancel-select-schema" class="btn btn-danger" data-dismiss='modal' aria-hidden='true'>Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSelectDatamartSchemaModal() {
+            $('#selectDatamartSchemaModal').modal('show');
+        }
+        // Submit add column projection form
+        function showDatamart() {
+            window.location.href = '/datamart/new?schemaName=' + $('#datamart-schema-selector :selected').val();
+            return true;
+        }
+    </script>
+</div>

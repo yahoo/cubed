@@ -1,0 +1,2734 @@
+<!DOCTYPE html>
+
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<html lang="en">
+
+    <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Cubed</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+    
+    <script src="/js/jquery.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    
+    <script src="/js/bootstrap.min.js"></script>
+    <link href="/css/bootstrap.min.css" rel="stylesheet" />
+    
+    <script src="/js/jquery.dataTables.min.js"></script>
+    <script src="/js/dataTables.bootstrap.min.js"></script>
+    <link href="/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <script src="/js/dataTables.buttons.min.js"></script>
+    <link href="/css/buttons.dataTables.min.css" rel="stylesheet" />
+    <script src="/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/jszip.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/pdfmake.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/buttons.flash.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/buttons.print.min.js"></script>
+    <script type="text/javascript" language="javascript" src="/js/vfs_fonts.js"></script>
+    
+    <script src="/js/query-builder.standalone.min.js"></script>
+    <link href="/css/query-builder.default.min.css" rel="stylesheet" />
+    
+    <script src="/js/select2.min.js"></script>
+    <link href="/css/select2.min.css" rel="stylesheet" />
+    <link href="/css/select2-bootstrap.min.css" rel="stylesheet" />
+    
+    <link href="/css/simple-sidebar.css" rel="stylesheet" />
+    
+    <link href="/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <script src="/js/bootstrap-switch.min.js"></script>
+     
+    <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <script src="/js/bootstrap-datepicker.min.js"></script>   
+    
+    <link href="/css/toastr.min.css" rel="stylesheet" />
+    <script src="/js/toastr.min.js"></script>
+    
+    <link href="/css/funnelmart.css" rel="stylesheet" />
+    
+    <link href="/css/pivot.min.css" rel="stylesheet" />
+    <script src="/js/pivot.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+    <script src="/js/d3_renderers.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+    <script src="/js/c3_renderers.min.js"></script>
+    <script src="/js/export_renderers.min.js"></script>
+    
+    <script type="text/javascript" language="javascript" src="/js/stomp.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+    
+    <script src="/js/FileSaver.min.js"></script>
+    
+    <script src="/js/interact.min.js"></script>
+    <!-- /* Drawflow funnel group drag n drop */-->
+    <link rel="stylesheet" type="text/css" href="/css/drawflow.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/funnel-group.css" />
+    <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+    
+    
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    
+    
+    <!-- Ads-data icon -->
+    <link href="/css/icons-ads-data.css" rel="stylesheet" />
+</head>
+
+    <body>
+        <script src="/js/drawflow.min.js"></script>
+        <script src="/js/font-awesome-all.min.js"></script>
+        <div id="wrapper">
+            <!-- Sidebar -->
+            <div id="sidebar-wrapper" style="font-family: HelveticaNeue-Thin, HelveticaNeueW01-Thin, Helvetica, Arial, sans-serif;">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+        <div class="text-center">
+            <a href="/">
+                <img src="/img/logo.png" width="50" />
+            </a>
+        </div>
+        <a href="/">Cubed</a>
+        </li>
+        <li>
+        <a href="/cubed">
+            <i class="icon icon-topic" style="font-size: 26px;display: block;"></i>
+            List
+        </a>
+        </li>
+        <li>
+        <a href="/deleted">
+            <i class="icon icon-delete" style="font-size: 26px;display: block;"></i>
+            Deleted
+        </a>
+        </li>
+        <li>
+            <a onclick="showSelectDatamartSchemaModal()">
+                <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                Datamart
+            </a>
+        </li>
+        <li>
+            <a onclick="showSelectFunnelSchemaModal()">
+                <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                Funnelmart
+            </a>
+        </li>
+        <div id="version">0.0.0</div>
+    </ul>
+
+</div>
+            <!-- /#sidebar-wrapper -->
+
+            <!-- Page Content -->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1>Build Your Funnel Mart</h1>
+                            <div>
+                                
+                                <div>
+                                    <form id="newFunnelForm">
+                                        <fieldset>
+                                            <!-- Name of datamart -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="dataMartName">Name</label>&nbsp;<a id="tooltip-name-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <input id="dataMartName" name="dataMartName" type="text" pattern="[A-Za-z0-9 _-]{1,30}" placeholder="Name of funnel mart" class="form-control input-md" required="" value="" />
+                                                </div>
+                                                <div id="tooltip-name" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Name of the Funnel Mart</h5>
+                                                        <p>Name of your mart. The name should be unique on Cubed. If you attempt to use a used name, a warning message will show up when you save the mart. This name is also used as your funnel mart table name.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Description of datamart -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="dataMartDescription">Description</label>&nbsp;<a id="tooltip-description-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <input id="dataMartDescription" name="dataMartDescription" type="text" pattern="[A-Za-z0-9 _-]{1,60}" placeholder="Description sentence for funnel mart" class="form-control input-md" required="" value="" />
+                                                </div>
+                                                <div id="tooltip-description" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Description of the Funnel Mart</h5>
+                                                        <p>A simple description sentence briefly introduces the purpose of this mart.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Owner of datamart -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="dataMartOwner">Owner</label>&nbsp;<a id="tooltip-owner-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <input id="dataMartOwner" name="dataMartOwner" type="text" pattern="[A-Za-z0-9 _-]{1,30}" placeholder="Owner of funnel mart" class="form-control input-md" required="" value="" />
+                                                </div>
+                                                <div id="tooltip-owner" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Owner of the Funnel Mart</h5>
+                                                        <p>Usually the creator is the owner of the funnel mart.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Schema of datamart -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="schemaSelector">Schema</label>&nbsp;<a id="tooltip-schema-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <span id="schemaSelectorGroup">
+                                                    <select class="form-control" name="schemaSelector" id="schemaSelector">
+                                                        <option selected="selected" value="schema1">schema1</option>
+                                                        <option value="schema2">schema2</option>
+                                                        <option value="schema4">schema4</option>
+                                                    </select>
+                                                </span>
+                                                <div id="tooltip-schema" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Schema the Funnel Mart is Created On</h5>
+                                                        <p>The schema of the data source. Different schemas provide different fields to choose from in <b>Aggregates</b>, <b>Filter</b>, <b>User Id Field</b>, and <b>Create A Funnel Step</b> section. If you change the schema when creating your funnel mart, the current progress will be lost.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Group By columns -->
+                                            <div class="form-group">
+                                                <label class="control-label">Aggregates</label>&nbsp;<a id="tooltip-aggregates-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <!-- Add a new projection button -->
+                                                    <button type="button" class="btn btn-success" data-toggle="modal" onclick="ShowModal(false)">Group By</button>
+                                                    <!-- Table to display the projections -->
+                                                    <table id="projectionTable" class="table table-striped table-hover table-bordered" style="width:100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Column</th>
+                                                                <th>Alias</th>
+                                                                <th>Key</th>
+                                                                <th>Column ID</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <div id="tooltip-aggregates" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Adding Aggregations to Funnel Mart</h5>
+                                                        <p>By adding aggregation columns to your funnel mart, you can obtain funnel conversion results within specific aggregation groups. For example, if you group by the "country" and the "gender" column, you will be able to see funnel results within every value combinations in country and gender (e.g. United States and Female).</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Filter -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="filter">Filter</label>&nbsp;<a id="tooltip-filter-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <div id="filterBuilder"></div>
+                                                </div>
+                                                <div id="tooltip-filter" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Filters Against the Source Data</h5>
+                                                        <p>The filters determine which records will be part of the output data (e.g. If you only interested in US market data, you can filter by country=us). Complex combinations of AND and OR filters are supported, as well as arbitrary nesting of groups of filters.</p>
+                                                        <p>A <b>Filter Group</b> consists of at least one filter. All filters within a Filter Group have either an AND or a OR relationship combine them, determined by the AND or OR toggle at the top left of each group.</p>
+                                                        <p><b>First level columns</b> can be found in the drop down list on each Filter Rule.</p>
+                                                        <p><b>Maps</b> can be accessed as: </p>
+                                                        <ul>
+                                                          <li><b>foo</b> for the entire map.</li>
+                                                          <li><b>foo[bar]</b> for the specific "bar" subfield inside the "foo" map. This only works for maps where all subfields are known in the schema configuration.</li>
+                                                          <li><b>foo[*]</b> for maps where Cubed does not know all possible subfields, so the user needs to enter the desired subfield manually.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- User id field -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="userIdSelector">User Id Field</label>&nbsp;<a id="tooltip-user-id-field-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <span id="userIdSelectorGroup">
+                                                    <select class="form-control" name="userIdSelector" id="userIdSelector">
+                                                        <option>cookie_one</option>
+                                                        <option>cookie_two</option>
+                                                    </select>
+                                                </span>
+                                                <div id="tooltip-user-id-field" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">User Id Field</h5>
+                                                        <p>The User Id Field in the source data you would like to have the funnel mart count based upon. It is a unique identification of users. Cubed will track down each unique user's activity in the data source to see what are the steps this user finished, and Cubed performs COUNT() on the user id field to calculate how many users landed on each step.</p>
+                                                        <p>For example, in a four-step funnel, user A001 (user id) did step 1 at timestamp 100, did step 2 at timestamp 200, did step 3 at timestamp 300, but did not do step 4. Then we consider this user dropped out at step 3, and we only count this user for the first 3 steps.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Step Builder -->
+                                            <div class="form-group">
+                                                <label class="control-label">Create A Funnel Step</label>&nbsp;<a id="tooltip-create-a-funnel-step-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <div id="stepBuilder" style="margin-bottom:1em"></div>
+                                                    <!-- Save step for reuse button -->
+                                                    <button type="button" class="btn btn-success" onclick="saveStep()">Save Step for Reuse</button>
+                                                    <button type="button" class="btn btn-danger" onclick="clearStepBuilder()">Reset Step Creator</button>
+                                                </div>
+                                                <div id="tooltip-create-a-funnel-step" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Create A Funnel Step</h5>
+                                                        <p>Here you can use SQL filters (predicates) to define a specific funnel step. A funnel step is a user interaction point you would like to study in your product. By chaining several funnel steps together, we can construct a user journey path, and funnel analysis will be performed on these funnel steps.</p>
+                                                        <p>By clicking <b>Save Step for Reuse</b>, you can save the funnel step, and it will appear on the left side of the drawing canvas. Saved steps are available to be dragged and dropped into the canvas. You can <b>View/Edit</b> or <b>Delete</b> saved steps. By clicking <b>View/Edit</b>, the saved step definition will be displayed in the "Create A Funnel Step" section. You can edit the step definition, and save it under the same step name to finish the update. You can also take advantage of this feature to build new steps based on saved steps. Just save the new step under a different name will finish create the new step. By clicking <b>Delete</b>, the corresponding saved step will be deleted, and any related steps and connections in the canvas will be deleted as well.</p>
+                                                        <p>By clicking <b>Reset Step Creator</b>, the contents in the "Create A Funnel Step" section will be reset. So you can create new steps from scratch.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Funnel Group Canvas -->
+                                            <div class="wrapper">
+                                                <div id="created-steps" class="col"></div>
+                                            
+                                                <div class="col-right">
+                                                  <div class="menu">
+                                                    <ul>
+                                                      <li onclick="editor.changeModule('Home'); changeModule(event);" style="font-weight: bold">Draw Funnel Group by Drag and Drop Saved Steps&nbsp;<a id="tooltip-drag-and-drop-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a></li>
+                                                    </ul>
+                                                  </div>
+                                                  <div id="drawflow" ondrop="drop(event)" ondragover="allowDrop(event)">
+                                                    <!-- <div class="btn-export" onclick="Swal.fire({ title: 'Export',
+                                                    html: '<pre><code>'+JSON.stringify(editor.export(), null,2)+'</code></pre>'
+                                                    })">Export</div> -->
+                                                    <div class="btn-clear" onclick="editor.clearModuleSelected()">Clear</div>
+                                                    <div class="btn-lock">
+                                                      <i id="lock" class="fas fa-lock" onclick="editor.editor_mode='fixed'; changeMode('lock');"></i>
+                                                      <i id="unlock" class="fas fa-lock-open" onclick="editor.editor_mode='edit'; changeMode('unlock');" style="display:none;"></i>
+                                                    </div>
+                                                    <div class="bar-zoom">
+                                                      <i class="fas fa-search-minus" onclick="editor.zoom_out()"></i>
+                                                      <i class="fas fa-search" onclick="editor.zoom_reset()"></i>
+                                                      <i class="fas fa-search-plus" onclick="editor.zoom_in()"></i>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                                <div id="tooltip-drag-and-drop" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Draw a Funnel Mart</h5>
+                                                        <p>You can drag the saved step name on the left bar and drop it onto the canvas. The tail node of one step can be connected to the head node of the other step. Multiple lines can be connected to a head or tail node.</p>
+                                                        <p>Connecting funnel steps with names forms a directed graph. You can use the flows in the graph to simulate the key flows in the product. No loops (e.g. A->B->A) are allowed and a warning will be shown if a loop is detected.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Individual funnels -->
+                                            <div class="form-group">
+                                                <div class="float-container">
+                                                    <div class="float-child">
+                                                        <button id="viewComposedFunnelsButton" type="button" class="btn btn-success" data-toggle="modal" onclick="viewComposedFunnels()" style="margin-top:1em">View Funnels</button>
+                                                    </div>
+
+                                                    <div class="float-child">
+                                                        <button id="hideComposedFunnelsButton" type="button" class="btn btn-success" data-toggle="modal" onclick="hideComposedFunnels()" style="margin-top:1em;display:none">Hide Funnels</button>
+                                                    </div>
+
+                                                    <div class="float-child">
+                                                        <a id="tooltip-view-hide-funnel-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign" style="margin-top:2em"></a>
+                                                    </div>
+                                                    <div id="tooltip-view-hide-funnel" class="popover" role="tooltip">
+                                                        <div>
+                                                            <h5 class="tooltip-header">View/Hide Individual Funnels</h5>
+                                                            <p>By clicking "View Funnels", you will be able to see all individual funnels in the graph. These individual funnels start from the start nodes and end at the end nodes. Start nodes are nodes do not have any incoming connection, and end nodes are nodes do not have any outgoing connection.</p>
+                                                            <p>You can also click "View Funnels" to refresh funnel results.</p>
+                                                            <p>By clicking "Hide Funnels", you can hide all the individual funnel results.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div id="viewEachFunnelResult">
+                                                    <div id="composedFunnels" class="col-full"></div>
+                                                </div>
+
+                                                <div id="tooltip-composed-funnel-name" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Name for Each Funnel</h5>
+                                                        <p>It is required to specify a custom name for each funnel. The names are used to filter each individual funnel in BI tools. Each funnel's name should be unique.</p>
+                                                    </div>
+                                                </div>
+                                                <div id="tooltip-composed-funnel" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Steps for each Funnel</h5>
+                                                        <p>Here lists the specific steps of each individual funnel.</p>
+                                                    </div>
+                                                </div>
+                                                <div id="tooltip-composed-funnel-operations" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Operations Can Be Performed</h5>
+                                                        <p><b>Preview HQL</b>: You can preview the composed Hive query for each individual funnel. In the Hive queries, you can find related funnel step definitions, global filters, and aggregations. When the funnel mart is deployed, the pipeline schedules each of these Hive script to run regularly, and combine the results afterwards.</p>
+                                                        <p><b>Run Ad Hoc</b>: You can run the Hive script shown in "Preview HQL" on the date you specified on the "Start Date" section. It will take a few minites to finish, and you will see results shown in a tabular format as well as a bar chart, if the result is not empty. You can use this feature to test if each individual funnel can produce the result you expected before deploying the funnel mart. If no results are generated or results are not ideal, you can go back to change the step definitions, refresh the funnel results by clicking the "View Funnels" button, and run ad hoc again.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Funnel preview-->
+                                            <div class="form-group">
+                                                <table id="queryPreviewTable" class="table table-striped table-hover table-bordered" style="width:100%;display:none;">
+                                                    <tr><td>
+                                                        <div id="queryPreview" style="white-space:pre-wrap;"></div>
+                                                    </td></tr>
+                                                </table>
+                                                <div id="resultsGroup" style="display:none;">
+                                                    <label class="control-label">Funnel Query Results</label>
+                                                    <div id="funnelResults">
+                                                        <div id="funnelResultsDataTableContainer"></div>
+                                                        <div id="funnelResultsPivotTableContainer"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Backfill -->
+                                            <div class="form-group">
+                                                <label class="control-label">Start Date</label>&nbsp;<a id="tooltip-start-date-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div id="backfillStartDateSelector">
+                                                    <div id="backfillStartDateSelectorTextGroup" class="input-group date">
+                                                        <input type="text" id="backfillStartDateSelectorText" pattern="[A-Za-z0-9 _-]{1,30}" class="form-control" />
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-th"></i></span>
+                                                    </div>
+                                                </div>
+                                                <div id="tooltip-start-date" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Start Date of the Funnel Mart</h5>
+                                                        <p>The start date determines from which date the funnel mart backfills.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                            <!-- Query range (day) -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="startTimeDateSelector">Query Range (day)</label>&nbsp;<a id="tooltip-query-range-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <span>
+                                                    <span class="input-group">
+                                                        <input type="number" id="queryRangeNumber" class="form-control" pattern="[0-9]{1,3}" placeholder="Default to 1 day" />
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+                                                    </span>
+                                                </span>
+                                                <div id="tooltip-query-range" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Query Range of the Funnel Mart</h5>
+                                                        <p>The Query Range defines the granularity of your funnel mart. It means the time window the funnel analysis is performed on. If it's one day, the funnel analysis is calculated based on the events belong to each one-day window (e.g. the "ad_click -> content_page_view" funnel usually happens quickly, so it fits in the one-day window). If it's multi-day, for example, you want to study the user conversion after a 7-day trial (or the conversion could happen within the 7 days), you can set it to 7 days.</p>
+                                                        <p>As a rule of thumb, we recommend to use 1-day query range for funnels that can finish within less an hour. If the funnel needs several hours to several days to finish, the multi-day query range could be more appropriate. For example, if a user finishes registration on day 1, and makes a purchase on day 2, then the 1-day query range could not capture it as a completion of the "registration -> purchase" funnel.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Repeat Interval (day) -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="startTimeDateSelector">Repeat Interval (day)</label>&nbsp;<a id="tooltip-repeat-interval-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <span>
+                                                    <span class="input-group">
+                                                        <input type="number" id="repeatIntervalNumber" class="form-control" pattern="[0-9]{1,3}" placeholder="Default to 1 day" />
+                                                        <span class="input-group-addon"><i class="glyphicon glyphicon-repeat"></i></span>
+                                                    </span>
+                                                </span>
+                                                <div id="tooltip-repeat-interval" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Repeat Interval of the Funnel Mart</h5>
+                                                        <p>The Repeat Interval defines how frequently your funnel mart pipeline runs. You can schedule it to run every day, or once a few days. By combining this setting with the Query Range, you can control how your pipeline is scheduled and how the results are calculated. For example: </p>
+                                                        <ul>
+                                                          <li><b>Query Range: 1 day + Repeat Interval: 1 day:</b> Funnel Analysis is performed on a per-day basis and the pipeline is run every day. So every day you can receive results calculated based on that day's data.</li>
+                                                          <li><b>Query Range: 7 days + Repeat Interval: 7 days:</b> Funnel Analysis is performed on each 7-day window, and the pipeline is run every week. So every week you receive results calculated based on the previous week.</li>
+                                                          <li><b>Query Range: 7 days + Repeat Interval: 1 day:</b> Funnel Analysis is performed on each 7-day window, and the pipeline is run every day. So every day you recieve results calculated based on the past 7 days.</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Show Oozie link -->
+                                            <div id="oozieJobLinkStatusGroup" style="display:none">
+                                                <div class="form-group">
+                                                    <label class="control-label" for="oozieJobLink">Oozie Job</label>&nbsp;<a id="tooltip-oozie-job-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                    <div id="oozieJobLinkDiv">
+                                                        <span class="form-control input-md" style="                                                                             font-weight: normal;                                                                             line-height: 24px;                                                                             font-size: 14px;                                                                             display: inline-block;">
+                                                            <span class="glyphicon glyphicon-link"></span>
+                                                            <a target="_blank" href=""></a>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div id="tooltip-oozie-job" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Oozie Job URL</h5>
+                                                        <p>The Oozie job URL. This Oozie job is started from the specified "Start Date" of this funnel mart.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Show Pivot and Superset UI links -->
+                                            <div id="uiLinkStatusGroup" style="display:none">
+
+                                                <div class="form-group">
+                                                    <label class="control-label">Visualize this Funnel Mart</label>&nbsp;<a id="tooltip-visualize-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                    <div>
+                                                        <span class="form-control input-md" style="font-weight: normal;                                                                                                     line-height: 24px;                                                                                                     font-size: 14px;                                                                                                     display: inline-block;">
+                                                            <span class="glyphicon glyphicon-link"></span>
+                                                            <a target="_blank" href="">Turnilo</a>
+                                                        </span>
+                                                        <br />
+                                                        <span class="form-control input-md" style="font-weight: normal;                                                                                                     line-height: 24px;                                                                                                     font-size: 14px;                                                                                                     display: inline-block;">
+                                                            <span class="glyphicon glyphicon-link"></span>
+                                                            <a target="_blank" href="">Superset</a>
+                                                        </span>
+                                                    </div>
+                                                    <div id="tooltip-visualize" class="popover" role="tooltip">
+                                                        <div>
+                                                            <h5 class="tooltip-header">Links to Visualization Tools</h5>
+                                                            <p>Here lists the BI tools supported by Cubed.</p>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!-- Buttons: Submit, Cancel, Download, Launch, Delete, etc -->
+                                            <div class="form-group">
+                                                <label class="control-label" for="submit">Actions</label>&nbsp;<a id="tooltip-actions-icon" href="javascript://" data-toggle="popover" class="glyphicon glyphicon-info-sign"></a>
+                                                <div>
+                                                    <!-- Buttons when creating pipeline -->
+                                                    <span>
+                                                        <!-- Buttons when creating pipeline -->
+                                                        <button id="saveNewFunnel" name="submit" class="btn btn-success">Save</button>
+                                                        <a id="cancelQuery" class="btn btn-danger">Cancel</a>
+                                                    </span>
+                                                    
+                                                </div>
+                                                <div id="tooltip-actions" class="popover" role="tooltip">
+                                                    <div>
+                                                        <h5 class="tooltip-header">Actions Can be Performed</h5>
+                                                        <p>According to different stages of the funnel mart pipeline, different subsets of actions can be performed.</p>
+                                                        <p><b>Save</b>: Save the funnel mart. It appears when creating a new funnel mart.</p>
+                                                        <p><b>Launch To Production</b>: Launch a saved funnel mart pipeline to production to run regularly.</p>
+                                                        <p><b>Update</b>: Update the current funnel mart when changes have been made on a saved funnel mart.</p>
+                                                        <p><b>Download</b>: Download the saved funnel mart pipeline specifications.</p>
+                                                        <p><b>Clone</b>: Clone the current saved funnel mart. A replicated new funnel mart will be created.</p>
+                                                        <p><b>Stop</b>: Stop the deployed (running) funnel mart pipeline.</p>
+                                                        <p><b>Delete</b>: Delete an updeployed or stopped funnel mart pipeline.</p>
+                                                        <p><b>Restore</b>: Restore a deleted funnel mart pipeline.</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add Column Modal -->
+                <div id="addColumnModal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <!-- Modal Header -->
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">
+                                    <span aria-hidden="true">&times;</span>
+                                    <span class="sr-only">Close</span>
+                                </button>
+                                <h4 class="modal-title" id="addColumnModalLabel">
+                                    Aggregate Column
+                                </h4>
+                            </div>
+                            <!-- Modal body -->
+                            <div class="modal-body">
+                                <form id="addColumnForm" class="form-horizontal" role="form">
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="columnToAdd">Column</label>
+                                        <div class="col-sm-10">
+                                            <select class="form-control width-all" id="column-selector" style="width:100%">
+                                                <option value="browser" type="string" dbId="3">browser</option>
+                                                <option value="bucket" type="integer" dbId="15">bucket</option>
+                                                <option value="content_id" type="string" dbId="17">content_id</option>
+                                                <option value="cookie_one" type="string" dbId="2">cookie_one</option>
+                                                <option value="cookie_one_age" type="string" dbId="11">cookie_one_age</option>
+                                                <option value="cookie_one_info" type="string" dbId="12">cookie_one_info</option>
+                                                <option value="cookie_one_info[age]" type="string" key="age" dbId="12">cookie_one_info[age]</option>
+                                                <option value="cookie_one_info[version]" type="string" key="version" dbId="12">cookie_one_info[version]</option>
+                                                <option value="cookie_two" type="string" dbId="7">cookie_two</option>
+                                                <option value="debug_tag" type="boolean" dbId="6">debug_tag</option>
+                                                <option value="debug_tag[is_deleted]" type="boolean" key="is_deleted" dbId="6">debug_tag[is_deleted]</option>
+                                                <option value="debug_tag[is_ok]" type="boolean" key="is_ok" dbId="6">debug_tag[is_ok]</option>
+                                                <option value="device" type="string" dbId="14">device</option>
+                                                <option value="geo_info" type="string" dbId="4">geo_info</option>
+                                                <option value="geo_info[city]" type="string" key="city" dbId="4">geo_info[city]</option>
+                                                <option value="geo_info[country]" type="string" key="country" dbId="4">geo_info[country]</option>
+                                                <option value="geo_info[state]" type="string" key="state" dbId="4">geo_info[state]</option>
+                                                <option value="network_status" type="string" dbId="13">network_status</option>
+                                                <option value="property" type="string" dbId="16">property</option>
+                                                <option value="random_info_one" type="string" dbId="8">random_info_one</option>
+                                                <option value="random_info_one[*]" type="string" key="*" dbId="8">random_info_one[*]</option>
+                                                <option value="random_info_two" type="string" dbId="9">random_info_two</option>
+                                                <option value="random_info_two[*]" type="string" key="*" dbId="9">random_info_two[*]</option>
+                                                <option value="timestamp" type="integer" dbId="1">timestamp</option>
+                                                <option value="user_event" type="string" dbId="10">user_event</option>
+                                                <option value="user_logged_in" type="boolean" dbId="5">user_logged_in</option>
+                                                
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group" id="mapKeyGroup">
+                                        <label class="col-sm-2 control-label" id="columnKeyToAddLabel" for="mapKey">Key</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="columnKeyToAdd" pattern="[A-z0-9_]*" title="Only alphanumeric characters and underscores are allowed" required="required" placeholder="Key, only used with map columns" />
+                                        </div>
+                                    </div>
+                                    <div id="isAddOrEdit" style="display: none;">
+                                        <div id="add" style="display: none;"></div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-2 control-label" for="columnAlias">Alias</label>
+                                        <div class="col-sm-10">
+                                            <input type="text" class="form-control" id="columnAlias" pattern="[a-z_]*" title="Starts with letter, contains lowercase letters and underscores" placeholder="Alias for column" />
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-sm-offset-2 col-sm-10">
+                                            <button id="submit-add-column" type="submit" class="btn btn-success">Add</button>
+                                            <button id="cancel-add-column" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                                            <button id="delete-add-column" class="btn btn-warning" data-dismiss="modal" aria-hidden="true" style="display:none">Delete</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="selectDatamartSchemaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="addColumnModalLabel">
+                    Please Select Schema
+                </h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div id="selectSchemaForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="datamart-schema-selector">Schema</label>
+                        <div class="col-sm-10">
+                            <select class="form-control width-all" id="datamart-schema-selector" style="width:100%">
+                                <option selected="selected" value="schema1">schema1</option>
+                                <option value="schema2">schema2</option>
+                                <option value="schema3">schema3</option>
+                                <option value="schema4">schema4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="submit-select-schema" onclick="showDatamart()" class="btn btn-success">Confirm</button>
+                            <button id="cancel-select-schema" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSelectDatamartSchemaModal() {
+            $('#selectDatamartSchemaModal').modal('show');
+        }
+        // Submit add column projection form
+        function showDatamart() {
+            window.location.href = '/datamart/new?schemaName=' + $('#datamart-schema-selector :selected').val();
+            return true;
+        }
+    </script>
+</div>
+                
+                <div id="selectFunnelSchemaModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">x</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="addColumnModalLabel">
+                    Please Select Schema
+                </h4>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                
+                <div id="selectSchemaForm" class="form-horizontal">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label" for="funnel-schema-selector">Schema</label>
+                        <div class="col-sm-10">
+                            <select class="form-control width-all" id="funnel-schema-selector" style="width:100%">
+                                <option selected="selected" value="schema1">schema1</option>
+                                <option value="schema2">schema2</option>
+                                <option value="schema4">schema4</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button id="submit-select-funnel-schema" onclick="showFunnel()" class="btn btn-success">Confirm</button>
+                            <button id="cancel-select-funnel-schema" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showSelectFunnelSchemaModal() {
+            $('#selectFunnelSchemaModal').modal('show');
+        }
+        // Submit add column projection form
+        function showFunnel() {
+            window.location.href = '/funnelgroup/new?schemaName=' + $('#funnel-schema-selector :selected').val();
+            return true;
+        }
+    </script>
+</div>
+        </div>
+        <!-- Update Confirmation Modal -->
+        <div id="updateConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Update pipeline? Only update the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="updateDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Launch Confirmation Modal -->
+        <div id="launchConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Launch pipeline? Only launch the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="launchDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Stop Confirmation Modal -->
+        <div id="stopConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Stop pipeline? Only stop the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="stopDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Clone Confirmation Modal -->
+        <div id="cloneConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Clone pipeline?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="cloneDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Delete Confirmation Modal -->
+        <div id="deleteConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Delete pipeline? Only delete the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="deleteDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+        <!-- Restore Confirmation Modal -->
+        <div id="restoreConfirmModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Restore pipeline? Only restore the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="restoreDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+    <!-- /#wrapper -->
+    <script language="javascript" type="text/javascript">
+        /*<![CDATA[*/
+
+        // If content for the pipeline is modified, limit the actions that can be performed
+        // Only perform these actions if viewing pipeline.
+        function UpdatePipelineAndLimitActions() {
+            
+            // Hide launch, download, and delete button.
+            // Show update button.
+            if (false) {
+                $('#launchDatamart').addClass('hidden');
+                $('#downloadDatamart').addClass('hidden');
+                $('#viewDatamartEtl').addClass('hidden');
+                $('#deleteDatamart').addClass('hidden');
+                $('#updateDatamart').removeClass('hidden');
+            }
+            
+        }
+
+    $("#tooltip-name-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-name").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-description-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-description").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-owner-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-owner").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-schema-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-schema").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-aggregates-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-aggregates").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-filter-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-filter").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-user-id-field-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-user-id-field").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-create-a-funnel-step-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-create-a-funnel-step").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-drag-and-drop-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-drag-and-drop").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-view-hide-funnel-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-view-hide-funnel").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-composed-funnel-name-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-composed-funnel-name").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-composed-funnel-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-composed-funnel").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-composed-funnel-operations-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-composed-funnel-operations").html();
+        },
+        placement: "left"
+    });
+
+    $("#tooltip-start-date-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-start-date").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-query-range-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-query-range").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-repeat-interval-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-repeat-interval").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-oozie-job-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-oozie-job").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-visualize-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-visualize").html();
+        },
+        placement: "right"
+    });
+
+    $("#tooltip-actions-icon").popover({
+        html: true,
+        content: function() {
+            return $("#tooltip-actions").html();
+        },
+        placement: "right"
+    });
+
+        
+        if (false && !['schema1','schema2','schema4'].includes('schema1')) {
+            $('#schemaSelector')[0].selectedIndex = -1;
+        }
+        
+
+        // On edit of description input, require update and disable launch.
+        $('#dataMartDescription').on('input', function() {
+            UpdatePipelineAndLimitActions();
+        });
+        // On edit of data mart owner, require update and disable launch.
+        $('#dataMartOwner').on('input', function() {
+            UpdatePipelineAndLimitActions();
+        });
+        // On edit of backfill date selector, require update and disable launch.
+        $('#backfillStartDateSelectorText').change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+        // On edit of query range number, require update and disable launch.
+        $('#queryRangeNumber').change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+        // On edit of repeat interval, require update and disable launch.
+        $('#repeatIntervalNumber').change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+
+        // On edit of composed funnels, require update and disable launch.
+        $("#composedFunnels").change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+
+        // Hide and initialize backfill date selector
+        $('#backfillStartDateSelectorTextGroup').datepicker({
+            // past days
+            endDate: '-2d',
+            format: 'yyyy-mm-dd'
+        });
+
+        // Funnel group graph drawflow
+        var id = document.getElementById("drawflow");
+        const editor = new Drawflow(id);
+        editor.drawflow = {"drawflow":{"Home":{"data": {}}}};
+        editor.start();
+
+        // Events of drawflow
+        editor.on('nodeCreated', function(id) {
+            UpdatePipelineAndLimitActions();
+        });
+
+        editor.on('nodeRemoved', function(id) {
+            UpdatePipelineAndLimitActions();
+        });
+
+        // editor.on('nodeSelected', function(id) {
+        //     console.log("Node selected " + id);
+        // })
+
+        editor.on('moduleCreated', function(name) {
+            UpdatePipelineAndLimitActions();
+        });
+
+        editor.on('moduleChanged', function(name) {
+            UpdatePipelineAndLimitActions();
+        });
+
+        editor.on('connectionCreated', function(connection) {
+            UpdatePipelineAndLimitActions();
+            // console.log(connection);
+        });
+
+        editor.on('connectionRemoved', function(connection) {
+            UpdatePipelineAndLimitActions();
+            // console.log(connection);
+        });
+
+        // editor.on('zoom', function(zoom) {
+        //     console.log('Zoom level ' + zoom);
+        // })
+
+        // editor.on('translate', function(position) {
+        //     console.log('Translate x:' + position.x + ' y:'+ position.y);
+        // })
+
+        $('#created-steps').change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+
+        $('#created-steps-edit').change(function() {
+            UpdatePipelineAndLimitActions();
+        });
+
+        /* DRAG EVENT */
+
+        /* Mouse and Touch Actions */
+
+        var elements = document.getElementsByClassName('drag-drawflow');
+        for (var i = 0; i < elements.length; i++) {
+            elements[i].addEventListener('touchend', drop, false);
+            elements[i].addEventListener('touchmove', positionMobile, false);
+            elements[i].addEventListener('touchstart', drag, false );
+        }
+
+        var mobile_item_selec = '';
+        var mobile_last_move = null;
+        function positionMobile(ev) {
+            mobile_last_move = event;
+        }
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            if (ev.type === "touchstart") {
+                mobile_item_selec = ev.target.closest(".drag-drawflow").getAttribute('data-node');
+            } else {
+                ev.dataTransfer.setData("node", ev.target.getAttribute('data-node'));
+            }
+        }
+
+        function viewSavedStep(e) {
+            // Get the created step
+            stepName = e.target.getAttribute('id').replace('edit_step_', '');
+            filter = savedSteps[stepName];
+            // Remove the current filter holder
+            $('#stepBuilder').children().last().remove();
+            // Add step holder
+            addStepWithFilter(filter, stepName);
+        }
+
+        function deleteSavedStep(e) {
+            // Get the created step
+            stepName = e.target.getAttribute('id').replace('delete_step_', '');
+
+            // Delete created nodes
+            element = document.getElementsByClassName("fg-node-" + stepName)[0];
+            if (element !== undefined) {
+                editor.removeNodeId(element.id);
+            }
+
+            // Delete the saved step and its ops
+            $('#saved_step_' + stepName).remove();
+            // Delete the saved step in object
+            delete savedSteps[stepName];
+        }
+
+        function drop(ev) {
+            if (ev.type === "touchend") {
+                var parentdrawflow = document.elementFromPoint( mobile_last_move.touches[0].clientX, mobile_last_move.touches[0].clientY).closest("#drawflow");
+                if(parentdrawflow != null) {
+                    addNodeToDrawFlow(mobile_item_selec, mobile_last_move.touches[0].clientX, mobile_last_move.touches[0].clientY);
+                }
+                mobile_item_selec = '';
+            } else {
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("node");
+                addNodeToDrawFlow(data, ev.clientX, ev.clientY);
+            }
+        }
+
+        function addNodeToDrawFlow(name, pos_x, pos_y) {
+            if(editor.editor_mode === 'fixed') {
+                return false;
+            }
+            pos_x = pos_x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)) - (editor.precanvas.getBoundingClientRect().x * ( editor.precanvas.clientWidth / (editor.precanvas.clientWidth * editor.zoom)));
+            pos_y = pos_y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)) - (editor.precanvas.getBoundingClientRect().y * ( editor.precanvas.clientHeight / (editor.precanvas.clientHeight * editor.zoom)));
+
+            var html = name;
+            editor.addNode(name, 1,  1, pos_x, pos_y, "fg-node-" + name, {}, html);
+        }
+
+        var transform = '';
+        function showpopup(e) {
+            e.target.closest(".drawflow-node").style.zIndex = "9999";
+            e.target.children[0].style.display = "block";
+            //document.getElementById("modalfix").style.display = "block";
+
+            //e.target.children[0].style.transform = 'translate('+translate.x+'px, '+translate.y+'px)';
+            transform = editor.precanvas.style.transform;
+            editor.precanvas.style.transform = '';
+            editor.precanvas.style.left = editor.canvas_x +'px';
+            editor.precanvas.style.top = editor.canvas_y +'px';
+            // console.log(transform);
+
+            //e.target.children[0].style.top  =  -editor.canvas_y - editor.container.offsetTop +'px';
+            //e.target.children[0].style.left  =  -editor.canvas_x  - editor.container.offsetLeft +'px';
+            editor.editor_mode = "fixed";
+
+        }
+
+        function closemodal(e) {
+            e.target.closest(".drawflow-node").style.zIndex = "2";
+            e.target.parentElement.parentElement.style.display  ="none";
+            //document.getElementById("modalfix").style.display = "none";
+            editor.precanvas.style.transform = transform;
+            editor.precanvas.style.left = '0px';
+            editor.precanvas.style.top = '0px';
+            editor.editor_mode = "edit";
+        }
+
+        function changeModule(event) {
+            var all = document.querySelectorAll(".menu ul li");
+            for (var i = 0; i < all.length; i++) {
+                all[i].classList.remove('selected');
+            }
+            event.target.classList.add('selected');
+        }
+
+        function changeMode(option) {
+            if(option == 'lock') {
+                lock.style.display = 'none';
+                unlock.style.display = 'block';
+            } else {
+                lock.style.display = 'block';
+                unlock.style.display = 'none';
+            }
+        }
+
+        function ShowModal(isEditProjection) {
+            if (isEditProjection) {
+                $('#isAddOrEdit')[0].childNodes[1].id = "edit";
+            } else {
+                $('#isAddOrEdit')[0].childNodes[1].id = "add";
+            }
+            $('#addColumnModal').modal('show');
+        }
+
+        // Init the column selector for the column add modal
+        var columnProjectionSelector = $("#column-selector").select2({
+            placeholder: "Select column to aggregate",
+            theme: "bootstrap"
+        });
+
+        // Add/remove the projection key based on the selected type
+        function manageProjectionKeyBasedOnType() {
+            // Get key of column
+            var key = $('#column-selector option:selected').attr('key');
+            // Check if a generic key
+            if (key) {
+                if (key === '*') {
+                    // Show the key input and enable
+                    $("#mapKeyGroup").show();
+                    $('#columnKeyToAdd').attr('required', true);
+                    $('#columnKeyToAdd').val('');
+                } else {
+                    // Hide the key input and set value
+                    $("#mapKeyGroup").hide();
+                    $('#columnKeyToAdd').attr('required', true);
+                    $('#columnKeyToAdd').val(key);
+                }
+            } else {
+                // Hide the key input and disable
+                $("#mapKeyGroup").hide();
+                $('#columnKeyToAdd').removeAttr('required');
+                $('#columnKeyToAdd').val('');
+            }
+        }
+
+        // Decide if we should hide the map key group and disable by default
+        manageProjectionKeyBasedOnType();
+
+        // When selecting maps, manage the key field
+        columnProjectionSelector.on("select2:select", function (e) {
+            manageProjectionKeyBasedOnType();
+        });
+
+        // Setup the projection table
+        var projectionTable = $('#projectionTable').DataTable({
+            "language": {
+                "emptyTable": "No columns aggregated."
+            },
+            "paging": false,
+            "ordering": false,
+            "info": false,
+            "searching": false,
+            // Hide the column id and the key
+            "columnDefs": [{
+                "targets": [2],
+                "visible": false,
+                "searchable": false
+            },
+                {
+                    "targets": [3],
+                    "visible": false,
+                    "searchable": false
+                }]
+        });
+
+        // Used if modifying row
+        var rowToModify = null;
+
+        // Reset the add column modal
+        $('#addColumnModal').on('hidden.bs.modal', function(){
+            $(this).find('form')[0].reset();
+            $('#column-selector').select2();
+            // Hide/disable the key field if necessary
+            manageProjectionKeyBasedOnType();
+            // Hide the delete button because we are done modifying
+            $('#delete-add-column').hide();
+            // Null out the row to modify
+            rowToModify = null;
+        });
+
+        // Shows an error message box with given message
+        function showErrorMessage(msg) {
+            toastr.error(msg);
+        }
+
+        // Shows an info message box with given message
+        function showInfoMessage(msg) {
+            toastr.info(msg);
+        }
+
+        // Shows a warning message box with given message
+        function showWarningMessage(msg) {
+            toastr.warning(msg);
+        }
+
+        // Return ajax message
+        function ajaxMessage(jqXHR, exception) {
+            // Show the error message
+            if (jqXHR.status === 0) {
+                showErrorMessage('Not connected. Verify network connection.');
+            } else if (jqXHR.status == 404) {
+                showErrorMessage('Requested page not found. [404]');
+            } else if (exception === 'parsererror') {
+                showErrorMessage('Requested JSON parse failed.');
+            } else if (exception === 'timeout') {
+                showErrorMessage('Time out error.');
+            } else if (exception === 'abort') {
+                showErrorMessage('Ajax request aborted.');
+            } else {
+                showErrorMessage(jqXHR.responseText);
+            }
+        }
+
+        var currentRequest = null;
+
+        $("#cancelQuery").click(function() {
+            if (currentRequest != null) {
+                currentRequest.abort();
+                $("#newFunnelForm :input").prop("disabled", false);
+                for (var i = 0; i < numComposedFunnels; i++) {
+                    $("#funnelResultsDataTableContainer_" + i).html("Aborted Request");
+                    $("#funnelResultsPivotTableContainer_" + i).html("");
+                    $("#runQueryButton_" + i).removeClass('btn-danger').html('Run Ad Hoc');
+                }
+            } else {
+                window.location.href = "/cubed";
+            }
+        });
+
+        function addDays(date, days) {
+            var result = new Date(date);
+            result.setDate(result.getDate() + days);
+            return result;
+        }
+
+        function updateQueryStartEndTime() {
+            var startDate = $('#backfillStartDateSelectorText').val();
+            var temp = new Date();
+            temp.setFullYear(Number(startDate.substr(0, 4)),
+                Number(startDate.substr(5, 2)) - 1,
+                Number(startDate.substr(8, 2)));
+            var endDate = addDays(startDate, Number( $('#queryRangeNumber').val() === "" ? 1 : $('#queryRangeNumber').val())).toJSON().substr(0, 10);
+            $("#currentQueryStartEndDate").html("Current query time range: <b>" + startDate + "</b> to <b>" + endDate + "</b>");
+        }
+
+        function matchOozieCoordFormat(name) {
+            const regex = /([a-zA-Z]([\-_a-zA-Z0-9])*){1,39}/g;
+            matchedName = name.match(regex);
+            if (!matchedName) {
+                showErrorMessage("Funnel name must follow the pattern '([a-zA-Z]([\-_a-zA-Z0-9])*){1,39}'. It should start with a letter and the max length is 40.");
+                return null;
+            }
+            return matchedName[0];
+        }
+
+        var funnelIdsMapping = {};
+
+        function processCustomFunnelNames(submit) {
+
+            funnelNamesValid = true;
+            usedFunnelNames = new Set();
+            $("#composedFunnels").children().each(function() {
+                funnelId = $(this).attr('id');
+                if (funnelId) {
+                    funnelName = $(this).find(".composed-funnel-name .input-md").val().trim().replace(/ /g, "_").replace(/\W/g, "").toLowerCase();
+
+                    // Non-empty funnel name verification
+                    if (funnelName && funnelName.length > 0) {
+                        funnelName = matchOozieCoordFormat(funnelName);
+                        if (!funnelName) { // Funnel name must follow oozie coordinator regex requirement
+                            funnelNamesValid = false;
+                        } else if (usedFunnelNames.has(funnelName)) { // Funnel name must be be unique
+                            showErrorMessage("Found duplicate individual funnel names. Please make sure each name is unique.");
+                            funnelNamesValid = false;
+                        } else {
+                            funnelIdsMapping[funnelId] = funnelName;
+                            usedFunnelNames.add(funnelName);
+                        }
+                    } else if (submit) { // Verify only in submit time (save / update) and empty names are allowed when developing
+                        showErrorMessage("Found at least one funnel without name specified or have invalid name. Please specify a valid name for each funnel.");
+                        funnelNamesValid = false;
+                    }
+                    return funnelNamesValid; // Used to break the loop
+                }
+            });
+            return funnelNamesValid;
+        }
+
+        
+
+        var funnelGroupFunnelNames = JSON.parse(null);
+        if (funnelGroupFunnelNames) {
+            for (let [funnelId, funnelName] of Object.entries(funnelGroupFunnelNames)) {
+                funnelIdsMapping[funnelId] = funnelName;
+            }
+        }
+
+        
+
+        // Build data for funnel group (new / view), or individual funnel (with funnelStepNames provided)
+        function buildData(isUpdate, funnelStepNames) {
+            // Validate the funnel group
+            if (funnelStepNames === undefined && !validateComposedFunnels()) {
+                return {};
+            }
+            // Build data to send to server
+            var data = {};
+            // Replace spaces with underscores in data mart name
+            if (!isUpdate) {
+                data.name = $('#dataMartName').val().trim().replace(/ /g, "_");
+            }
+            data.schemaName = $('#schemaSelector :selected').select2().val();
+            data.description = $('#dataMartDescription').val().trim();
+            data.owner = $('#dataMartOwner').val().trim();
+            // Used for storing projections
+            data.projections = [];
+            // Add every projection
+            projectionTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                var row = this.data();
+                // Data in this format: Column[0], Alias[1], Key[2], Column ID[3]
+                // Will return: [Column ID, Key, Alias, Aggregate ID]
+                // Format is ',' seperate for fields, ':' seperated for projections
+                data.projections.push({"column_id": row[3], "key": row[2], "alias": row[1], "schema_name": data.schemaName});
+            });
+            // Add steps
+            data.steps = []
+            if (funnelStepNames === undefined) {
+                for (let [stepName, stepRule] of Object.entries(savedSteps)) {
+                    rule = {...stepRule};
+                    rule['name'] = stepName;
+                    data.steps.push(rule);
+                }
+            } else {
+                funnelStepNames.map((val) => data.steps.push(savedSteps[val]));
+            }
+            
+
+            // Add filters
+            data.filter = $('#filterBuilder').queryBuilder('getRules');
+            // Start time
+            data.startDate = $('#backfillStartDateSelectorText').val();
+            // Query range
+            data.queryRange = $('#queryRangeNumber').val() === "" ? 1 : $('#queryRangeNumber').val();
+            // Repeat interval
+            data.repeatInterval = $('#repeatIntervalNumber').val() === "" ? 1 : $('#repeatIntervalNumber').val();
+            // End time
+            var startDate = new Date();
+            startDate.setFullYear(Number(data.startDate.substr(0, 4)),
+                Number(data.startDate.substr(5, 2)) - 1,
+                Number(data.startDate.substr(8, 2)));
+
+            if (addDays(startDate, Number(90)) < new Date()) {
+                showWarningMessage("The retention on Druid is 90 Days.");
+            }
+            
+            data.endDate = addDays(startDate, Number(data.queryRange)).toJSON().substr(0, 10);
+            // Reformat dates
+            data.startDate = data.startDate.replace(/\-/g, "");
+            data.endDate = data.endDate.replace(/\-/g, "");
+
+            // User id column
+            data.userIdColumn = $('#userIdSelector :selected').select2().val();
+
+            // Get Steps
+            if (funnelStepNames === undefined) { // funnel group
+                edgeList = buildEdgeList();
+                data.stepNames = edgeList.map((val) => [val[0] == 'START' ? 'START' : nodeIdAndName[val[0]], nodeIdAndName[val[1]]]);
+                // Topology
+                data.topology = JSON.stringify(editor.export());
+                // Custom names
+                if (!processCustomFunnelNames(true)) {
+                    return {};
+                }
+                serializedFunnelIdsmapping = JSON.stringify(funnelIdsMapping);
+                if (serializedFunnelIdsmapping.trim() === "{}") {
+                    showErrorMessage("No funnel names specified. Please click the 'View Funnel' button to view and name each funnel.");
+                    return {};
+                }
+                data.funnelNames = serializedFunnelIdsmapping;
+            } else { // individual funnel
+                data.stepNames = funnelStepNames;
+            }
+            
+            return data;
+        }
+
+        // given instructions in form of js button, toggle UI buttons
+        function toggleButtons(instructions) {
+            // iterate through key,val pairs
+            $.each(instructions, function(button,action) {
+                if (action == 'show') {
+                    $(button).removeClass('hidden');
+                }
+                else if (action == 'hide') {
+                    $(button).addClass('hidden');
+                }
+            });
+        }
+
+        function shouldEnableInput(shouldEnable) {
+            $("#newFunnelForm :input").prop("disabled", shouldEnable);
+        }
+
+        // Launch data mart
+        $("#launchDatamartModalYes").click(function(){
+            showInfoMessage("Launching funnel group. This will take 20 seconds.");
+            $.ajax({
+                // Using POST
+                type: 'POST',
+                // Send to launch URL
+                url: $(location).attr('href') + "/launch",
+                // Sent no data
+                data: {},
+                // Sending JSON
+                contentType: "application/json",
+                // Recieve text
+                dataType: 'text',
+                beforeSend: function() {
+                    toggleInput(true);
+                },
+                // Show success message
+                success: function(response) {
+                    // If empty reponse, all good
+                    if (response === "") {
+                        showInfoMessage("Launched funnel group");
+                        toggleButtons({'#deleteDatamart':'hide'});
+                    } else {
+                        // Else there was a warning, but not a failure
+                        showWarningMessage(response);
+                    }
+                    // refresh oozie job link, and show Stop button
+                    $('#oozieJobLinkDiv').load(' #oozieJobLinkDiv');
+                    $('#oozieJobLinkStatusGroup').show();
+                    // if stop button is not already shown, then show (if re-launching an already launched datamart)
+                    if ($('#stopDatamart').length == 0) {
+                        $('#inactiveSpan').append('<div id="stopDatamart" class="btn btn-danger" data-toggle="modal" data-target="#stopConfirmModal">Stop</div>');
+                    }
+                    toggleInput(false);
+                },
+                error: function(jqXHR, exception) {
+                    ajaxMessage(jqXHR, exception);
+                    toggleInput(false);
+                }
+            });
+        });
+
+        // Clone data mart
+        $("#cloneDatamartModalYes").click(function(){
+            window.location = $(location).attr('href').replace('/funnelgroup', '/funnelgroup/clone');
+        });
+
+        // Delete data mart
+        $("#deleteDatamartModalYes").click(function(){
+            $.ajax({
+                // Using POST
+                type: 'DELETE',
+                // Send to launch URL
+                url: $(location).attr('href'),
+                // Redirect to main page on delete
+                success: function(response) {
+                    window.location.href = "/cubed";
+                },
+                error: ajaxMessage
+            });
+        });
+        // Restore data mart
+        $("#restoreDatamartModalYes").click(function(){
+            $.ajax({
+                // Using PUT
+                type: 'PUT',
+                // Send to launch URL
+                url: $(location).attr('href') + "/restore",
+                // Refresh page on success
+                success: function(response) {
+                    showInfoMessage("Restored funnel group");
+                    setTimeout(function(){
+                        window.location.reload(1);
+                    }, 2000);
+                },
+                error: ajaxMessage
+            });
+        });
+        function toggleInput(shouldBeDisabled) {
+            $("#newDatamartForm :input").prop("disabled", shouldBeDisabled);
+            $("#launchDatamart").prop("disabled", shouldBeDisabled);
+        }
+
+        function validateFilter() {
+            if (!$('#filterBuilder').queryBuilder('validate')) {
+                showErrorMessage("Invalid filter definition.");
+                return false;
+            }
+
+            filters = $('#filterBuilder').queryBuilder('getRules');
+            if (!filters || !filters.rules || filters.rules.length == 0) {
+                showErrorMessage("Filter should not be empty.");
+                return false;
+            }
+
+            return true;
+        }
+
+        // Update data mart
+        $("#updateDatamartModalYes").click(function(e) {
+            // Stop form from submitting normally
+            e.preventDefault();
+
+            var data = buildData(true);
+
+            if (data && Object.keys(data).length && validateFilter()) {
+                $.ajax({
+                    // Using PUT
+                    type: 'PUT',
+                    // Send to launch URL
+                    url: $(location).attr('href') + "/update",
+                    // Data object to send
+                    data: JSON.stringify(data),
+                    // Sending JSON
+                    contentType: "application/json",
+                    // Receive JSON
+                    dataType: 'json',
+                    // Refresh the page on success
+                    success: function (response) {
+                        showInfoMessage("Updated funnel group");
+                        var buttonChanges = {'#updateDatamart':'hide','#launchDatamart':'show','#downloadDatamart':'show','#cloneDatamart':'show','#queryBullet':'show','#viewQueryBullet':'hide'};
+                        // if it has been previously launched, show stop, else show delete
+                        if ($('#stopDatamart').length != 0) {
+                            buttonChanges['#stopDatamart'] = 'show';
+                            buttonChanges['#deleteDatamart'] = 'hide';
+                        } else {
+                            buttonChanges['#stopDatamart'] = 'hide';
+                            buttonChanges['#deleteDatamart'] = 'show';
+                        }
+                        toggleButtons(buttonChanges);
+                    },
+                    error: ajaxMessage
+                });
+            }
+        });
+
+        // Stop data mart
+        $("#stopDatamartModalYes").click(function() {
+            $.ajax({
+                // Using PUT
+                type: 'PUT',
+                // Send to launch URL
+                url: $(location).attr('href') + "/stop",
+                // Show success message
+                success: function(response) {
+                    showInfoMessage("Stopped funnel group");
+                    // when stopping, remove stop button and show delete button
+                    toggleButtons({'#stopDatamart':'hide', '#deleteDatamart':'show'});
+                    $('#activeSpan').append('<div id="deleteDatamart" class="btn btn-danger" data-toggle="modal" data-target="#deleteConfirmModal">Delete</div>');
+                },
+                error: ajaxMessage,
+                timeout: 15000
+            });
+        });
+
+        // Download funnel group
+        $("#downloadDatamart").click(function(){
+            showInfoMessage("Download funnel group");
+            window.open($(location).attr('href') + "/download", '_self', '');
+        });
+
+        // Save new funnel group
+        $("#saveNewFunnel").click(function(e){
+                // Stop form from submitting normally
+                e.preventDefault();
+
+                // Build data to send to server
+                var data = buildData(false);
+                if (data && Object.keys(data).length && validateFilter()) {
+                    // Send the form
+                    $.ajax({
+                        // Using POST
+                        type: 'POST',
+                        // URL to send to
+                        url: '/funnelgroup/new/save',
+                        // Data object to send
+                        data: JSON.stringify(data),
+                        // Sending JSON
+                        contentType: "application/json",
+                        // Recieve JSON
+                        dataType: 'json',
+                        // Redirect to the new pipeline on success
+                        success: function (response) {
+                            window.location.href = "/funnelgroup/" + response
+                        },
+                        error: ajaxMessage
+                    });
+                }
+        });
+        
+        function isJson(str) {
+            try {
+                JSON.parse(str);
+            } catch (e) {
+                return false;
+            }
+            if (str && str != "null") {
+                return true;
+            }
+            return false;
+        }
+
+        // Submit add column projection form
+        $("#addColumnForm").on('submit',function(e){
+            // Prevent submit action
+            e.preventDefault();
+            // Get the column projection values
+            var uiColumnId = $('#column-selector :selected').select2().val();
+            var columnId = $('#column-selector :selected').select2().attr('dbId');
+            var columnName = $('#column-selector :selected').select2().text();
+            var columnAlias = $('#columnAlias').val();
+            var mapKey = $('#columnKeyToAdd').val();
+            // If map key is not empty, add key to column displayed to user
+            if (mapKey) {
+                columnName = columnName.replace('*', mapKey);
+            }
+            var tableToEdit = projectionTable;
+            // Check if we are adding new or modifying
+            if (rowToModify != null) {
+                // Modify the projection
+                tableToEdit.row(rowToModify).data([columnName, columnAlias, mapKey, columnId, uiColumnId]).draw(false);
+                // Null out the row to modify
+                rowToModify = null;
+            } else {
+                // Add the projection
+                tableToEdit.row.add([columnName, columnAlias, mapKey, columnId, uiColumnId]).draw(false);
+            }
+            // Hide the delete button because we are done modifying
+            $('#delete-add-column').hide();
+            // Close modal
+            $('#addColumnModal').modal('toggle');
+            return true;
+        });
+
+        // Delete button was clicked, remove the projection
+        $("#delete-add-column").click(function(){
+            var tableToEdit = projectionTable;
+            // Delete the row
+            tableToEdit.row(rowToModify).remove().draw(false);
+            // Null out the row to modify
+            rowToModify = null;
+        });
+
+        // Allow editing of projection tables values
+        $('#projectionTable tbody').on('click', 'tr', function () {
+            
+             // Disable click if in view mode
+              if (true || true) {
+             
+            // Check if the table is empty
+            if (projectionTable.data().count() == 0) {
+                return;
+            }
+            // Store the row to modify
+            rowToModify = this;
+            // Get all the settings for the current row and update the modal
+            var data = projectionTable.row(rowToModify).data();
+            // Get the field
+            var fieldMap = JSON.parse(localStorage.getItem("field_map"));
+            var fieldKeyObj = fieldMap[data[0]];
+            if (!fieldKeyObj) {
+                var compositeKey = data[0].replace(data[2], "*");
+                fieldKeyObj = fieldMap[compositeKey];
+            }
+            // Set the column selector and update the key if necessary
+            $("#column-selector").val(fieldKeyObj.id).trigger("change");
+            manageProjectionKeyBasedOnType();
+            // Set alias and key
+            $('#columnAlias').val(data[1]);
+            $('#columnKeyToAdd').val(data[2]);
+            // Show the delete button as an option
+            $('#delete-add-column').show();
+            // Show modal
+            $('#addColumnModal').modal('toggle');
+            
+            }
+            
+        });
+
+        // If in view mode, show oozie job / backfill job id if the pipeline has one
+        
+          function oozieJobStatusDisplayFun(htmlComponent, jobStatus) {
+              if (jobStatus == null) {
+                  htmlComponent.toggleClass('status na-status');
+              }
+              else if (jobStatus.includes('ERROR')) {
+                  htmlComponent.toggleClass('status alert-status');
+              }
+              else if (jobStatus.includes('FAIL')) {
+                  htmlComponent.toggleClass('status fail-status');
+              }
+              else {
+                  htmlComponent.toggleClass('status ok-status');
+              }
+          }
+          var oozieJobLink = null;
+          if (oozieJobLink) {
+            $("#oozieJobLinkStatusGroup").show();
+            var oozieJobStatus = null;
+            oozieJobStatusDisplayFun($("#oozieJobStatusDisplay"), oozieJobStatus);
+          }
+        
+
+        $('#backfillStartDateSelectorText').change(updateQueryStartEndTime);
+        $('#queryRangeNumber').on("input", updateQueryStartEndTime);
+
+        // Show backfill
+        
+          var backfillStartDate = null;
+          if (backfillStartDate) {
+              $('#backfillStartDateSelectorText').val(backfillStartDate);
+          } else {
+            // Default backfill to the day before yesterday to guarantee data existence
+            var beforeYesterday = new Date();
+            beforeYesterday.setDate(beforeYesterday.getDate()-2)
+            beforeYesterday = beforeYesterday.toISOString().substring(0,10);
+            $('#backfillStartDateSelectorTextGroup').datepicker('setDate', beforeYesterday);
+            $('#backfillStartDateSelectorTextGroup').datepicker('update');
+            $('#backfillStartDateSelectorTextGroup').val('');
+          }
+          updateQueryStartEndTime();
+        
+        // Show query range
+        
+          var queryRange = null;
+          if (queryRange) {
+              $('#queryRangeNumber').val(queryRange);
+          } else {
+            // Default query range to 1 day
+            $('#queryRangeNumber').val(1);
+          }
+          updateQueryStartEndTime();
+        
+        // Show repeat interval
+        
+          var repeatInterval = null;
+          if (repeatInterval) {
+              $('#repeatIntervalNumber').val(repeatInterval);
+          } else {
+            // Default repeat interval to 1 day
+            $('#repeatIntervalNumber').val(1);
+          }
+        
+        // If in view mode, show UI links
+        
+            if (null != null && null != null) {
+                $("#uiLinkStatusGroup").show();
+            }
+        
+        // If in view mode, show projections
+        
+         var projections = null;
+         if (projections != null) {
+         for (i = 0; i < projections.length; i++) {
+         var columnName = projections[i].fieldNameId;
+         var columnAlias = projections[i].alias;
+         var aggregateName = projections[i].aggregationName;
+         var mapKey = projections[i].key;
+         var columnId = projections[i].field.fieldId;
+         var aggregateId = projections[i].aggregationName;
+
+         // Map to readable name
+         switch (aggregateName) {
+         case "NONE":
+         aggregateName = "None";
+         break;
+         case "SUM":
+         aggregateName = "Sum";
+         break;
+         case "MIN":
+         aggregateName = "Minimum";
+         break;
+         case "MAX":
+         aggregateName = "Maximum";
+         break;
+         case "COUNT":
+         aggregateName = "Count";
+         break;
+         case "COUNT_DISTINCT":
+         aggregateName = "Count Distinct";
+         break;
+         case "THETA_SKETCH":
+         aggregateName = "Count Distinct";
+         break;
+         default:
+         aggregateName = null;
+         break;
+         }
+
+         // Add projection to table
+         projectionTable.row.add([columnName, columnAlias, mapKey, columnId]).draw(false);
+         }
+         }
+         
+
+         // Setup dummy filter builder
+        var filterColumns = [
+            {
+                id: '1',
+                label: 'col_1',
+                type: 'string'
+            },
+            {
+                id: '2',
+                label: 'col_2',
+                show_subfield: true,
+                type: 'string'
+            }
+        ];
+        // Get columns from database
+        
+          // Loop over all fields and build the filter columns
+          filterColumns = [];
+          var fields = [{'fieldId':3,'fieldKeys':[],'fieldName':'browser','fieldNameId':'browser','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-browser','schemaName':'schema1','subField':false},{'fieldId':15,'fieldKeys':[],'fieldName':'bucket','fieldNameId':'bucket','fieldType':'integer','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-bucket','schemaName':'schema1','subField':false},{'fieldId':17,'fieldKeys':[],'fieldName':'content_id','fieldNameId':'content_id','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-content_id','schemaName':'schema1','subField':false},{'fieldId':2,'fieldKeys':[],'fieldName':'cookie_one','fieldNameId':'cookie_one','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-cookie_one','schemaName':'schema1','subField':false},{'fieldId':11,'fieldKeys':[],'fieldName':'cookie_one_age','fieldNameId':'cookie_one_age','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-cookie_one_age','schemaName':'schema1','subField':false},{'fieldId':12,'fieldKeys':[{'fieldId':12,'keyId':12001,'keyName':'version','primaryName':'schema1-12-version','schemaName':'schema1'},{'fieldId':12,'keyId':12002,'keyName':'age','primaryName':'schema1-12-age','schemaName':'schema1'}],'fieldName':'cookie_one_info','fieldNameId':'cookie_one_info','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':true,'primaryName':'schema1-cookie_one_info','schemaName':'schema1','subField':false},{'fieldId':12,'fieldKeys':null,'fieldName':'cookie_one_info','fieldNameId':'cookie_one_info[age]','fieldType':'string','key':'age','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-cookie_one_info','schemaName':null,'subField':true},{'fieldId':12,'fieldKeys':null,'fieldName':'cookie_one_info','fieldNameId':'cookie_one_info[version]','fieldType':'string','key':'version','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-cookie_one_info','schemaName':null,'subField':true},{'fieldId':7,'fieldKeys':[],'fieldName':'cookie_two','fieldNameId':'cookie_two','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-cookie_two','schemaName':'schema1','subField':false},{'fieldId':6,'fieldKeys':[{'fieldId':6,'keyId':60001,'keyName':'is_ok','primaryName':'schema1-6-is_ok','schemaName':'schema1'},{'fieldId':6,'keyId':60002,'keyName':'is_deleted','primaryName':'schema1-6-is_deleted','schemaName':'schema1'}],'fieldName':'debug_tag','fieldNameId':'debug_tag','fieldType':'boolean','key':null,'measurement':null,'measurementType':null,'notSimpleType':true,'primaryName':'schema1-debug_tag','schemaName':'schema1','subField':false},{'fieldId':6,'fieldKeys':null,'fieldName':'debug_tag','fieldNameId':'debug_tag[is_deleted]','fieldType':'boolean','key':'is_deleted','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-debug_tag','schemaName':null,'subField':true},{'fieldId':6,'fieldKeys':null,'fieldName':'debug_tag','fieldNameId':'debug_tag[is_ok]','fieldType':'boolean','key':'is_ok','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-debug_tag','schemaName':null,'subField':true},{'fieldId':14,'fieldKeys':[],'fieldName':'device','fieldNameId':'device','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-device','schemaName':'schema1','subField':false},{'fieldId':4,'fieldKeys':[{'fieldId':4,'keyId':40001,'keyName':'city','primaryName':'schema1-4-city','schemaName':'schema1'},{'fieldId':4,'keyId':40002,'keyName':'state','primaryName':'schema1-4-state','schemaName':'schema1'},{'fieldId':4,'keyId':40003,'keyName':'country','primaryName':'schema1-4-country','schemaName':'schema1'}],'fieldName':'geo_info','fieldNameId':'geo_info','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':true,'primaryName':'schema1-geo_info','schemaName':'schema1','subField':false},{'fieldId':4,'fieldKeys':null,'fieldName':'geo_info','fieldNameId':'geo_info[city]','fieldType':'string','key':'city','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-geo_info','schemaName':null,'subField':true},{'fieldId':4,'fieldKeys':null,'fieldName':'geo_info','fieldNameId':'geo_info[country]','fieldType':'string','key':'country','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-geo_info','schemaName':null,'subField':true},{'fieldId':4,'fieldKeys':null,'fieldName':'geo_info','fieldNameId':'geo_info[state]','fieldType':'string','key':'state','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-geo_info','schemaName':null,'subField':true},{'fieldId':13,'fieldKeys':[],'fieldName':'network_status','fieldNameId':'network_status','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-network_status','schemaName':'schema1','subField':false},{'fieldId':16,'fieldKeys':[],'fieldName':'property','fieldNameId':'property','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-property','schemaName':'schema1','subField':false},{'fieldId':8,'fieldKeys':[],'fieldName':'random_info_one','fieldNameId':'random_info_one','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':true,'primaryName':'schema1-random_info_one','schemaName':'schema1','subField':false},{'fieldId':8,'fieldKeys':null,'fieldName':'random_info_one','fieldNameId':'random_info_one[*]','fieldType':'string','key':'*','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-random_info_one','schemaName':null,'subField':true},{'fieldId':9,'fieldKeys':[],'fieldName':'random_info_two','fieldNameId':'random_info_two','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':true,'primaryName':'schema1-random_info_two','schemaName':'schema1','subField':false},{'fieldId':9,'fieldKeys':null,'fieldName':'random_info_two','fieldNameId':'random_info_two[*]','fieldType':'string','key':'*','measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'null-random_info_two','schemaName':null,'subField':true},{'fieldId':1,'fieldKeys':[],'fieldName':'timestamp','fieldNameId':'timestamp','fieldType':'integer','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-timestamp','schemaName':'schema1','subField':false},{'fieldId':10,'fieldKeys':[],'fieldName':'user_event','fieldNameId':'user_event','fieldType':'string','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-user_event','schemaName':'schema1','subField':false},{'fieldId':5,'fieldKeys':[],'fieldName':'user_logged_in','fieldNameId':'user_logged_in','fieldType':'boolean','key':null,'measurement':null,'measurementType':null,'notSimpleType':false,'primaryName':'schema1-user_logged_in','schemaName':'schema1','subField':false}];
+          localStorage.setItem("field_map", JSON.stringify({}));
+          for (i = 0; i < fields.length; i++) {
+             // Create a new field
+             var newField = {};
+             // field id is not unique because of flattening of subfields, using name id instead
+             newField.id = fields[i].fieldNameId;
+             newField.label = fields[i].fieldNameId;
+
+             // show subfield input if it is a generic one
+             if (fields[i].key && fields[i].key === '*') {
+                 newField.show_subfield = true;
+             }
+
+            // Check if field is map type
+                     if (fields[i].notSimpleType == true && fields[i].key == null) {
+                        newField.type = 'string';
+                        newField.operators = ['is_null', 'is_not_null'];
+                        newField.placeholder = 'value';
+                     } else {
+                        // Special actions for different types
+                         switch(fields[i].fieldType) {
+                           case "string":
+                             newField.type = 'string';
+                             newField.operators = ['equal', 'not_equal', 'is_null', 'is_not_null', 'rlike', 'like'];
+                             newField.placeholder = 'value';
+                             break;
+                           case "integer":
+                             newField.type = 'integer';
+                             newField.operators = ['equal', 'not_equal', 'less', 'less_or_equal', 'greater', 'greater_or_equal'];
+                             break;
+                           case "boolean":
+                             newField.type = 'boolean';
+                             newField.operators = ['equal', 'not_equal', 'is_null', 'is_not_null'];
+                             newField.input = 'radio';
+                             newField.values = {1: 'True', 0: 'False'};
+                             break;
+                           case "map<string,string>":
+                           case "map<string,boolean>":
+                           case "map<string,integer>":
+                             newField.type = 'string';
+                             newField.operators = ['is_null', 'is_not_null'];
+                             newField.placeholder = 'value';
+                             break;
+                           default:
+                             console.log("Bad type for fieldNameId: " + fields[i].fieldNameId + " with type: " + fields[i].fieldType);
+                         }
+                        }
+
+             // Add new field to filter columns
+             filterColumns.push(newField);
+             var fieldCompositeKey = newField.id;
+             if (fields[i].key) {
+                fieldCompositeKey.concat("_").concat(fields[i].key);
+             }
+             var field_map = JSON.parse(localStorage.getItem("field_map"));
+             field_map[fieldCompositeKey] = newField;
+             localStorage.setItem("field_map", JSON.stringify(field_map));
+          }
+        
+
+        
+        // Read in default filter rules, without the "condition" field, which is by default "AND"
+        var defaultFilterRules = [{'id':'user_logged_in','operator':'equal','value':'1'},{'id':'browser','operator':'equal','value':'browser1'},{'id':'debug_tag','operator':'is_null'}];
+        var defaultRules;
+        if (defaultFilterRules) {
+            defaultRules = {
+            condition: 'AND',
+            rules: defaultFilterRules
+            };
+        }
+        
+
+        // // Default rules, to help user
+        // var defaultRules = {
+        //     condition: 'AND',
+        //     rules: defaultFilterRules
+        // };
+
+        function getDefaultSettings (addDefaultRules) {
+            var defaultSettings = {
+                allow_empty: true,
+                allow_groups: true,
+                conditions: ['AND', 'OR'],
+                filters: filterColumns,
+                operators: [
+                    'equal', 'not_equal', 'in', 'not_in', 'less', 'less_or_equal', 'is_empty',
+                    'is_not_empty', 'greater', 'greater_or_equal', 'is_null', 'is_not_null',
+                    { type: 'rlike', nb_inputs: 1, multiple: false, apply_to: ['string'] },
+            { type: 'like', nb_inputs: 1, multiple: false, apply_to: ['string'] }
+                ],
+                lang: {
+                    add_rule: 'Rule',
+                    add_group: 'Group',
+                    delete_rule: '',
+                    delete_group: '',
+                    operators: {
+                        rlike: 'regex matches'
+                    }
+                },
+                plugins: {
+                    'subfield': null
+                }
+            };
+            if (addDefaultRules) {
+                defaultSettings.rules = defaultRules;
+            }
+            return defaultSettings;
+        }
+
+        var savedSteps = {};
+        function saveStep() {
+            name = $('#step0Name').val().trim().replace(/ /g, "_").replace(/\W/g, "").toLowerCase();
+            savedStepId = 'saved_step_' + name;
+            savedStepEditId = 'edit_step_' + name;
+            savedStepDeleteId = 'delete_step_' + name;
+
+            isStepValid = $('#stepHolder0').children().last().queryBuilder('validate');
+
+            if (isStepValid && (name !== "")) {
+                rule = $('#stepHolder0').children().last().queryBuilder('getRules');
+
+                currStep =
+                "<div id=" + savedStepId + ">" +
+                "<div class='drag-drawflow' draggable='true' ondragstart='drag(event)' data-node='" + name + "'>" +
+                "    <span>" + name + "</span>" +
+                "</div>" +
+                "<div class='drag-drawflow-ops'>" +
+                "    <button type='button' id=" + savedStepEditId + " class='btn-xs btn-success' data-toggle='modal' onclick='viewSavedStep(event)'>View/Edit</button>" +
+                "    <button type='button' id=" + savedStepDeleteId + " class='btn-xs btn-danger' data-toggle='modal' onclick='deleteSavedStep(event)'>Delete</button>" +
+                "</div></div>";
+
+                if (name in savedSteps) { // Update
+                    // Remove the existing currStep
+                    $('#' + savedStepId).remove();
+                }
+
+                savedSteps[name] = rule
+
+                $('#created-steps').prepend(currStep);
+
+            } else if (!isStepValid) {
+                showWarningMessage("Funnel step is invalid.");
+            } else {
+                showWarningMessage("Funnel step name is missing.");
+            }
+        }
+
+        // In view mode, add saved step to the canvas step dragging area
+        function addSavedStep(filter, name) {
+            savedStepId = 'saved_step_' + name;
+            savedStepEditId = 'edit_step_' + name;
+            savedStepDeleteId = 'delete_step_' + name;
+
+            currStep =
+                "<div id=" + savedStepId + ">" +
+                "<div class='drag-drawflow' draggable='true' ondragstart='drag(event)' data-node='" + name + "'>" +
+                "    <span>" + name + "</span>" +
+                "</div>" +
+                "<div class='drag-drawflow-ops'>" +
+                "    <button type='button' id=" + savedStepEditId + " class='btn-xs btn-success' data-toggle='modal' onclick='viewSavedStep(event)'>View/Edit</button>" +
+                "    <button type='button' id=" + savedStepDeleteId + " class='btn-xs btn-danger' data-toggle='modal' onclick='deleteSavedStep(event)'>Delete</button>" +
+                "</div></div>";
+
+            savedSteps[name] = filter;
+
+            $('#created-steps').prepend(currStep);
+        }
+
+        function clearStepBuilder() {
+            $('#stepBuilder').children().last().remove();
+            addStep();
+        }
+
+        var nodeIdAndName = {};
+        // Process the editor's raw data and generate an edge list
+        function buildEdgeList() {
+
+            if (savedSteps === undefined || Object.keys(savedSteps).length === undefined || Object.keys(savedSteps).length == 0) {
+                showWarningMessage("Please create some steps!");
+                return [];
+            }
+
+            data = editor.export()['drawflow']['Home']['data'];
+
+            if (data === undefined || Object.keys(data).length === undefined || Object.keys(data).length == 0) {
+                showWarningMessage("Please drag and drop saved steps to the canvas!");
+                return [];
+            }
+
+            edgeList = [];
+            for (const node in data) {
+                nodeIdAndName[node] = data[node]['name'];
+                inputs = data[node]['inputs']['input_1']['connections'];
+                outputs = data[node]['outputs']['output_1']['connections'];
+
+                // Source nodes
+                if (inputs === undefined || inputs.length == 0) {
+                    // Has outputs, not idle node
+                    if (!(outputs === undefined || outputs.length == 0)) {
+                        edgeList.push(['START', node]);
+                    }
+                    // Idle nodes (no input no putput) are not considered
+                }
+                if (outputs === undefined) {
+                    continue;
+                }
+                for (var i = 0; i < outputs.length; i++) {
+                    edgeList.push([node, outputs[i]['node']]);
+                }
+            }
+
+            // Verify if two nodes of the same name connected to each other
+            for (var i = 0; i < edgeList.length; i++) {
+                nodeFromId = edgeList[i][0];
+                nodeToId = edgeList[i][1];
+                if (nodeFromId != "START") {
+                    nameFrom = nodeIdAndName[nodeFromId];
+                    nameTo = nodeIdAndName[nodeToId];
+                    if (nameFrom == nameTo) {
+                        showWarningMessage("Node [" + nameFrom + "] connects to itself.");
+                        return [];
+                    }
+                }
+            }
+
+            return edgeList;
+        }
+
+        // Identify if the graph user created has loop
+        function graphHasLoop(graph, inDegree) {
+            inDegree = {...inDegree};
+            queue = [];
+            visited = new Set();
+
+            for (const node in inDegree) {
+                if (inDegree[node] == 0) {
+                    queue.push(node);
+                }
+            }
+
+            if (graph !== undefined && Object.keys(graph).length !== undefined && Object.keys(graph).length != 0 && queue.length == 0) {
+                return true;
+            }
+
+            // BFS
+            while (queue.length > 0) {
+                node = queue.shift();
+                visited.add(node);
+                for (var i = 0; i < graph[node].length; i++) {
+                    if (visited.has(graph[node][i])) {
+                        return true;
+                    }
+                    for (var i = 0; i < graph[node].length; i++) {
+                        neighbor = graph[node][i];
+                        inDegree[neighbor]--;
+                        if (inDegree[neighbor] == 0) {
+                            queue.push(neighbor);
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Process the edge list and generate each funnel
+        function generateFunnels() {
+            edgeList = buildEdgeList();
+            // Generate adjacency list and compute in and out degree
+            adjList = {};
+            inDegree = {};
+            outDegree = {};
+
+            for (var i = 0; i < edgeList.length; i++) {
+                fromNode = edgeList[i][0];
+                toNode = edgeList[i][1];
+
+                // Add to adj list
+                if (fromNode in adjList) {
+                    adjList[fromNode].push(toNode);
+                } else {
+                    adjList[fromNode] = [toNode];
+                }
+
+                if (!(toNode in adjList)) {
+                    adjList[toNode] = [];
+                }
+
+                // Increment out-degree
+                if (fromNode in outDegree) {
+                    outDegree[fromNode]++;
+                } else {
+                    outDegree[fromNode] = 1;
+                }
+
+                if (!(toNode in outDegree)) {
+                    outDegree[toNode] = 0;
+                }
+
+                // Increment in-degree
+                if (toNode in inDegree) {
+                    inDegree[toNode]++;
+                } else {
+                    inDegree[toNode] = 1;
+                }
+
+                if (!(fromNode in inDegree)) {
+                    inDegree[fromNode] = 0;
+                }
+            }
+            
+            // Loop detection using topological sort
+            if (graphHasLoop(adjList, inDegree)) {
+                showWarningMessage("Graph has loop!");
+                return [];
+            }
+
+            // Build Funnels
+            // Traverse from all zero-in-degree nodes to all zero-out-degree nodes
+            deque = [];
+            // Adding all zero in-degree nodes into the deque
+            for (const node in inDegree) {
+                if (inDegree[node] == 0) {
+                    deque.push([node]);
+                }
+            }
+            // Construct all the funnels
+            funnels = [];
+            while(deque.length > 0) {
+                list = deque.shift();
+                node = list[list.length - 1];
+                for (var i = 0; i < adjList[node].length; i++) {
+                    neighbor = adjList[node][i];
+                    copiedList = [...list];
+                    copiedList.push(neighbor);
+                    if (outDegree[neighbor] == 0) {
+                        funnels.push(copiedList);
+                    } else {
+                        deque.push(copiedList);
+                    }
+                }
+            }
+
+            strFunnels = []
+            for (var i = 0; i < funnels.length; i++) {
+                funnels[i].shift(); // Get rid of START node
+                // Each funnel should not have duplicate steps
+                stepSet = new Set();
+                for (var j = 0; j < funnels[i].length; j++) {
+                    stepName = nodeIdAndName[funnels[i][j]];
+                    if (stepSet.has(stepName)) {
+                        showWarningMessage("Step [" + stepName + "] appears twice in one funnel!");
+                        return [];
+                    }
+                    stepSet.add(stepName);
+                }
+                // Join funnel steps
+                strFunnels.push(funnels[i].map((val) => nodeIdAndName[val]).join(" &rarr; "));
+            }
+
+            // Deduplicate
+            strFunnels = [...new Set(strFunnels)];
+
+            return strFunnels;
+        }
+
+        function hideComposedFunnels() {
+            $("#composedFunnels").html("");
+            $("#hideComposedFunnelsButton").hide();
+        }
+
+        var numComposedFunnels = 0;
+        function viewComposedFunnels() {
+
+            // If it's an update, save the funnel names user inputs
+            if (!processCustomFunnelNames(false)) {
+                return [];
+            }
+
+            funnels = generateFunnels();
+
+            if (funnels === undefined || funnels.length == 0) {
+                showWarningMessage("Graph has error!");
+                return [];
+            }
+
+            $("#hideComposedFunnelsButton").show();
+
+            numComposedFunnels = funnels.length;
+
+            if (numComposedFunnels > 30) {
+                showWarningMessage("Exceeded the funnel count limit of 30. Please try to simplify your graph.");
+                return [];
+            }
+
+            resultFunnelheaderHtml = 
+            "<div class=individual-funnel><div class='composed-funnel-name-header'>Name&nbsp;<a id='tooltip-composed-funnel-name-icon' href='javascript://'' data-toggle='popover' class='glyphicon glyphicon-info-sign'></a></div>" +
+            "<div class='composed-funnel-header'>Funnel&nbsp;<a id='tooltip-composed-funnel-icon' href='javascript://'' data-toggle='popover' class='glyphicon glyphicon-info-sign'></a></div>" +
+            "<div class='composed-funnel-ops-header'>Operations&nbsp;<a id='tooltip-composed-funnel-operations-icon' href='javascript://'' data-toggle='popover' class='glyphicon glyphicon-info-sign'></a></div></div>";
+
+            $("#composedFunnels").html("");
+            $("#composedFunnels").append(resultFunnelheaderHtml);
+
+            $("#tooltip-composed-funnel-name-icon").popover({
+                html: true,
+                content: function() {
+                    return $("#tooltip-composed-funnel-name").html();
+                },
+                placement: "right"
+            });
+
+            $("#tooltip-composed-funnel-icon").popover({
+                html: true,
+                content: function() {
+                    return $("#tooltip-composed-funnel").html();
+                },
+                placement: "right"
+            });
+
+            $("#tooltip-composed-funnel-operations-icon").popover({
+                html: true,
+                content: function() {
+                    return $("#tooltip-composed-funnel-operations").html();
+                },
+                placement: "left"
+            });
+
+            for (var i = 0; i < funnels.length; i++) {
+                // funnels[i] looks like: stepName1 -> stepName2 -> stepName3
+                stepNames = funnels[i].split(" &rarr; ");
+                funnelId = funnels[i].replace(/ &rarr; /g, "-");
+                previewQueryButtonId = "previewQueryButton_" + funnelId;
+                runQueryButtonId = "runQueryButton_" + funnelId;
+
+                var html = 
+                "<div id=" + funnelId + " class=individual-funnel>" +
+                "<div class=composed-funnel-name>" +
+                "<input type='text' pattern='[A-Za-z0-9 _-]{1,30}' placeholder='Name of this individual funnel' class='form-control input-md'/>" +
+                "</div>" +
+                "<div class='composed-funnel'>" +
+                "    <span>" + funnels[i] + "</span>" +
+                "</div>" +
+                "<div class='composed-funnel-ops'>" +
+                "<div>" +
+                "    <button type='button' id=" + previewQueryButtonId + " class='btn-xs btn-success' data-toggle='modal'>Preview HQL</button>" +
+                "    <button type='button' id=" + runQueryButtonId + " class='btn-xs btn-success' data-toggle='modal'>Run Ad Hoc</button>" +
+                "</div></div></div>";
+
+                $("#composedFunnels").append(html);
+
+                // Set the pre-existing funnel name if there are any
+                if (funnelIdsMapping[funnelId] !== undefined && funnelIdsMapping[funnelId].length > 0) {
+                    $("#composedFunnels #" + funnelId + " .composed-funnel-name .input-md").val(funnelIdsMapping[funnelId]);
+                }
+
+                $('#' + previewQueryButtonId).click(function(e) {
+                    // Stop form from submitting normally
+                    e.preventDefault();
+                    // Build data to send to server
+                    buttonId = this.id;
+                    data = buildData(false, buttonId.replace("previewQueryButton_", "").split("-"));
+                    if (data && Object.keys(data).length) {
+                        // Send the form
+                        currentRequest = $.ajax({
+                            // Using POST
+                            type: 'POST',
+                            // URL to send to
+                            url: '/funnel/preview',
+                            // Data object to send
+                            data: JSON.stringify(data),
+                            // Sending JSON
+                            contentType: "application/json",
+                            beforeSend: function() {
+                                $("#queryPreviewTable").hide();
+                            },
+                            success: function(response) {
+                                // If the response is same as what we currently have, then assume the user intends to collapse
+                                if (typeof document.getElementById("queryPreview").getElementsByTagName('p')[0] != "undefined" && response == document.getElementById("queryPreview").getElementsByTagName('p')[0].innerText) {
+                                    $("#queryPreviewTable").hide();
+                                    $("#queryPreview").html("");
+                                } else {
+                                    $("#queryPreview").html("<p>" + response + "</p>");
+                                    $("#queryPreviewTable").show();
+                                }
+                            },
+                            error: function(jqXHR, exception) {
+                                $('#' + buttonId).removeClass('btn-info').addClass('btn-danger').html("Error");
+                                setTimeout("$('#" + buttonId + "').removeClass('btn-danger').addClass('btn-info').html('Preview HQL')", 3000);
+                                $("#queryPreview").html("Request failed, " + jqXHR.responseText);
+                                $("#queryPreviewTable").show();
+                                shouldEnableInput(false);
+                            }
+                        });
+                    }
+                });
+
+                $('#' + runQueryButtonId).click(function(e) {
+                    // Stop form from submitting normally
+                    e.preventDefault();
+                    // Build data to send to server
+                    buttonId = this.id;
+                    funnelSteps = buttonId.replace("runQueryButton_", "").split("-");
+                    data = buildData(false, funnelSteps);
+                    if (data && Object.keys(data).length) {
+                        // Send the form
+                        currentRequest = $.ajax({
+                            // Using POST
+                            type: 'POST',
+                            // URL to send to
+                            url: '/funnel/run',
+                            // Data object to send
+                            data: JSON.stringify(data),
+                            // Sending JSON
+                            contentType: "application/json",
+                            beforeSend: function() {
+                                $('#' + buttonId).html("<span class=\"glyphicon glyphicon-refresh glyphicon-refresh-animate\"></span> Loading...");
+                                $("#resultsGroup").hide();
+                                shouldEnableInput(true);
+                            },
+                            success: function(response) {
+                                var pivotUiHeader = {
+                                    rows: [],
+                                    cols: [],
+                                    renderers: $.extend(
+                                        $.pivotUtilities.renderers,
+                                        $.pivotUtilities.c3_renderers,
+                                        $.pivotUtilities.d3_renderers,
+                                        $.pivotUtilities.export_renderers
+                                    ),
+                                    rendererName: "Horizontal Bar Chart",
+                                    aggregatorName: "Integer Sum",
+                                    vals: ["Total"]
+                                };
+                                var resultsArray = JSON.parse(response);
+                                var pivotUiData = [];
+                                var resultStr = '<!-- Table to display the results -->' +
+                            '<table id="funnelResultsDataTable" class="table table-striped table-hover table-bordered">' +
+                            '<thead> ' +
+                            '<tr> ';
+                                if (data.projections.length > 0) {
+                                    projectionTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
+                                        var row = this.data();
+                                        // Data in this format: Column[0], Alias[1], Key[2], Column ID[3]
+                                        resultStr += '<th>' + row[0] + '</th>';
+                                        pivotUiHeader.rows.push(row[0]);
+                                    });
+                                }
+                                pivotUiHeader.cols.push("Step");
+                                for (var i=0; i < funnelSteps.length; i++) {
+                                    resultStr += '<th>Step ' + (i + 1) + '</th><th>% carryover</th>';
+                                }
+                                resultStr += '</tr> ' +
+                                    '</thead> ' +
+                                    '<tbody>';
+                                for (var i=0; i < resultsArray.length; i++) {
+                                    var currentRow = resultsArray[i];
+                                    var keys = currentRow.keys;
+                                    var values = currentRow.values;
+                                    if (values === undefined) {
+                                        // if this case is all 0 in each step
+                                            values = [];
+                                        }
+                                    resultStr += '<tr>';
+                                    var j = 0;
+                                    var currentPivotUiDataRow = {};
+                                    if (keys) {
+                                        for (; j < keys.length; j++) {
+                                            resultStr += '<td>' + keys[j] + '</td>';
+                                            var currRow = pivotUiHeader.rows[j];
+                                            currentPivotUiDataRow[currRow] = keys[j];
+                                        }
+                                    }
+                                    j=0;
+                                    for(; j < values.length; j++) {
+                                        var previousIndex =0;
+                                        if (j > 0) {
+                                            previousIndex = j-1;
+                                        }
+                                        if (values[j]) {
+                                            resultStr += '<td>' + values[j] + '</td><td>' + ((values[j]/values[previousIndex])*100).toFixed(2) + '%</td>';
+                                        } else {
+                                            resultStr += '<td>0</td><td>0.00%</td>';
+                                        }
+                                        var currentPivotUiData = jQuery.extend(true, {}, currentPivotUiDataRow);
+                                        currentPivotUiData["Step"] = (j+1);
+                                        currentPivotUiData["Total"] = values[j];
+                                        pivotUiData.push(currentPivotUiData);
+                                    }
+                                    for (;j<funnelSteps.length; j++) {
+                                        resultStr += '<td>0</td><td>0.00%</td>'
+                                    }
+                                    resultStr += '</tr>';
+                                }
+                                resultStr += '</tbody></table>';
+                                shouldEnableInput(false);
+                                $("#funnelResultsDataTableContainer").html(resultStr);
+                                $("#funnelResultsDataTable").DataTable( {
+                                    dom: 'Bfrtip',
+                                    buttons: [
+                                        'copy', 'csv', 'excel', 'pdf', 'print'
+                                    ]
+                                });
+                                $("#funnelResultsPivotTableContainer").pivotUI(
+                                    pivotUiData,
+                                    pivotUiHeader
+                                );
+
+                                function getSum(total, num) {
+                                    return total + num;
+                                }
+
+                                if (resultsArray.length === 0 || (resultsArray[0].values && resultsArray[0].values.reduce(getSum) === "")) {
+                                    $("#funnelResultsDataTableContainer").html("0 Results Found. Please try adjusting funnel query.");
+                                    $("#funnelResultsPivotTableContainer").hide();
+                                }
+                                $("#resultsGroup").show();
+                                $('#' + buttonId).html("Run Ad Hoc");
+                            },
+                            error: function(jqXHR, exception) {
+                                $('#' + buttonId).removeClass('btn-info').addClass('btn-danger').html("Error");
+                                setTimeout("$('#" + buttonId + "').removeClass('btn-danger').addClass('btn-info').html('Run Ad Hoc')", 3000);
+                                $("#funnelResultsDataTableContainer").html("Request failed, " + jqXHR.responseText);
+                                $("#resultsGroup").show();
+                                $("#funnelResultsPivotTableContainer").hide();
+                                shouldEnableInput(false);
+                            }
+                        });
+                    }
+                });
+            }
+        }
+
+        function validateComposedFunnels() {
+            funnels = generateFunnels();
+
+            if (funnels === undefined || funnels.length == 0) {
+                showWarningMessage("Graph has error!");
+                return false;
+            }
+
+            numComposedFunnels = funnels.length;
+
+            if (numComposedFunnels > 30) {
+                showWarningMessage("Exceeded the funnel count limit of 30. Please try to simplify your graph.");
+                return false;
+            }
+
+            return true;
+        }
+
+        function addStep() {
+            var currentStepContainer = $(
+                "<div id=stepHolder0 style='background-color:rgb(249,249,249);padding:1em;border:1px solid #ddd'>" +
+                "<div class='form-group'>\n" +
+                "<label class='control-label' for='step0Name'>Name</label>\n" +
+                "<div style='display:inline;'>\n" +
+                "<input style='display:inline;width:auto' id='step0Name' name='step0Name' type='text' pattern='[A-Za-z0-9 _-]{1,30}' placeholder='Name of the step' class='form-control input-md'/>\n" +
+                "</div>\n" +
+                "</div>" +
+                "</div>");
+            var currentStep = $("<div id='step0'></div>");
+            var currentStepHolderSelector = '#stepHolder0';
+            currentStep.queryBuilder(getDefaultSettings(false));
+            currentStep.on('afterUpdateRuleValue.queryBuilder ' +
+                'afterUpdateRuleOperator.queryBuilder ' +
+                'afterUpdateRuleFilter.queryBuilder ' +
+                'afterUpdateGroupCondition.queryBuilder ' +
+                'afterDeleteGroup.queryBuilder ' +
+                'afterDeleteRule.queryBuilder' , function(e, rule, error, value) {
+                UpdatePipelineAndLimitActions();
+
+                // If no rule in a step, delete the step
+                var output = $(this).queryBuilder('getRules');
+                var ruleCounter = 0;
+
+                (function loop(rules) {
+                  rules.forEach(function(ruleOrGroup) {
+                      ruleCounter++;
+                  });
+                }(output.rules));
+
+                if (ruleCounter == 0) {
+                    $(currentStepHolderSelector).remove();
+                }
+            });
+            currentStepContainer.append(currentStep);
+            $('#stepBuilder').append(currentStepContainer);
+            $("#step0Name").change(function() {
+                UpdatePipelineAndLimitActions();
+            });
+        }
+        function addStepWithFilter(filter, stepName) {
+            var currentStepContainer = $(
+                "<div id=stepHolder0 style='background-color:rgb(249,249,249);padding:1em;border:1px solid #ddd'>" +
+                "<div class='form-group'>\n" +
+                "<label class='control-label' for='step0Name'>Name</label>\n" +
+                "<div style='display:inline;'>\n" +
+                "<input style='display:inline;width:auto' id='step0Name' name='step0Name' type='text' pattern='[A-Za-z0-9 _-]{1,30}' placeholder='Name of the step' class='form-control input-md'/>\n" +
+                "</div>\n" +
+                "</div>" +
+                "</div>");
+            var currentStep = $("<div id='step0'></div>");
+            var currentStepHolderSelector = '#stepHolder0';
+            var settings = getDefaultSettings(false);
+            settings.rules = filter;
+            currentStep.queryBuilder(settings);
+            currentStep.on('afterUpdateRuleValue.queryBuilder ' +
+                'afterUpdateRuleOperator.queryBuilder ' +
+                'afterUpdateRuleFilter.queryBuilder ' +
+                'afterUpdateGroupCondition.queryBuilder ' +
+                'afterDeleteGroup.queryBuilder ' +
+                'afterDeleteRule.queryBuilder' , function(e, rule, error, value) {
+                UpdatePipelineAndLimitActions();
+
+                // If no rule in a step, delete the step
+                var output = $(this).queryBuilder('getRules');
+                var ruleCounter = 0;
+
+                (function loop(rules) {
+                  rules.forEach(function(ruleOrGroup) {
+                      ruleCounter++;
+                  });
+                }(output.rules));
+
+                if (ruleCounter == 0) {
+                    $(currentStepHolderSelector).remove();
+                }
+            });
+            currentStepContainer.append(currentStep);
+            $('#stepBuilder').append(currentStepContainer);
+            $("#step0Name").val(stepName);
+            $("#step0Name").change(function() {
+                UpdatePipelineAndLimitActions();
+            });
+        }
+
+        // Add 1 step to be used as the step builder
+        addStep();
+
+        $('#filterBuilder').queryBuilder(getDefaultSettings(true));
+
+        // If in view mode, set UI widgets
+        
+         var filters = JSON.parse(null);
+         if (filters != null) {
+            // Set filters
+            $('#filterBuilder').queryBuilder('setRules', filters);
+         }
+
+        // On edit of filters, require update and disable launch.
+        $('#filterBuilder').on('change ' +
+            'afterDeleteGroup.queryBuilder ' +
+            'afterDeleteRule.queryBuilder', function() {
+            UpdatePipelineAndLimitActions();
+        });
+
+         var userIdField = null;
+         if (userIdField) {
+            $("#userIdSelector").val(userIdField);
+         } else {
+            $("#userIdSelector").val("bcookie");
+         }
+         var funnelStartTime = null;
+         if (funnelStartTime) {
+            $('#startTimeDateSelectorText').val(funnelStartTime);
+         }
+
+         var funnelEndTime = null;
+         if (funnelEndTime) {
+            $('#endTimeDateSelectorText').val(funnelEndTime);
+         }
+
+         var userIdFields = ['cookie_one','cookie_two'];
+
+         var steps = null;
+         
+         if (steps && steps.length > 0) {
+            steps = steps.split("\n\n");
+            for (var i = 0; i < steps.length; i++) {
+                if (steps[i]) {
+                    currStep = {...JSON.parse(steps[i])};
+                    stepName = currStep['name'];
+                    delete currStep['name'];
+                    addSavedStep(currStep, stepName);
+                }
+            }
+         }
+
+         var funnelGroupTopology = null;
+         if (funnelGroupTopology) {
+            editor.import(JSON.parse(funnelGroupTopology));
+         }
+
+         
+
+        /*]]>*/
+
+        var lastSel = $("#schemaSelector option:selected");
+
+        $("#schemaSelector").click(function() {
+            lastSel = $("#schemaSelector option:selected");
+        });
+
+        $("#schemaSelector").change(function() {
+            var r = confirm("Do you want to change the schema? You will lose the information you typed in this web page.");
+            if (r == true) {
+                window.location.href = '/funnelgroup/new?schemaName=' + this.value;
+            } else {
+                lastSel.prop("selected", true);
+            }
+        });
+
+</script>
+</body>
+</html>
