@@ -1,0 +1,109 @@
+/*!
+ * Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+ */
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+	background-color: #eee;
+	cursor: pointer;
+}
+
+#version {
+	position:fixed;
+	padding:5px;
+	bottom:0px;
+	color: #999999;
+}
+
+.status {
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 1px;
+	padding-bottom: 2px;
+	border-radius: 2px;
+	line-height: 130%;
+}
+
+.ok-status {
+	background-color: rgba(0, 183, 119, 0.4);
+}
+
+.na-status {
+	background-color: rgba(192, 192, 192, 0.4);
+}
+
+.alert-status {
+	background-color: rgba(255, 195, 0, 0.4);
+}
+
+.fail-status {
+	background-color: rgba(255, 0, 0, 0.4);
+}
+
+.hidden{
+	display: none;
+}
+
+.body {
+	font-family: "Helvetica Neue",HelveticaNeue,Helvetica,"Lucida Grande",Arial,sans-serif;
+}
+
+.glyphicon-refresh-animate {
+	-animation: spin .7s infinite linear;
+	-ms-animation: spin .7s infinite linear;
+	-webkit-animation: spinw .7s infinite linear;
+	-moz-animation: spinm .7s infinite linear;
+}
+
+@keyframes spin {
+	from { transform: scale(1) rotate(0deg);}
+	to { transform: scale(1) rotate(360deg);}
+}
+
+@-webkit-keyframes spinw {
+	from { -webkit-transform: rotate(0deg);}
+	to { -webkit-transform: rotate(360deg);}
+}
+
+@-moz-keyframes spinm {
+	from { -moz-transform: rotate(0deg);}
+	to { -moz-transform: rotate(360deg);}
+}
+
+.modal-lg {
+	width:80%;
+	height:90%
+}
+
+.selected-step {
+	background-color: #ffa !important;
+}
+
+.marked-cell {
+	background-color: lightblue;
+}
+
+.bullet-query-table-hover tbody tr:hover td, .bullet-query-table-hover tbody tr:hover th {
+	font-weight: bold;
+	cursor: pointer;
+}
+
+.glyphicon.glyphicon-info-sign {
+    font-size: 12px;
+    color: #6c00db;
+}
+
+.popover {
+	width: 100%;
+}
+
+.tooltip-header {
+	border-bottom: 1px solid #DCDCDC; 
+	padding-bottom:10px
+}
+
+input[type="text"] {
+     width: 100%;
+     box-sizing: border-box;
+     -webkit-box-sizing:border-box;
+     -moz-box-sizing: border-box;
+}

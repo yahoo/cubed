@@ -1,0 +1,3 @@
+<dataset name="input_dataset" frequency="${coord:hours(1)}" initial-instance="${funnel_start_time}" timezone="UTC">
+    <uri-template>${hcat_uri}/${in_database}/${in_hour_table}/${in_hour_partition}</uri-template>
+</dataset>

@@ -1,0 +1,143 @@
+{
+  "name": "test_funnel",
+  "schemaName": "schema1",
+  "description": "test funnel",
+  "owner": "owner",
+  "projections": [
+    {
+      "column_id": 4,
+      "key": "state",
+      "alias": "state",
+      "schema_name": "schema1"
+    },
+    {
+      "column_id": 5,
+      "key": null,
+      "alias": "logged_in",
+      "schema_name": "schema1"
+    }
+  ],
+  "steps": [
+    {
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "value1"
+        },
+        {
+          "id": "cookie_one",
+          "field": "cookie_one",
+          "type": "string",
+          "input": "text",
+          "operator": "is_not_null",
+          "value": null
+        }
+      ]
+    },
+    {
+      "condition": "OR",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "value2"
+        },
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "sth_else"
+        }
+      ]
+    },
+    {
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event3"
+        },
+        {
+          "condition": "AND",
+          "rules": [
+            {
+              "id": "cookie_one_age",
+              "field": "cookie_one_age",
+              "type": "string",
+              "input": "text",
+              "operator": "equal",
+              "value": "10"
+            },
+            {
+              "id": "cookie_one_info",
+              "field": "cookie_one_info",
+              "type": "string",
+              "input": "text",
+              "operator": "is_not_null",
+              "value": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition": "AND",
+      "rules": [
+        {
+          "id": "user_event",
+          "field": "user_event",
+          "type": "string",
+          "input": "text",
+          "operator": "equal",
+          "value": "event4"
+        }
+      ]
+    }
+  ],
+  "filter": {
+    "condition": "AND",
+    "rules": [
+      {
+        "id": "browser",
+        "field": "browser",
+        "type": "string",
+        "input": "text",
+        "operator": "equal",
+        "value": "browser1"
+      },
+      {
+        "id": "cookie_one",
+        "field": "cookie_one",
+        "type": "string",
+        "input": "text",
+        "operator": "is_not_null",
+        "value": null
+      }
+    ]
+  },
+  "startDate": "20200507",
+  "queryRange": "1",
+  "repeatInterval": "1",
+  "endDate": "20200508",
+  "userIdColumn": "cookie_one",
+  "stepNames": [
+    "step1",
+    "step2",
+    "step3",
+    "step4"
+  ]
+}

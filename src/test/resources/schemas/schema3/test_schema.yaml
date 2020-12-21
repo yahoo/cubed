@@ -1,0 +1,17 @@
+---
+schemas:
+- tables:
+    hourly_table: hourly_event
+    hourly_partition: "dt=${YEAR}${MONTH}${DAY}${HOUR}"
+  fields:
+  - name: "event_category"
+    type: "string"
+    id: 1
+  - name: "event_cause"
+    type: "string"
+    id: 2
+  - name: "count"
+    type: "integer"
+    id: 3
+  name: "schema3"
+  database: "schema3"

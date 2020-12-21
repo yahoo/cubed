@@ -1,0 +1,49 @@
+# Bullet APIs URL
+bulletUrl: "https://bullet.cubed.com:4443/bullet/api/drpc"
+
+# Disable bullet validataion
+disableBullet: false
+
+# Disable funnel
+disableFunnel: false
+
+# Oozie job type
+oozieJobType: "hourly"
+
+# Oozie backfill job type
+oozieBackfillJobType: "daily"
+
+# User id fields
+userIdFields: 
+  - "bcookie"
+  - "sid"
+  - "session_info['internet_session_id']"
+  - "session_info['network_session_id']"
+  - "session_info['property_session_id']"
+  - "session_info['subproperty_session_id']"
+  - "session_info['device_session_id']"
+  - "session_info['foreground_session_id']"
+  - "session_info['app_session_id']"
+
+# Default filters
+defaultFilters:
+  - id: "filter_tag"
+    operator: "is_null"
+  - id: "network"
+    operator: "equal"
+    value: "on"
+  - id: "pty_family"
+    operator: "equal"
+    value: "sports"
+  - id: "pty_device"
+    operator: "equal"
+    value: "desktop"
+  - id: "pty_experience"
+    operator: "equal"
+    value: "web"
+  - id: "event_family"
+    operator: "equal"
+    value: "view"
+
+# Hql timestamp column attribute
+timestampColumnParam: "timestamp"

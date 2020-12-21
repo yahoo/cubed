@@ -1,0 +1,18 @@
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<div id="stopConfirmModal" class="modal fade" role="dialog" th:fragment="stopConfirmModal">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <p>Stop pipeline? Only stop the pipeline if you are the owner.</p>
+                <p>Current owner is: <strong><span th:text="${viewPipeline != null} ? ${pipelineOwner}"></span></strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn btn-info" id="stopDatamartModalYes">Yes</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger">No</button>
+            </div>
+        </div>
+    </div>
+</div>

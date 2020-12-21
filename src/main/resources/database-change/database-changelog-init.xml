@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
+    <changeSet author="yahoo" id="create_all_schemas_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `all_schemas` (
+              `SCHEMA_NAME` varchar(100) NOT NULL,
+              `SCHEMA_TABLES` longtext NOT NULL,
+              `SCHEMA_OOZIE_JOB_TYPE` varchar(100) NOT NULL,
+              `SCHEMA_OOZIE_BACKFILL_JOB_TYPE` varchar(100) NOT NULL,
+              `SCHEMA_TARGET_TABLE` varchar(100) DEFAULT NULL,
+              `SCHEMA_USER_ID_FIELDS` longtext,
+              `SCHEMA_DEFAULT_FILTERS` longtext,
+              `SCHEMA_BULLET_URL` varchar(100) DEFAULT 'https://bullet.cubed.com:4443/bullet/api/drpc',
+              `SCHEMA_DISABLE_BULLET` tinyint(1) DEFAULT FALSE,
+              `SCHEMA_TIMESTAMP_COLUMN_PARAM` varchar(100) DEFAULT 'timestamp',
+              `SCHEMA_DISABLE_FUNNEL` tinyint(1) DEFAULT FALSE,
+              `SCHEMA_DATABASE` varchar(100) DEFAULT 'schema1',
+              `IS_SCHEMA_DELETED` tinyint(1) DEFAULT FALSE,
+              PRIMARY KEY (`SCHEMA_NAME`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_field_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `field` (
+              `FIELD_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `FIELD_NAME` varchar(100) NOT NULL,
+              `FIELD_TYPE` varchar(200) DEFAULT NULL,
+              `MEASUREMENT_TYPE` varchar(10) DEFAULT 'DIM',
+              `SCHEMA_NAME` varchar(100) NOT NULL DEFAULT 'schema1',
+              PRIMARY KEY (`FIELD_ID`,`SCHEMA_NAME`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_field_key_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `field_key` (
+              `KEY_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `KEY_NAME` varchar(100) NOT NULL,
+              `FIELD_ID` int(10) NOT NULL,
+              `SCHEMA_NAME` varchar(100) NOT NULL DEFAULT 'schema1',
+              PRIMARY KEY (`KEY_ID`,`FIELD_ID`,`SCHEMA_NAME`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_pipeline_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `pipeline` (
+              `PIPELINE_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `PIPELINE_NAME` varchar(100) NOT NULL,
+              `PIPELINE_DESCRIPTION` longtext,
+              `PIPELINE_OWNER` varchar(100) DEFAULT NULL,
+              `PIPELINE_APPROVED` tinyint(1) DEFAULT FALSE,
+              `PIPELINE_FILTER` longtext,
+              `PIPELINE_STATUS` varchar(50) DEFAULT NULL,
+              `PIPELINE_OOZIE_JOB_ID` varchar(100) DEFAULT NULL,
+              `PIPELINE_OOZIE_JOB_STATUS` varchar(50) DEFAULT NULL,
+              `PIPELINE_BACKFILL_START_TIME` varchar(100) DEFAULT NULL,
+              `PIPELINE_OOZIE_BACKFILL_JOB_ID` varchar(100) DEFAULT NULL,
+              `PIPELINE_OOZIE_BACKFILL_JOB_STATUS` varchar(50) DEFAULT NULL,
+              `PIPELINE_IS_DELETED` tinyint(1) DEFAULT FALSE,
+              `PIPELINE_END_TIME` varchar(100) DEFAULT NULL,
+              `PIPELINE_CREATE_TIME` varchar(100) DEFAULT NULL,
+              `PIPELINE_EDIT_TIME` varchar(100) DEFAULT NULL,
+              `PIPELINE_VERSION` int(10) DEFAULT 1,
+              `PIPELINE_TYPE` longtext,
+              `FUNNEL_HQL` longtext,
+              `FUNNEL_STEPS` longtext,
+              `FUNNEL_STEP_NAMES` longtext,
+              `FUNNEL_USER_ID_FIELD` longtext,
+              `FUNNEL_QUERY_RANGE` int(10) DEFAULT 1,
+              `FUNNEL_REPEAT_INTERVAL` int(10) DEFAULT 1,
+              `PRODUCT_NAME` longtext,
+              `PIPELINE_SCHEMA_NAME` varchar(100) NOT NULL DEFAULT 'schema1',
+              `FUNNEL_GROUP_ID` int(10) DEFAULT -1,
+              PRIMARY KEY (`PIPELINE_ID`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_pipeline_filter_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `pipeline_filter` (
+              `PIPELINE_FILTER_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `PIPELINE_ID` int(10) NOT NULL,
+              `FIELD_ID` int(10) NOT NULL,
+              `OPERATOR` varchar(100) NOT NULL,
+              `VALUE` longtext ,
+              `FIELD_KEY` varchar(200)  DEFAULT NULL,
+              PRIMARY KEY (`PIPELINE_FILTER_ID`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_pipeline_projection_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `pipeline_projection` (
+              `PIPELINE_PROJECTION_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `PIPELINE_ID` int(10) DEFAULT -1,
+              `FIELD_ID` int(10) NOT NULL,
+              `FIELD_ALIAS` varchar(100) DEFAULT NULL,
+              `FIELD_KEY` varchar(200) DEFAULT NULL,
+              `AGGREGATION_NAME` varchar(100) DEFAULT NULL,
+              `IS_IN_ORIGINAL_SCHEMA` tinyint(1) DEFAULT TRUE,
+              `SCHEMA_NAME` varchar(100) NOT NULL DEFAULT 'schema1',
+              `FUNNEL_GROUP_ID` int(10) DEFAULT -1,
+              PRIMARY KEY (`PIPELINE_PROJECTION_ID`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_pipeline_projection_vm_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `pipeline_projection_vm` (
+              `PIPELINE_PROJECTION_VM_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `PIPELINE_PROJECTION_ID` int(10) NOT NULL,
+              `FIELD_NAME` varchar(100) NOT NULL,
+              `FIELD_VALUE` varchar(100) NOT NULL,
+              `FIELD_VALUE_MAPPING` varchar(100) NOT NULL,
+              PRIMARY KEY (`PIPELINE_PROJECTION_VM_ID`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="yahoo" id="create_funnel_group_table">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `funnel_group` (
+              `FUNNEL_GROUP_ID` int(10) NOT NULL AUTO_INCREMENT,
+              `FUNNEL_GROUP_NAME` varchar(100) NOT NULL,
+              `PRODUCT_NAME` longtext,
+              `FUNNEL_GROUP_OWNER` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_DESCRIPTION` longtext,
+              `FUNNEL_GROUP_USER_ID_FIELD` longtext,
+              `FUNNEL_GROUP_REPEAT_INTERVAL` int(10) DEFAULT 1,
+              `FUNNEL_GROUP_QUERY_RANGE` int(10) DEFAULT 1,
+              `FUNNEL_GROUP_STEP_NAMES` longtext,
+              `FUNNEL_GROUP_STEPS_JSON` longtext,
+              `FUNNEL_GROUP_OOZIE_JOB_ID` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_OOZIE_JOB_STATUS` varchar(50) DEFAULT NULL,
+              `FUNNEL_GROUP_IS_DELETED` tinyint(1) DEFAULT FALSE,
+              `FUNNEL_GROUP_CREATE_TIME` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_EDIT_TIME` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_END_TIME` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_BACKFILL_START_TIME` varchar(100) DEFAULT NULL,
+              `FUNNEL_GROUP_VERSION` int(10) DEFAULT 1,
+              `FUNNEL_GROUP_SCHEMA_NAME` varchar(100) NOT NULL DEFAULT 'benzene',
+              `FUNNEL_GROUP_STATUS` varchar(50) DEFAULT NULL,
+              `FUNNEL_GROUP_FILTER_JSON` longtext,
+              `FUNNEL_GROUP_TOPOLOGY` longtext,
+              `FUNNEL_NAMES` longtext,
+              PRIMARY KEY (`FUNNEL_GROUP_ID`)
+            ) ENGINE=InnoDB;
+        </sql>
+    </changeSet>
+</databaseChangeLog>

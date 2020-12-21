@@ -1,0 +1,14 @@
+targetDatabase: "schema1"
+funnelTargetTable: "daily_data"
+disableFunnel: false
+userIdFields: 
+  - "bcookie"
+  - "yummycookie"
+  - "sid"
+  - "session_info['internet_session_id']"
+  - "session_info['network_session_id']"
+  - "session_info['property_session_id']"
+  - "session_info['subproperty_session_id']"
+  - "session_info['device_session_id']"
+  - "session_info['foreground_session_id']"
+  - "session_info['app_session_id']"

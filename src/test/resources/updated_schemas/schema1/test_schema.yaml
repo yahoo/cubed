@@ -1,0 +1,78 @@
+---
+schemas:
+- tables:
+    daily_table: "daily_data"
+    hourly_partition: "dt=${YEAR}${MONTH}${DAY}${HOUR}"
+    daily_partition: "dt=${YEAR}${MONTH}${DAY}"
+    hourly_table: "hourly_data"
+  fields:
+  - name: "timestamp"
+    type: "integer"
+    id: 1
+  - name: "cookie_one"
+    type: "string"
+    id: 2
+  - name: "browser"
+    type: "string"
+    id: 3
+  - name: "geo_info"
+    type: "map<string,string>"
+    id: 4
+    keys:
+    - name: "city"
+      id: 40001
+    - name: "state"
+      id: 40002
+    - name: "country"
+      id: 40003
+  - name: "user_logged_in"
+    type: "boolean"
+    id: 5
+  - name: "debug_tag"
+    type: "map<string,boolean>"
+    id: 6
+    keys:
+    - name: "is_ok"
+      id: 60001
+    - name: "is_deleted"
+      id: 60002
+  - name: "cookie_two"
+    type: "string"
+    id: 7
+  - name: "random_info_one"
+    type: "map<string,string>"
+    id: 8
+  - name: "random_info_two"
+    type: "map<string,string>"
+    id: 9
+  - name: "user_event"
+    type: "string"
+    id: 10
+  - name: "cookie_one_age"
+    type: "string"
+    id: 11
+  - name: "cookie_one_info"
+    type: "map<string,string>"
+    id: 12
+    keys:
+    - name: "version"
+      id: 12001
+    - name: "age"
+      id: 12002
+  - name: "network_status"
+    type: "string"
+    id: 13
+  - name: "device"
+    type: "string"
+    id: 14
+  - name: "bucket"
+    type: "integer"
+    id: 15
+  - name: "property"
+    type: "string"
+    id: 16
+  - name: "content_id"
+    type: "string"
+    id: 17
+  name: "schema1"
+  database: "schema1"

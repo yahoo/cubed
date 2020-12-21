@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<bundle-app xmlns="uri:oozie:bundle:0.1" name="\${product_name}_\${owner}">
+    <coordinator name="funnel_group">
+        <app-path>\${project_path}/funnel_group/coordinator.xml</app-path>
+    </coordinator>
+    $COORDINATORS$
+</bundle-app>

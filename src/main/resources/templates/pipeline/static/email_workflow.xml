@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<workflow-app xmlns="uri:oozie:workflow:0.5" name="${product_name}_${owner}_email">
+  <start to="send_email"/>
+  <action name="send_email">
+    <email xmlns="uri:oozie:email-action:0.2">
+      <to>${email}</to>
+      <subject>${product_name} workflow for ${year}-${month}-${day}-T${hour} failed at ${wf:lastErrorNode()}</subject>
+      <body>
+        <![CDATA[
+      <style>
+          #report {
+            font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+            width:100%;
+            border-collapse:collapse;
+          }
+          #report td, #report th {
+            font-size:1.2em;
+            border:1px solid #98bf21;
+            padding:3px 7px 2px 7px;
+          }
+          #report th {
+            font-size:1.4em;
+            text-align:left;
+            padding-top:5px;
+            padding-bottom:4px;
+            background-color:#A7C942;
+            color:#fff;
+          }
+          #report tr.alt td {
+            color:#000;
+            background-color:#EAF2D3;
+          }
+      </style>
+      <h1>Workflow failed!</h1>
+      <table id="report">
+        <tr>
+          <th>Attribute</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td><b>Workflow Name</b></td>
+          <td>${workflow_name}</td>
+        </tr>
+        <tr class="alt">
+          <td><b>Workflow ID</b></td>
+          <td>${workflow_id}</td>
+        </tr>
+        <tr>
+          <td><b>Workflow URL</b></td>
+          <td><a href="${oozie_ui_url}/?job=${workflow_id}">${oozie_ui_url}/?job=${workflow_id}</a></td>
+        </tr>
+        <tr class="alt">
+          <td><b>Action Node</b></td>
+          <td>${workflow_last_error_node}</td>
+        </tr>
+        <tr>
+          <td><b>Action ID</b></td>
+          <td>${workflow_action_id}</td>
+        </tr>
+        <tr class="alt">
+          <td><b>Error Code</b></td>
+          <td>${workflow_error_code}</td>
+        </tr>
+        <tr>
+          <td><b>Error Message</b></td>
+          <td>${workflow_error_message}</td>
+        </tr>
+      </table>
+      ]]>
+      </body>
+      <content_type>text/html</content_type>
+    </email>
+    <ok to="fail"/>
+    <error to="fail"/>
+  </action>
+  <kill name="fail">
+    <message>Send email failed, error message: [${wf:errorMessage(wf:lastErrorNode())}]</message>
+  </kill>
+  <end name="end"/>
+</workflow-app>

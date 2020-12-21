@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<!--
+   ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+   -->
+<html lang="en">
+   <head>
+      <meta charset="utf-8" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1" />
+      <meta name="description" content="" />
+      <meta name="author" content="" />
+      <title>Cubed</title>
+      <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+      <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+      <script src="/js/jquery.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+      <script src="/js/bootstrap.min.js"></script>
+      <link href="/css/bootstrap.min.css" rel="stylesheet" />
+      <script src="/js/jquery.dataTables.min.js"></script>
+      <script src="/js/dataTables.bootstrap.min.js"></script>
+      <link href="/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+      <script src="/js/dataTables.buttons.min.js"></script>
+      <link href="/css/buttons.dataTables.min.css" rel="stylesheet" />
+      <script src="/js/buttons.html5.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/jszip.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/pdfmake.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/buttons.flash.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/buttons.print.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/vfs_fonts.js"></script>
+      <script src="/js/query-builder.standalone.min.js"></script>
+      <link href="/css/query-builder.default.min.css" rel="stylesheet" />
+      <script src="/js/select2.min.js"></script>
+      <link href="/css/select2.min.css" rel="stylesheet" />
+      <link href="/css/select2-bootstrap.min.css" rel="stylesheet" />
+      <link href="/css/simple-sidebar.css" rel="stylesheet" />
+      <link href="/css/bootstrap-switch.min.css" rel="stylesheet" />
+      <script src="/js/bootstrap-switch.min.js"></script>
+      <link href="/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+      <script src="/js/bootstrap-datepicker.min.js"></script>   
+      <link href="/css/toastr.min.css" rel="stylesheet" />
+      <script src="/js/toastr.min.js"></script>
+      <link href="/css/funnelmart.css" rel="stylesheet" />
+      <link href="/css/pivot.min.css" rel="stylesheet" />
+      <script src="/js/pivot.min.js"></script>
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+      <script src="/js/d3_renderers.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.css" />
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
+      <script src="/js/c3_renderers.min.js"></script>
+      <script src="/js/export_renderers.min.js"></script>
+      <script type="text/javascript" language="javascript" src="/js/stomp.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+      <script src="/js/FileSaver.min.js"></script>
+      <script src="/js/interact.min.js"></script>
+      <!-- /* Drawflow funnel group drag n drop */-->
+      <link rel="stylesheet" type="text/css" href="/css/drawflow.min.css" />
+      <link rel="stylesheet" type="text/css" href="/css/funnel-group.css" />
+      <!-- <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script> -->
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <![endif]-->
+      
+      
+      <!-- Ads-data icon -->
+      <link href="/css/icons-ads-data.css" rel="stylesheet" />
+   </head>
+   <body>
+      <div id="wrapper">
+         <div id="sidebar-wrapper" style="font-family: HelveticaNeue-Thin, HelveticaNeueW01-Thin, Helvetica, Arial, sans-serif;">
+            <ul class="sidebar-nav">
+               <li class="sidebar-brand">
+                  <div class="text-center">
+                     <a href="/">
+                     <img src="/img/logo.png" width="50" />
+                     </a>
+                  </div>
+                  <a href="/">Cubed</a>
+               </li>
+               <li>
+                  <a href="/cubed">
+                  <i class="icon icon-topic" style="font-size: 26px;display: block;"></i>
+                  List
+                  </a>
+               </li>
+               <li>
+                  <a href="/deleted">
+                  <i class="icon icon-delete" style="font-size: 26px;display: block;"></i>
+                  Deleted
+                  </a>
+               </li>
+               <li>
+                  <a onclick="showSelectDatamartSchemaModal()">
+                  <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                  Datamart
+                  </a>
+               </li>
+               <li>
+                  <a onclick="showSelectFunnelSchemaModal()">
+                  <i class="icon icon-circle-add" style="font-size: 26px;display: block;"></i>
+                  Funnelmart
+                  </a>
+               </li>
+               <div id="version">0.0.0</div>
+            </ul>
+         </div>
+         <div id="page-content-wrapper">
+            <div class="container-fluid">
+               <div class="row">
+                  <div class="col-lg-12">
+                     <h1>List of Marts</h1>
+                     <div class="table-responsive">
+                        <div>
+                           <table id="dataMartTable" class="table table-striped table-hover table-bordered">
+                              <thead>
+                                 <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Owner</th>
+                                    <th>Status</th>
+                                    <th>Latest Version</th>
+                                    <th>Date Created</th>
+                                    <th>Date Last Updated</th>
+                                 </tr>
+                              </thead>
+                              <tbody>
+                                 <tr class="clickable-row" th:attr="data-href=${dataHref}">
+                                    <td>datamart</td>
+                                    <td>test_mart</td>
+                                    <td>simple description</td>
+                                    <td>john_doe</td>
+                                    <td>Inactive</td>
+                                    <td>1</td>
+                                    <td th:text="${updateDate}"></td>
+                                    <td th:text="${updateDate}"></td>
+                                 </tr>
+                              </tbody>
+                              <tfoot>
+                                 <tr>
+                                    <th>Type</th>
+                                    <th>Name</th>
+                                    <th>Description</th>
+                                    <th>Owner</th>
+                                    <th>Status</th>
+                                    <th>Latest Version</th>
+                                    <th>Date Created</th>
+                                    <th>Date Last Updated</th>
+                                 </tr>
+                              </tfoot>
+                           </table>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div id="selectDatamartSchemaModal" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                     <!-- Modal Header -->
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">x</span>
+                        <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="addColumnModalLabel">
+                           Please Select Schema
+                        </h4>
+                     </div>
+                     <!-- Modal body -->
+                     <div class="modal-body">
+                        <div id="selectSchemaForm" class="form-horizontal">
+                           <div class="form-group">
+                              <label class="col-sm-2 control-label" for="datamart-schema-selector">Schema</label>
+                              <div class="col-sm-10">
+                                 <select class="form-control width-all" id="datamart-schema-selector" style="width:100%">
+                                    <option value="schema1">schema1</option>
+                                    <option value="schema2">schema2</option>
+                                    <option value="schema3">schema3</option>
+                                    <option value="schema4">schema4</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                 <button id="submit-select-schema" onclick="showDatamart()" class="btn btn-success">Confirm</button>
+                                 <button id="cancel-select-schema" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <script>
+                  function showSelectDatamartSchemaModal() {
+                      $('#selectDatamartSchemaModal').modal('show');
+                  }
+                  // Submit add column projection form
+                  function showDatamart() {
+                      window.location.href = '/datamart/new?schemaName=' + $('#datamart-schema-selector :selected').val();
+                      return true;
+                  }
+               </script>
+            </div>
+            <div id="selectFunnelSchemaModal" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <!-- Modal content-->
+                  <div class="modal-content">
+                     <!-- Modal Header -->
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">
+                        <span aria-hidden="true">x</span>
+                        <span class="sr-only">Close</span>
+                        </button>
+                        <h4 class="modal-title" id="addColumnModalLabel">
+                           Please Select Schema
+                        </h4>
+                     </div>
+                     <!-- Modal body -->
+                     <div class="modal-body">
+                        <div id="selectSchemaForm" class="form-horizontal">
+                           <div class="form-group">
+                              <label class="col-sm-2 control-label" for="funnel-schema-selector">Schema</label>
+                              <div class="col-sm-10">
+                                 <select class="form-control width-all" id="funnel-schema-selector" style="width:100%">
+                                    <option value="schema1">schema1</option>
+                                    <option value="schema2">schema2</option>
+                                    <option value="schema4">schema4</option>
+                                 </select>
+                              </div>
+                           </div>
+                           <div class="form-group">
+                              <div class="col-sm-offset-2 col-sm-10">
+                                 <button id="submit-select-funnel-schema" onclick="showFunnel()" class="btn btn-success">Confirm</button>
+                                 <button id="cancel-select-funnel-schema" class="btn btn-danger" data-dismiss="modal" aria-hidden="true">Cancel</button>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <script>
+                  function showSelectFunnelSchemaModal() {
+                      $('#selectFunnelSchemaModal').modal('show');
+                  }
+                  // Submit add column projection form
+                  function showFunnel() {
+                      window.location.href = '/funnelgroup/new?schemaName=' + $('#funnel-schema-selector :selected').val();
+                      return true;
+                  }
+               </script>
+            </div>
+         </div>
+      </div>
+      <script>
+         $(".clickable-row").click(function() {
+             window.document.location = $(this).data("href");
+         });
+         
+         $("#dataMartTable tfoot th").each( function () {
+             $(this).html('<input type="text" pattern="[A-Za-z0-9 _-]{1,30}" placeholder="Search" />');
+         });
+         
+         var table = $("#dataMartTable").DataTable({
+             "pageLength": 100,
+             "order": [[ 6, "desc" ]],
+             "bStateSave": true,
+         });
+         
+         // Intentionally search by empty string to clear the filters
+         table.columns().search("").draw();
+         
+         table.columns().every(function () {
+             var that = this;
+             $("input", this.footer()).on("keyup change clear", function() {
+                 if (that.search() !== this.value) {
+                     that.search(this.value).draw();
+                 }
+             });
+         });
+         
+         $("#dataMartTable tfoot tr").appendTo("#dataMartTable thead");
+         
+         /*<![CDATA[*/
+         
+         $("#dataMartTable thead tr:eq(1) th:eq(4) input").val('Deployed');
+         table.column(4).search('Deployed').draw();
+         
+         /*]]>*/
+         
+      </script>
+   </body>
+</html>

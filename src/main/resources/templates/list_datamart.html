@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<!--
+  ~ Copyright Verizon Media, Licensed under the terms of the Apache License, Version 2.0. See LICENSE file in project root for terms.
+  -->
+<html lang="en">
+    <head th:replace="fragments/head :: head">
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, shrink-to-fit=no, initial-scale=1" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Data Mart Onboarding Tool</title>
+        <link rel="shortcut icon" href="../static/favicon.ico" type="image/x-icon" />
+        <link rel="icon" href="../static/favicon.ico" type="image/x-icon" />
+        <!--/* jQuery */-->
+        <script src="../static/js/jquery.js"></script>
+        <!--/* Bootstrap */-->
+        <script src="../static/js/bootstrap.min.js"></script>
+        <link href="../static/css/bootstrap.min.css" rel="stylesheet" />
+        <!--/* Data table */-->
+        <script src="../static/js/jquery.dataTables.min.js"></script>
+        <script src="../static/js/dataTables.bootstrap.min.js"></script>
+        <link href="../static/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+        <!--/* Query Builder, custom POT build */-->
+        <script src="../static/js/query-builder.standalone.min.js"></script>
+        <link href="../static/css/query-builder.default.min.css" rel="stylesheet" />
+        <!--/* Sidebar CSS */-->
+        <link href="../static/css/simple-sidebar.css" rel="stylesheet" />
+        <!--/* Funnelmart CSS */-->
+        <link href="../static/css/funnelmart.css" rel="stylesheet" />
+        <!--/* HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries */-->
+        <!--/* WARNING: Respond.js doesn't work if you view the page via file:// */-->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <!--/* Sidebar */-->
+            <div id="sidebar-wrapper" th:replace="fragments/nav :: nav">
+                <ul class="sidebar-nav">
+                    <li class="sidebar-brand">
+                    <div class="text-center">
+                        <img src="../static/img/logo.png" width="150" />
+                    </div>
+                    <a href="#">Data Mart Onboarding Tool</a>
+                    </li>
+                    <li>
+                    <a href="#">Help</a>
+                    </li>
+                    <li>
+                    <a href="#">List Data Marts</a>
+                    </li>
+                    <li>
+                    <a href="#">New Data Mart</a>
+                    </li>
+                    <div id="version" th:text="${version}">v0.0.0</div>
+                </ul>
+            </div>
+            <!--/* /#sidebar-wrapper */-->
+
+            <!--/* Page Content */-->
+            <div id="page-content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 th:text="${title}">List of Data Marts / Funnels</h1>
+                            <div th:if="${error != null}" th:text="${error}" class="alert alert-danger" role="alert">Error message</div>
+                            <div class="table-responsive">
+                                <!--/*
+                                If the list of data marts is empty, show allert.
+                                Else, loop over the list and output the data mart information.
+                                */-->
+                                <div th:switch="${#lists.size(listOfDataMarts) > 0}">
+                                    <div th:case="${false}" class="alert alert-info" role="alert" style="padding:10px"><i class="icon-bolt" style="margin-right: 5px;"></i>No marts to display</div>
+                                    <table id="dataMartTable" th:case="${true}" class="table table-striped table-hover table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Owner</th>
+                                                <th>Status</th>
+                                                <th>Latest Version</th>
+                                                <th>Date Created</th>
+                                                <th>Date Last Updated</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr th:each="funnelGroup: ${listOfFunnelGroups}" class='clickable-row'
+                                                th:attr="data-href=${'/funnelgroup/'+funnelGroup.getFunnelGroupId()}">
+                                                <td th:text="funnelmart">funnelmart</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupName()}">Alpha</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupDescription()}">A simple data mart</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupOwner()}">owner</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupStatus()}">not created</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupVersion()}">3</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupCreateTime()}">create date</td>
+                                                <td th:text="${funnelGroup.getFunnelGroupEditTime()}">update date</td>
+                                            </tr>
+                                            <tr th:each="dataMart: ${listOfDataMarts}" class='clickable-row'
+                                                th:attr="data-href=${'/datamart/'+dataMart.getPipelineId()}">
+                                                <td th:text="${dataMart.getPipelineType()}">Datamart</td>
+                                                <td th:text="${dataMart.getPipelineName()}">Alpha</td>
+                                                <td th:text="${dataMart.getPipelineDescription()}">A simple data mart</td>
+                                                <td th:text="${dataMart.getPipelineOwner()}">owner</td>
+                                                <td th:text="${dataMart.getPipelineStatus()}">not created</td>
+                                                <td th:text="${dataMart.getPipelineVersion()}">3</td>
+                                                <td th:text="${dataMart.getPipelineCreateTime()}">create date</td>
+                                                <td th:text="${dataMart.getPipelineEditTime()}">update date</td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Name</th>
+                                                <th>Description</th>
+                                                <th>Owner</th>
+                                                <th>Status</th>
+                                                <th>Latest Version</th>
+                                                <th>Date Created</th>
+                                                <th>Date Last Updated</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--/* Select Datamart Schema Modal */-->
+                <div id="selectDatamartSchemaModal" th:replace="fragments/select_datamart_schema_modal :: selectDatamartSchemaModal"/>
+                <!--/* Select Funnel Schema Modal */-->
+                <div id="selectFunnelSchemaModal" th:replace="fragments/select_funnel_schema_modal :: selectFunnelSchemaModal"/>
+
+            </div>
+            <!--/* /page-content-wrapper */-->
+
+        </div>
+        <!--/* /wrapper */-->
+
+        <!--/* Menu Toggle Script */-->
+        <script th:inline="javascript">
+            $(".clickable-row").click(function() {
+                window.document.location = $(this).data("href");
+            });
+
+            $("#dataMartTable tfoot th").each( function () {
+                $(this).html('<input type="text" pattern="[A-Za-z0-9 _-]{1,30}" placeholder="Search" />');
+            });
+
+            var table = $("#dataMartTable").DataTable({
+                "pageLength": 100,
+                "order": [[ 6, "desc" ]],
+                "bStateSave": true,
+            });
+
+            // Intentionally search by empty string to clear the filters
+            table.columns().search("").draw();
+
+            table.columns().every(function () {
+                var that = this;
+                $("input", this.footer()).on("keyup change clear", function() {
+                    if (that.search() !== this.value) {
+                        that.search(this.value).draw();
+                    }
+                });
+            });
+
+            $("#dataMartTable tfoot tr").appendTo("#dataMartTable thead");
+
+            /*<![CDATA[*/
+            /*[+
+            $("#dataMartTable thead tr:eq(1) th:eq(4) input").val([[${statusFilter}]]);
+            table.column(4).search([[${statusFilter}]]).draw();
+            +]*/
+            /*]]>*/
+
+        </script>
+        
+        
+    </body>
+</html>

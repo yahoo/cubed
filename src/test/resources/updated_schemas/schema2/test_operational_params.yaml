@@ -1,0 +1,29 @@
+# Disable bullet validataion
+disableBullet: true
+
+# Disable funnel support
+disableFunnel: false
+
+# Oozie job type
+oozieJobType: "daily"
+
+# Oozie backfill job type
+oozieBackfillJobType: "daily"
+
+# Target table used in funnel queries
+funnelTargetTable: "daily_data"
+
+# User id fields
+userIdFields: 
+  - "cookie_one"
+
+# Default filters
+defaultFilters:
+  - id: "filter"
+    operator: "is_null"
+  - id: "cookie_version"
+    operator: "equal"
+    value: "1"
+
+# Hql timestamp column attribute
+timestampColumnParam: "timestamp"

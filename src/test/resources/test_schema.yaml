@@ -1,0 +1,492 @@
+---
+schemas:
+- tables:
+    daily_table: "daily_data"
+    hourly_partition: "dt=${YEAR}${MONTH}${DAY}${HOUR}"
+    daily_partition: "dt=${YEAR}${MONTH}${DAY}"
+    hourly_table: "hourly_data"
+  fields:
+  - name: "timestamp"
+    type: "integer"
+    id: 19
+  - name: "bcookie"
+    type: "string"
+    id: 9
+  - name: "bcookie_age"
+    type: "string"
+    id: 13
+  - name: "bcookie_bucket"
+    type: "integer"
+    id: 103
+  - name: "bcookie_mobile_source"
+    type: "string"
+    id: 11
+  - name: "bcookie_timestamp"
+    type: "string"
+    id: 12
+  - name: "bcookie_version"
+    type: "string"
+    id: 10
+  - name: "browser_name"
+    type: "string"
+    id: 24
+  - name: "browser_version"
+    type: "string"
+    id: 25
+  - name: "bucket_id_tag"
+    type: "map<string,boolean>"
+    id: 90
+  - name: "click_info"
+    type: "map<string,string>"
+    id: 38
+  - name: "cookie_info"
+    type: "map<string,string>"
+    id: 32
+    keys:
+    - name: "count"
+      id: 32001
+    - name: "epolyvoreuid"
+      id: 32002
+    - name: "external_domain_age"
+      id: 32003
+    - name: "external_domain_cookie"
+      id: 32004
+    - name: "external_domain_timestamp"
+      id: 32005
+    - name: "external_domain_version"
+      id: 32006
+    - name: "eyuid"
+      id: 32007
+    - name: "partner"
+      id: 32008
+    - name: "pending_bcookie"
+      id: 32009
+    - name: "premium_services"
+      id: 32010
+    - name: "profile"
+      id: 32011
+    - name: "external_bcookie"
+      id: 32012
+    - name: "local_sid"
+      id: 32013
+    - name: "hashed_bcookie"
+      id: 32014
+  - name: "debug_info"
+    type: "map<string,string>"
+    id: 70
+    keys:
+    - name: "event_model"
+      id: 70001
+    - name: "http_status_code"
+      id: 70002
+    - name: "click_view_join_type"
+      id: 70003
+    - name: "quality_score"
+      id: 70004
+    - name: "app_session_skip_reason"
+      id: 70005
+    - name: "bcookie_state"
+      id: 70006
+  - name: "demog_info"
+    type: "map<string,string>"
+    id: 42
+    keys:
+    - name: "age"
+      id: 42001
+    - name: "birth_year"
+      id: 42002
+    - name: "country"
+      id: 42003
+    - name: "gender"
+      id: 42004
+    - name: "zip"
+      id: 42005
+  - name: "event"
+    type: "string"
+    id: 4
+  - name: "event_family"
+    type: "string"
+    id: 80
+  - name: "event_is_user_triggered"
+    type: "boolean"
+    id: 7
+  - name: "event_tag"
+    type: "map<string,boolean>"
+    id: 6
+  - name: "event_trigger"
+    type: "string"
+    id: 5
+  - name: "filter_tag"
+    type: "map<string,boolean>"
+    id: 39
+    keys:
+    - name: "is_bad_statuscode"
+      id: 39001
+    - name: "is_blacklisted_host"
+      id: 39002
+    - name: "is_blacklisted_spaceid"
+      id: 39003
+    - name: "is_blacklisted_yuid"
+      id: 39004
+    - name: "is_internal_ip"
+      id: 39005
+    - name: "is_invalid_bcookie"
+      id: 39006
+    - name: "is_invalid_url"
+      id: 39007
+    - name: "is_log_error"
+      id: 39008
+    - name: "is_non_production"
+      id: 39009
+    - name: "is_null_spaceid"
+      id: 39010
+    - name: "is_robotic_user_agent"
+      id: 39011
+    - name: "is_tp_robot"
+      id: 39012
+    - name: "is_unjoined_click"
+      id: 39013
+    - name: "is_duplicate"
+      id: 39014
+    - name: "is_ganon_data"
+      id: 39015
+    - name: "is_eu_old_app_data"
+      id: 39016
+  - name: "instrumentation_info"
+    type: "map<string,string>"
+    id: 44
+    keys:
+    - name: "platform"
+      id: 44001
+    - name: "version"
+      id: 44002
+    - name: "yql_table_version"
+      id: 44003
+  - name: "ip_geo_info"
+    type: "map<string,string>"
+    id: 43
+    keys:
+    - name: "asn"
+      id: 43001
+    - name: "city"
+      id: 43002
+    - name: "city_id"
+      id: 43003
+    - name: "country"
+      id: 43004
+    - name: "country_id"
+      id: 43005
+    - name: "dma"
+      id: 43006
+    - name: "dma_id"
+      id: 43007
+    - name: "isp"
+      id: 43008
+    - name: "state"
+      id: 43009
+    - name: "state_id"
+      id: 43010
+    - name: "timezone"
+      id: 43011
+    - name: "timezone_offset"
+      id: 43012
+    - name: "zip"
+      id: 43013
+    - name: "zip_id"
+      id: 43014
+  - name: "ip_version"
+    type: "integer"
+    id: 21
+  - name: "is_additive_view"
+    type: "boolean"
+    id: 72
+  - name: "is_logged_in"
+    type: "boolean"
+    id: 2
+  - name: "is_page_view"
+    type: "boolean"
+    id: 1
+  - name: "is_row_deleted"
+    type: "boolean"
+    id: 106
+  - name: "kpi_tag"
+    type: "map<string,boolean>"
+    id: 97
+    keys:
+    - name: "is_young_user"
+      id: 97001
+    - name: "is_filter_tag_not_null"
+      id: 97002
+    - name: "is_not_foreground"
+      id: 97003
+  - name: "logged_event_timestamp"
+    type: "integer"
+    id: 18
+  - name: "mobile_app_age"
+    type: "string"
+    id: 105
+  - name: "mobile_app_name"
+    type: "string"
+    id: 60
+  - name: "mobile_app_screen_name"
+    type: "string"
+    id: 61
+  - name: "mobile_app_state"
+    type: "string"
+    id: 101
+  - name: "mobile_app_version"
+    type: "string"
+    id: 62
+  - name: "mobile_device_carrier"
+    type: "string"
+    id: 48
+  - name: "mobile_device_connectivity"
+    type: "string"
+    id: 49
+  - name: "mobile_device_country"
+    type: "string"
+    id: 52
+  - name: "mobile_device_id"
+    type: "string"
+    id: 50
+  - name: "mobile_device_idfv"
+    type: "string"
+    id: 59
+  - name: "mobile_device_locale"
+    type: "string"
+    id: 51
+  - name: "mobile_device_make"
+    type: "string"
+    id: 53
+  - name: "mobile_device_model"
+    type: "string"
+    id: 54
+  - name: "mobile_device_orientation"
+    type: "string"
+    id: 55
+  - name: "mobile_device_resolution"
+    type: "string"
+    id: 56
+  - name: "mobile_device_timezone_offset"
+    type: "string"
+    id: 57
+  - name: "mobile_device_version"
+    type: "string"
+    id: 58
+  - name: "mobile_os_name"
+    type: "string"
+    id: 67
+  - name: "mobile_os_version"
+    type: "string"
+    id: 68
+  - name: "network"
+    type: "string"
+    id: 76
+  - name: "os_name"
+    type: "string"
+    id: 22
+  - name: "os_version"
+    type: "string"
+    id: 23
+  - name: "page_domain"
+    type: "string"
+    id: 27
+  - name: "page_info"
+    type: "map<string,string>"
+    id: 36
+  - name: "page_protocol"
+    type: "string"
+    id: 74
+  - name: "page_search_term"
+    type: "string"
+    id: 34
+  - name: "page_uri"
+    type: "string"
+    id: 28
+  - name: "partner_info"
+    type: "map<string,string>"
+    id: 47
+    keys:
+    - name: "traffic_source"
+      id: 47001
+  - name: "pty_country"
+    type: "string"
+    id: 64
+  - name: "pty_device"
+    type: "string"
+    id: 78
+  - name: "pty_dt"
+    type: "string"
+    id: 73
+  - name: "pty_experience"
+    type: "string"
+    id: 79
+  - name: "pty_family"
+    type: "string"
+    id: 77
+  - name: "pty_language"
+    type: "string"
+    id: 104
+  - name: "pty_name"
+    type: "string"
+    id: 63
+  - name: "ptyid"
+    type: "string"
+    id: 3
+  - name: "referrer"
+    type: "string"
+    id: 81
+  - name: "referrer_domain"
+    type: "string"
+    id: 29
+  - name: "referrer_protocol"
+    type: "string"
+    id: 82
+  - name: "referrer_search_term"
+    type: "string"
+    id: 31
+  - name: "referrer_source"
+    type: "string"
+    id: 83
+  - name: "referrer_uri"
+    type: "string"
+    id: 30
+  - name: "row_id"
+    type: "string"
+    id: 84
+  - name: "row_id_source"
+    type: "string"
+    id: 85
+  - name: "server_name"
+    type: "string"
+    id: 35
+  - name: "session_info"
+    type: "map<string,string>"
+    id: 66
+    keys:
+    - name: "duration"
+      id: 66001
+    - name: "internet_session_id"
+      id: 66002
+    - name: "internet_sequence"
+      id: 66003
+    - name: "network_session_id"
+      id: 66004
+    - name: "network_referrer"
+      id: 66005
+    - name: "network_referrer_source"
+      id: 66006
+    - name: "network_referrer_domain"
+      id: 66007
+    - name: "network_referrer_uri"
+      id: 66008
+    - name: "property_session_id"
+      id: 66009
+    - name: "property_sequence"
+      id: 66010
+    - name: "subproperty_session_id"
+      id: 66011
+    - name: "subproperty_sequence"
+      id: 66012
+    - name: "subproperty_referrer_domain"
+      id: 66013
+    - name: "subproperty_referrer_uri"
+      id: 66014
+    - name: "subproperty_referrer_search_term"
+      id: 66015
+    - name: "subproperty_referrer_section"
+      id: 66016
+    - name: "subproperty_landing_spaceid"
+      id: 66017
+    - name: "timespent"
+      id: 66018
+    - name: "flurry_session_id"
+      id: 66019
+    - name: "device_session_id"
+      id: 66020
+    - name: "device_sequence"
+      id: 66021
+    - name: "foreground_session_id"
+      id: 66022
+    - name: "foreground_sequence"
+      id: 66023
+    - name: "app_session_id"
+      id: 66024
+    - name: "app_sequence"
+      id: 66025
+  - name: "sid"
+    type: "string"
+    id: 14
+  - name: "sid_bucket"
+    type: "integer"
+    id: 102
+  - name: "spaceid"
+    type: "string"
+    id: 15
+  - name: "toolbar_info"
+    type: "map<string,string>"
+    id: 40
+  - name: "tp_tag"
+    type: "map<string,boolean>"
+    id: 65
+  - name: "tp_test_tag"
+    type: "map<string,boolean>"
+    id: 75
+  - name: "user_agent"
+    type: "string"
+    id: 26
+  - name: "user_device_info"
+    type: "map<string,string>"
+    id: 69
+    keys:
+    - name: "bid"
+      id: 69001
+    - name: "carrier"
+      id: 69002
+    - name: "device_type"
+      id: 69003
+    - name: "dtid"
+      id: 69004
+    - name: "make"
+      id: 69005
+    - name: "model"
+      id: 69006
+  - name: "user_privacy_info"
+    type: "map<string,string>"
+    id: 33
+    keys:
+    - name: "dnt"
+      id: 33001
+    - name: "master_optout"
+      id: 33002
+    - name: "privacy_mode"
+      id: 33003
+    - name: "search_optout"
+      id: 33004
+  - name: "view_id"
+    type: "string"
+    id: 71
+  - name: "ydod"
+    type: "string"
+    id: 8
+  - name: "yrid"
+    type: "string"
+    id: 86
+  - name: "yuid_age"
+    type: "string"
+    id: 17
+  - name: "yuid_timestamp"
+    type: "string"
+    id: 16
+  - name: "ywa_info"
+    type: "map<string,string>"
+    id: 46
+    keys:
+    - name: "first_visit_timestamp"
+      id: 46001
+    - name: "projectid"
+      id: 46002
+    - name: "sessionid"
+      id: 46003
+  name: "schema1"
+  database: "schema1"

@@ -1,0 +1,19 @@
+targetDatabase: "schema1"
+funnelTargetTable: "daily_data"
+
+# Default filters
+defaultFilters:
+  - id: "filter_tag"
+    operator: "is_null"
+  - id: "favorite_pokemon"
+    operator: "equal"
+    value: "pikachu"
+  - id: "pty_family"
+    operator: "equal"
+    value: "sports"
+  - id: "pty_device"
+    operator: "equal"
+    value: "desktop"
+  - id: "pty_experience"
+    operator: "equal"
+    value: "web"
