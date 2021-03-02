@@ -2,11 +2,11 @@ set -e
 
 ############## Util ###############
 
-function printInfo {
+printInfo() {
 	echo "[DMART PIPELINE CD][INFO] $1"
 }
 
-function printError {
+printError() {
 	# stderr
 	echo "[DMART PIPELINE CD][ERROR] $1" >&2
 }

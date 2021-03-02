@@ -2,26 +2,26 @@
 
 OOZIE=$(OOZIE)
 
-function printInfo {
+printInfo() {
     echo "[DMART PIPELINE CD][INFO] $1"
 }
 
-function printError {
+printError() {
     # stderr
     echo "[DMART PIPELINE CD][ERROR] $1" >&2
 }
 
-function printOozieJobID {
+printOozieJobID() {
     echo "[[ID]]$1"
 }
 
-function printBackfillOozieJobID {
+printBackfillOozieJobID() {
     echo "[[BACKFILLID]]$1"
 }
 
 # --------------------------------- OOZIE --------------------------------- #
 
-function  oozie_jobSearch {
+oozie_jobSearch() {
   JOBTYPE=$1
   JOB_NAME_PATTERN=$2
   OOZIE_URL=$3
@@ -41,7 +41,7 @@ function  oozie_jobSearch {
   echo $JOB_IDS
 }
 
-function oozie_jobKill {
+oozie_jobKill() {
   JOBID=$1
   OOZIE_URL=$2
 
@@ -50,7 +50,7 @@ function oozie_jobKill {
   echo $RESULT
 }
 
-function oozie_jobSubmit {
+oozie_jobSubmit() {
   USER_JOB=$1
   OOZIE_URL=$2
 
@@ -66,7 +66,7 @@ function oozie_jobSubmit {
   echo $OOZIEJOBID
 }
 
-function oozie_jobSetEndTime {
+oozie_jobSetEndTime() {
   JOBID=$1
   ENDTIME=$2
 
@@ -77,7 +77,7 @@ function oozie_jobSetEndTime {
 
 # --------------------------------- HDFS --------------------------------- #
 
-function hdfs_ls {
+hdfs_ls() {
     local DIR=$1
 
     hdfs dfs -ls $DIR >/dev/null 2>&1
@@ -90,7 +90,7 @@ function hdfs_ls {
 # Put a folder onto hdfs
 # e.g. LOCALSRC = /a/b/c, HDFSDEST=x/y/z
 # result = x/y/z/c
-function hdfs_folder_put {
+hdfs_folder_put() {
 
   local LOCALSRC=$1
   local HDFSDEST=$2

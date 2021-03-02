@@ -1,7 +1,7 @@
 set +e
 
 # Customize settings
-function exportSetting {
+exportSetting() {
 	export HEADLESS_USER=$(USER_NAME)
 	export DEST_FOLDER=$(DEST_FOLDER)
 	export DEPLOY_PATH="${DEST_FOLDER}/${PIPELINE_NAME}_v${PIPELINE_VERSION}"
@@ -10,7 +10,7 @@ function exportSetting {
 	export OOZIE_URL=$(OOZIE_URL)
 }
 
-function deployPipeline {
+deployPipeline() {
 
 	# ------------- (1) check deployment path -------------------
 	printInfo "Check if deploy already exists: ${DEPLOY_PATH}"
