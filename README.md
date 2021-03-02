@@ -1,5 +1,6 @@
 # Cubed
 
+[![build](https://github.com/yahoo/cubed/workflows/build/badge.svg?branch=main)](https://github.com/yahoo/cubed/actions?query=workflow%3Abuild)
 [![Apache License 2.0](https://img.shields.io/badge/license-Apache%202.0-blue.svg?style=flat)](LICENSE)
 
 Cubed is a self-serve data mart and funnel analysis pipeline management platform.  
