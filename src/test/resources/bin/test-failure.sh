@@ -2,7 +2,7 @@ set -e
 
 ############## Util ###############
 
-function printError {
+printError() {
 	# stderr
 	echo "[DMART PIPELINE CD][ERROR] $1" >&2
 }

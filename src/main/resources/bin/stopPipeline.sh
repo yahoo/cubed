@@ -1,13 +1,13 @@
 set +e
 
-function exportSetting {
+exportSetting() {
 	export HEADLESS_USER=$(USER_NAME)
 	export INSTANCE_NAME=$(INSTANCE_NAME)
 	export PRODUCT_NAME="${INSTANCE_NAME}_${PIPELINE_NAME}"
 	export OOZIE_URL=$(OOZIE_URL)
 }
 
-function stopPipeline {
+stopPipeline() {
 
 	# -------------- (1) search for existing (old) jobs -------------------
 	# Get all running or waiting jobs matching the product name/owner combination
@@ -34,7 +34,7 @@ function stopPipeline {
 	printInfo "Done stopping the pipeline."
 }
 
-function stopBackfillPipeline {
+stopBackfillPipeline() {
 
 	# -------------- (1) search for existing backfill jobs -------------------
 	# Get all running or waiting jobs matching the product name/backfill/owner combination
