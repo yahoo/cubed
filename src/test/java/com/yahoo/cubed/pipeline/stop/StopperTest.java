@@ -26,7 +26,6 @@ public class StopperTest {
         stopper.setScriptFileName("test-success-stop.sh");
         
         PipelineStopper.Status status1 = stopper.call();
-        System.out.print(status1.errorMsg);
         Assert.assertFalse(status1.hasError);
         Assert.assertEquals(status1.infoMsg, "[DMART PIPELINE CD][INFO] OK\n");
         

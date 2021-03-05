@@ -33,7 +33,6 @@ public class LauncherTest {
         launcher.setPipelineOozieBackfillJobType(YamlSettings.OOZIE_BACKFILL_JOB_TYPE);
         
         PipelineLauncher.LaunchStatus status1 = launcher.call();
-        System.out.print(status1.errorMsg);
         Assert.assertFalse(status1.hasError);
         Assert.assertEquals(status1.infoMsg, "[DMART PIPELINE CD][INFO] OK\n");
         
