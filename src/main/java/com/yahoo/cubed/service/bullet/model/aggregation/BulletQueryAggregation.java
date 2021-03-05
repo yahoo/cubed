@@ -5,8 +5,10 @@
 package com.yahoo.cubed.service.bullet.model.aggregation;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.yahoo.cubed.service.bullet.query.BulletQuery;
 import com.yahoo.cubed.model.PipelineProjection;
 import com.yahoo.cubed.util.Measurement;
+import com.yahoo.cubed.util.Constants;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +25,18 @@ public class BulletQueryAggregation {
     public String type;
     /** Limit record number. */
     public int size;
+    /** The attribute used to give an alias to the aggregation. */
+    public Map<String, String> attributes;
+    /** The key to give the aggregation an alias. */
+    private static final String NEW_NAME = "newName";
 
     private BulletQueryAggregation(String aggregationType, int recordLimit) {
         this.type = aggregationType;
         this.fields = new HashMap<>();
         this.size = recordLimit;
+        this.attributes = new HashMap<String, String>() { {
+                put(NEW_NAME, BulletQuery.AGGREGATION_TYPE);
+            } };
     }
 
     /**
@@ -57,7 +66,7 @@ public class BulletQueryAggregation {
         for (PipelineProjection projection : dimensionProjections) {
             String fieldName = projection.getField().getFieldName();
             if (projection.getKey() != null && !projection.getKey().isEmpty()) {
-                fieldName = fieldName + "." + projection.getKey();
+                fieldName = fieldName + Constants.DOT + Constants.DOUBLE_QUOTE + projection.getKey() + Constants.DOUBLE_QUOTE;
             }
             ret.addField(fieldName);
         }

@@ -76,7 +76,7 @@ public class BulletQueryTest {
         // check aggregation
         Assert.assertEquals(query.aggregation.type, BulletQuery.AGGREGATION_TYPE);
         Assert.assertEquals(query.aggregation.fields.size(), 1);
-        Assert.assertTrue(query.aggregation.fields.containsKey("field2._KEY"));
+        Assert.assertTrue(query.aggregation.fields.containsKey("field2.\"_KEY\""));
 
         // check filter
         Assert.assertEquals(query.filters.size(), 1);

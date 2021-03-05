@@ -42,4 +42,8 @@ public class Constants {
     public static final String HOURLY_PARTITION_TEMPLATE = "hourly_partition";
     /** Daily data partition format. */
     public static final String DAILY_PARTITION_TEMPLATE = "daily_partition";
+    /** The dot. */
+    public static final String DOT = ".";
+    /** The double quote. */
+    public static final String DOUBLE_QUOTE = "\"";
 }

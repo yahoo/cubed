@@ -7,6 +7,7 @@ package com.yahoo.cubed.service.bullet.model.projection;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.yahoo.cubed.model.PipelineProjection;
 import com.yahoo.cubed.util.Measurement;
+import com.yahoo.cubed.util.Constants;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,7 +53,7 @@ public class BulletQueryProjection {
         for (PipelineProjection projection : dimensionProjections) {
             String fieldName = projection.getField().getFieldName();
             if (projection.getKey() != null && !projection.getKey().isEmpty()) {
-                fieldName = fieldName + "." + projection.getKey();
+                fieldName = fieldName + Constants.DOT + Constants.DOUBLE_QUOTE + projection.getKey() + Constants.DOUBLE_QUOTE;
             }
             // use alias if given
             if (projection.getAlias() != null) {

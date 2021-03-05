@@ -5,20 +5,13 @@
 package com.yahoo.cubed.service.querybullet;
 
 import com.yahoo.cubed.App;
-import com.yahoo.cubed.model.Field;
-import com.yahoo.cubed.model.Pipeline;
-import com.yahoo.cubed.model.PipelineProjection;
 import com.yahoo.cubed.service.querybullet.QueryBulletService.ResponseJson;
 import com.yahoo.cubed.service.bullet.query.BulletQueryFailException;
 import com.yahoo.cubed.settings.CLISettings;
 import com.yahoo.cubed.source.ConfigurationLoader;
-import com.yahoo.cubed.util.Aggregation;
-import com.yahoo.cubed.util.Measurement;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -39,7 +32,6 @@ import org.testng.annotations.Test;
 public class QueryBulletServiceTest {
     private static HttpClient httpClient;
     private static QueryBulletService queryBulletService;
-    private static Pipeline pipeline;
     private static String schemaName = "schema1";
 
     private static class MockQueryBulletServiceImpl extends QueryBulletServiceImpl {
@@ -77,43 +69,6 @@ public class QueryBulletServiceTest {
         HttpClient myHttpClient = Mockito.mock(HttpClient.class);
         Mockito.when(myHttpClient.execute(Mockito.any(HttpPost.class))).thenReturn(httpResponse);
 
-        // mock pipeline
-        Field field1 = new Field();
-        field1.setFieldId(1L);
-        field1.setFieldName("field1");
-        field1.setFieldType("string");
-        field1.setSchemaName(schemaName);
-        field1.setMeasurementType(Measurement.METRIC.measurementTypeCode);
-
-        PipelineProjection projection1 = new PipelineProjection();
-        projection1.setField(field1);
-        projection1.setAlias("F1");
-        projection1.setAggregation(Aggregation.COUNT);
-
-        Field field2 = new Field();
-        field2.setFieldId(2L);
-        field2.setFieldName("field2");
-        field2.setFieldType("string");
-        field2.setSchemaName(schemaName);
-        field2.setMeasurementType(Measurement.DIMENSION.measurementTypeCode);
-
-        PipelineProjection projection2 = new PipelineProjection();
-        projection2.setField(field2);
-        projection2.setAlias("F2");
-        projection2.setKey("_KEY");
-
-        List<PipelineProjection> projections = new ArrayList<>();
-        projections.add(projection1);
-        projections.add(projection2);
-
-        Pipeline myPipeline = new Pipeline();
-        myPipeline.setPipelineName("pipeline");
-        myPipeline.setPipelineDescription("pipeline description");
-        myPipeline.setProjections(projections);
-        myPipeline.setPipelineFilterJson("{\"condition\":\"AND\",\"rules\":[{\"id\":\"price\",\"field\":\"price\",\"type\":\"double\",\"input\":\"text\",\"operator\":\"less\",\"value\":\"10.25\"},{\"id\":\"filter_tag\",\"field\":\"filter_tag\",\"type\":\"double\",\"input\":\"text\",\"operator\":\"equal\",\"value\":\"null\"}]}");
-        myPipeline.setPipelineSchemaName("schema1");
-
-        pipeline = myPipeline;
         httpClient = myHttpClient;
         queryBulletService = new MockQueryBulletServiceImpl();
     }
