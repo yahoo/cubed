@@ -11,7 +11,13 @@ SELECT
        bool_map_field_1['key_1'],
        COALESCE(regexp_replace(string_map_field_1['_fieldkey3'], '[\\t\\r\\n]', ''), ''),
        COALESCE(SUM(integer_column), 0),
-       COALESCE(base64(data_to_sketch(string_field_2, 2048, 1.0)), '')
+       COALESCE(base64(data_to_sketch(string_field_2, 2048, 1.0)), ''),
+       COALESCE(regexp_replace(
+        CASE
+          WHEN string_field_3 = 'value1' THEN 'alias1'
+          WHEN string_field_3 = 'value2' THEN 'alias2'
+          ELSE 'alias'
+        END, '[\\t\\r\\n]', ''), '')
 WHERE
       (
         string_field_1 > '3' OR 
@@ -27,4 +33,4 @@ WHERE
         )
       ) AND 
       dt = '${hivevar:DATE_FILTER}'
-GROUP BY string_field_1,bool_map_field_1['key_1'],string_map_field_1['_fieldkey3'];
+GROUP BY string_field_1,bool_map_field_1['key_1'],string_map_field_1['_fieldkey3'],string_field_3;

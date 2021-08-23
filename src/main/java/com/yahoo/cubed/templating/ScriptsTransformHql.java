@@ -104,19 +104,34 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
 
         // Check for existing value mapping
         List<PipelineProjectionVM> vas = projection.getProjectionVMs();
+        String defaultVMAlias = projection.getDefaultVMAlias();
         if (vas != null && vas.size() > 0) {
             // Add CASE WHEN statement for value mapping pairs
-            String caseStatement = "\n\tCASE";
-            for (int i = 0; i < vas.size(); i++) {
-                caseStatement = caseStatement + "\n\t\t" + "WHEN " + fieldName + " = '" + vas.get(i).getFieldValue() + "' THEN '" + vas.get(i).getFieldValueMapping() + "'";
+            StringBuilder caseStatement = new StringBuilder("\n\tCASE");
+            for (PipelineProjectionVM va : vas) {
+                caseStatement.append("\n\t\tWHEN ");
+                caseStatement.append(fieldName);
+                caseStatement.append(" = '");
+                caseStatement.append(va.getFieldValue());
+                caseStatement.append("' THEN '");
+                caseStatement.append(va.getFieldValueMapping());
+                caseStatement.append("'");
             }
-            caseStatement =  caseStatement + "\n\t\tELSE " + fieldName + "\n\tEND";
+            if (defaultVMAlias != null) {
+                caseStatement.append("\n\t\tELSE '");
+                caseStatement.append(defaultVMAlias);
+                caseStatement.append("'\n\tEND");
+            } else {
+                caseStatement.append("\n\t\tELSE ");
+                caseStatement.append(fieldName);
+                caseStatement.append("\n\tEND");
+            }
             if (Constants.STRING.equals(projection.getField().getFieldType())) {
                 // String type projection, perform cleanup regex
-                return String.format(STRING_CLEANUP_PROJECTION, caseStatement);
+                return String.format(STRING_CLEANUP_PROJECTION, caseStatement.toString());
             } else {
                 // Else, do the standard projection
-                return String.format(STANDARD_PROJECTION, caseStatement);
+                return String.format(STANDARD_PROJECTION, caseStatement.toString());
             }
         } else {
             // No value mapping exists

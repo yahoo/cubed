@@ -253,6 +253,10 @@ public class Utils {
                 projection.setAlias(alias);
             }
 
+            // Set the default value mapping alias
+            String defaultVMAlias = projectionMap.get("default_vm_alias");
+            projection.setDefaultVMAlias(defaultVMAlias);
+
             // Add aggregate
             projection.setAggregation(Aggregation.byName(projectionMap.get(NewDatamart.AGGREGATE)));
             // Set projection as not part of original schema

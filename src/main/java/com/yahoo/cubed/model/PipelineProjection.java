@@ -78,6 +78,13 @@ public class PipelineProjection implements AbstractModel {
     private List<PipelineProjectionVM> projectionVMs;
 
     /**
+     * Default VM alias.
+     */
+    @Getter @Setter
+    @Column(name = "default_vm_alias")
+    private String defaultVMAlias;
+
+    /**
      * Key (subfield) of field.
      */
     @Getter @Setter
