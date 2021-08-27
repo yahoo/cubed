@@ -112,6 +112,8 @@ public class Utils {
     public static final String VM_ALIAS_JSON_FIELD = "value mapping alias";
     /** The funnel step name json field. */
     public static final String FUNNEL_STEP_NAME_JSON_FIELD = "funnel step name";
+    /** The default value mapping alias for projection map. */
+    public static final String DEFAULT_VM_ALIAS = "default_vm_alias";
     /** Regular text field pattern in json requests. */
     private static final Pattern REGULAR_TEXT_FIELD_PATTERN = Pattern.compile("^[A-Za-z0-9 _-]*$");
     /** Funnel names serialized json string pattern in json requests. */
@@ -254,7 +256,7 @@ public class Utils {
             }
 
             // Set the default value mapping alias
-            String defaultVMAlias = projectionMap.get("default_vm_alias");
+            String defaultVMAlias = projectionMap.get(DEFAULT_VM_ALIAS);
             projection.setDefaultVMAlias(defaultVMAlias);
 
             // Add aggregate
