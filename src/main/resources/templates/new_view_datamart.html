@@ -424,13 +424,13 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="vaValue">Value</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="vaValue" pattern="[A-Za-z0-9 _-]{1,30}" required="required" placeholder="Value of the field"/>
+                                    <input type="text" class="form-control" id="vaValue" pattern="[a-z_ 0-9.A-Z]*" required="required" placeholder="Value of the field"/>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label class="col-sm-2 control-label" for="vaAlias">Alias</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="vaAlias" pattern="[A-Za-z0-9 _-]{1,30}" required="required" placeholder="Alias of the value"/>
+                                    <input type="text" class="form-control" id="vaAlias" pattern="[a-z_ 0-9.A-Z]*" required="required" placeholder="Alias of the value"/>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -825,21 +825,35 @@
                 "render": function(data, type, row, meta) {
                     var result = '';
                     if ((row[8] && row[8] === "Dimension") || row[3] === "None" || !row[3]) {
-                        if (data && data.length > 0 ) {
+                        if (data && data[0].length > 0 ) {
                             result += '<ul class="va-list" style="list-style:none;padding:0">\n';
-                            for (var i = 0; i < data.length; i++) {
+                            var projectionVMsSize = data[0].length;
+
+                            // First element of data indicates the default mapping value (or null))
+                            var defaultVM = data[1];
+                            for (var i = 0; i < projectionVMsSize; i++) {
                                 result +=
                                     '<li style="margin-top:10px">\n' +
                                     '<div>\n' +
-                                    '<input type="text" class="form-control va-input" pattern="[A-z- ]{1,30}" value="'+ data[i][0] + '" id="val-' + meta.row + '-' + i + '"/>\n' +
+                                    '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" class="form-control va-input" value="'+ data[0][i][0] + '" id="val-' + meta.row + '-' + i + '"/>\n' +
                                     '<i class="glyphicon glyphicon-arrow-right"></i>\n' +
-                                    '<input type="text" class="form-control va-input" pattern="[A-z- ]{1,30}" value="'+ data[i][1] + '" id="ali-' + meta.row + '-' + i + '"/>\n' +
+                                    '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" class="form-control va-input" value="'+ data[0][i][1] + '" id="ali-' + meta.row + '-' + i + '"/>\n' +
                                     '<button type="button" class="btn btn-xs btn-danger" onclick="removeVM(event,' + meta.row + ',' + i +')">\n' +
                                     '<i class="glyphicon glyphicon-remove"></i>\n' +
                                     '</button>\n' +
                                     '</div>\n' +
                                     '</li>';
                             }
+                            // Add default VM input box and checkbox based on the values retrieved above
+                            // OnClick and OnInput events are over-ridden to stop edit-projection pop-up and re-sync VMs
+                            if (defaultVM != null) {
+                                result += '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" value="' + defaultVM + '" class="form-control va-input" id="defaultVM-' + meta.row + '" placeholder="Default value mapping" style="margin:10px; margin-left:0px;">';
+                                result += '<input onclick="handleVaInputOnClick(event)" onchange="updateProjectionVMs(event)" checked type="checkbox" class="form-input va-input" id="defaultVMCheckbox-' + meta.row + '" style="margin:10px;"><label class="form-check-label" for="defaultVMCheckbox" style="margin:10px; margin-right:5px;">Use default</label>';
+                            } else {
+                                result += '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" value="" class="form-control va-input hidden" id="defaultVM-' + meta.row + '" placeholder="Default value mapping" style="margin:10px; margin-left:0px;">';
+                                result += '<input onclick="handleVaInputOnClick(event)" onchange="updateProjectionVMs(event)" type="checkbox" class="form-input va-input" id="defaultVMCheckbox-' + meta.row + '" style="margin:10px;"><label class="form-check-label" for="defaultVMCheckbox" style="margin:10px; margin-left:5px;">Use default</label>';
+                            }
+                            result += '<p></p>';
                             result += '<button class="btn btn-success" type="button" style="margin-top:10px" onclick="ShowVMModal(event,' + meta.row + ')">Add</button>';
                         } else {
                             result += '<button class="btn btn-success" type="button" onclick="ShowVMModal(event,' + meta.row + ')">Add</button>';
@@ -867,13 +881,12 @@
         e.stopImmediatePropagation();
 
         var rowContent = projectionTable.row(row).data();
-        rowContent[2].splice(i, 1);
+        rowContent[2][0].splice(i, 1);
         projectionTable.row(row).data(rowContent);
 
     }
 
     function projectionFieldSearch(){
-        console.log("triggered");
         var input = $("#projection-field-search").val();
         var tr = $("tr.projection-field");
         for (var i = 0; i < tr.length; i++) {
@@ -1064,19 +1077,28 @@
                 columnKeyName = row[0].substring(row[0].indexOf("[") + 1, row[0].length - 1);
             }
 
+            var defaultVMAlias = null;
+            if (row[2]) {
+                if (row[2][0].length == 0) {
+                    data.projectionVMs.push(row[2][0].slice());
+                 } else {
+                    data.projectionVMs.push(row[2][0]);
+
+                    // Get default VM alias and whether it should be activated or not
+                    defaultVMAlias = row[2][1];
+                }
+            } else {
+                data.projectionVMs.push(null);
+            }
+
             data.projections.push({
                 "column_id": row[5],
                 "key": columnKeyName,
                 "alias": row[1],
                 "aggregate": row[6],
-                "schema_name": data.schemaName
+                "schema_name": data.schemaName,
+                "default_vm_alias": defaultVMAlias
             });
-
-            if (row[2]) {
-                data.projectionVMs.push(row[2]);
-            } else {
-                data.projectionVMs.push(null);
-            }
         });
         // Add filters
         data.filter = $('#filterBuilder').queryBuilder('getRules');
@@ -1396,7 +1418,7 @@
         // Prevent submit action
         e.preventDefault();
         var valueAlias = [];
-        // type refers to dimension or metric, determined from modal header
+        // Type refers to dimension or metric, determined from modal header
         var type = $('#addColumnModalLabel').text();
 
         if (isEditProjection) {
@@ -1408,6 +1430,8 @@
             var aggregateName = $('#aggregate-selector :selected').select2().text();
             var columnAlias = $('#columnAlias').val();
             var mapKey = $('#columnKeyToAdd').val();
+            // In valueAlias, the 1st element contains value mappings, the 2nd element is the default
+            var valueAlias = [[],null];
 
             // if dimension, aggregate is ALWAYS NONE
             if (type == 'Dimension') {
@@ -1436,6 +1460,7 @@
                 var aggregateName = projections[i][4];
                 var columnAlias = projections[i][5];
                 var mapKey = projections[i][6] == null ? "" : projections[i][6];
+                var valueAlias = [[],null];
 
                 // if dimension, aggregate is ALWAYS NONE
                 if (type == 'Dimension') {
@@ -1470,7 +1495,7 @@
         var vaAlias = $('#vaAlias').val();
         if (rowIndexToModify !== -1) {
             var rowContent = projectionTable.row(rowIndexToModify).data();
-            rowContent[2].push([vaValue, vaAlias]);
+            rowContent[2][0].push([vaValue, vaAlias]);
             projectionTable.row(rowIndexToModify).data(rowContent);
         }
         // Close modal
@@ -1545,6 +1570,13 @@
      var valueAlias = projections[i].projectionVMs.map(function(d) {
         return [d.fieldValue, d.fieldValueMapping];
      });
+
+     valueAlias = [valueAlias.slice(), null];
+     // Add an element into the VM array indicating the default alias value (or null)
+     if (valueAlias[0].length > 0) {
+        valueAlias[1] = projections[i].defaultVMAlias;
+     }
+
      // Map to readable name
      switch (aggregateName) {
      case "NONE":
@@ -1579,21 +1611,44 @@
      +]*/
 
     // Manually add synchronization between VM input value and projectionTable rows.
-    $("input.va-input").on("input", function() {
+    function updateProjectionVMs(e) {
+        e.stopImmediatePropagation();
         projectionTable.rows().every(function (rowIdx, tableLoop, rowLoop) {
             if (this.data()[2]) {
-                var numOfVMs = this.data()[2].length;
-                var temp = [];
-                for (var i = 0; i < numOfVMs; i ++) {
-                    temp.push([$("#val-"+rowIdx+"-"+i).val(), $("#ali-"+rowIdx+"-"+i).val()]);
+                var numOfVMs = this.data()[2][0].length;
+
+                if (numOfVMs > 0) {
+                    var temp = [];
+                    temp.push([]);
+                    temp.push(null);
+                    if ($("#defaultVMCheckbox-"+rowIdx)[0].checked) {
+                        temp[1] = $("#defaultVM-"+rowIdx)[0].value;
+                        if ($("#defaultVM-"+rowIdx)[0].classList.contains("hidden")) {
+                            $("#defaultVM-"+rowIdx).removeClass('hidden');
+                        }
+                    } else {
+                        temp[1] = null;
+                        $("#defaultVM-"+rowIdx).addClass('hidden');
+                    }
+                    for (var i = 0; i < numOfVMs; i ++) {
+                        temp[0].push([$("#val-"+rowIdx+"-"+i).val(), $("#ali-"+rowIdx+"-"+i).val()]);
+                    }
+                    this.data()[2] = temp;
+                } else {
+                    var temp = [];
+                    temp.push([]);
+                    temp.push(null);
+                    this.data()[2] = temp;
                 }
-                this.data()[2] = temp;
             }
-
-
         });
         UpdatePipelineAndLimitActions();
-    });
+    }
+
+    function handleVaInputOnClick(e) {
+        e.stopImmediatePropagation();
+    }
+
     // Setup dummy filter builder
     var filterColumns = [
         {

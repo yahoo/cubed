@@ -30,6 +30,7 @@ public class SchemaDAOTest {
         CLISettings.DB_CONFIG_FILE = "src/test/resources/database-configuration.properties";
         App.prepareDatabase();
         App.dropAllFields();
+        App.loadSchemas("src/test/resources/schemas/");
         session = HibernateSessionFactoryManager.getSessionFactory().openSession();
     }
 

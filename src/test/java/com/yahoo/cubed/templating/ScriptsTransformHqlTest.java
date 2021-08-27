@@ -7,7 +7,6 @@ package com.yahoo.cubed.templating;
 import com.yahoo.cubed.model.Field;
 import com.yahoo.cubed.model.Pipeline;
 import com.yahoo.cubed.model.PipelineProjection;
-//import com.yahoo.cubed.model.filter.PipelineFilter;
 import com.yahoo.cubed.model.filter.PipelineLogicalRule;
 import com.yahoo.cubed.model.filter.PipelineRelationalRule;
 import com.yahoo.cubed.util.Aggregation;
@@ -115,6 +114,25 @@ public class ScriptsTransformHqlTest {
         projection5.setAlias("epsilon");
         projection5.setAggregation(Aggregation.THETA_SKETCH);
 
+        // Field
+        long fid8 = 8L;
+        Field field8 = new Field();
+        field8.setFieldId(fid8);
+        field8.setFieldName("string_field_3");
+        field8.setFieldType("string");
+
+        // Project field
+        PipelineProjection projection6 = new PipelineProjection();
+        projection6.setAlias("pi");
+        projection6.setField(field8);
+        List<String> va1 = Arrays.asList("value1", "alias1");
+        List<String> va2 = Arrays.asList("value2", "alias2");
+        List<List<String>> vas = new ArrayList<>();
+        vas.add(va1);
+        vas.add(va2);
+        projection6.setProjectionVMs(vas);
+        projection6.setDefaultVMAlias("alias");
+
         // Filters
         PipelineRelationalRule filter1 = new PipelineRelationalRule();
         filter1.setField(field1);
@@ -169,6 +187,7 @@ public class ScriptsTransformHqlTest {
         projections.add(projection3);
         projections.add(projection4);
         projections.add(projection5);
+        projections.add(projection6);
 
         Pipeline pipeline = new Pipeline();
         pipeline.setPipelineName("newpipeline");
@@ -179,6 +198,6 @@ public class ScriptsTransformHqlTest {
         String template = tg.generateFile(pipeline, System.currentTimeMillis());
         String expected = TemplateTestUtils.loadTemplateInstance("templates/transform.hql");
 
-        Assert.assertEquals(template, expected);
+        Assert.assertEquals(template.replaceAll("\\s", ""), expected.replaceAll("\\s", ""));
     }
 }
