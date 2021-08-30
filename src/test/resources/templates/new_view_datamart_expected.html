@@ -2303,7 +2303,7 @@
             switch(fields[i].fieldType) {
               case "string":
                 newField.type = 'string';
-                newField.operators = ['equal', 'not_equal', 'is_null', 'is_not_null', 'rlike', 'like'];
+                newField.operators = ['equal', 'not_equal', 'is_null', 'is_not_null', 'rlike', 'not_rlike', 'like', 'not_like'];
                 newField.placeholder = 'value';
                 newField.validation = {
                            format: /^.([^"'])*$/
@@ -2377,7 +2377,9 @@
                 'equal', 'not_equal', 'in', 'not_in', 'less', 'less_or_equal', 'is_empty',
                 'is_not_empty', 'greater', 'greater_or_equal', 'is_null', 'is_not_null',
                 { type: 'rlike', nb_inputs: 1, multiple: false, apply_to: ['string'] },
-        { type: 'like', nb_inputs: 1, multiple: false, apply_to: ['string'] }
+                { type: 'not_rlike', nb_inputs: 1, multiple: false, apply_to: ['string'] },
+                { type: 'like', nb_inputs: 1, multiple: false, apply_to: ['string'] },
+                { type: 'not_like', nb_inputs: 1, multiple: false, apply_to: ['string'] }
             ],
             lang: {
                 add_rule: 'Rule',
@@ -2385,7 +2387,9 @@
                 delete_rule: '',
                 delete_group: '',
                 operators: {
-                    rlike: 'regex matches'
+                    rlike: 'regex matches',
+                    not_rlike: 'regex not matches',
+                    not_like: 'not like'
                 }
             },
             plugins: {

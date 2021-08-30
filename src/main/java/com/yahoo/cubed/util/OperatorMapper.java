@@ -26,6 +26,8 @@ public class OperatorMapper {
         OPERATORS.put("is_not_null", "is not");
         OPERATORS.put("rlike", "rlike");
         OPERATORS.put("like", "like");
+        OPERATORS.put("not_like", "not like");
+        OPERATORS.put("not_rlike", "not rlike");
 
         BOOLEAN_OPERATORS = new HashMap<>();
         BOOLEAN_OPERATORS.put("0", "false");
