@@ -1,6 +1,7 @@
 --- # Sample schema
 schemas:
   - name: alpha
+    datetimePartitionColumn: "dt"
     database: test
     fields:
       - name: one

@@ -26,4 +26,7 @@ public class YamlSchema {
 
     @Getter @Setter
     private String database;
+
+    @Getter @Setter
+    private String datetimePartitionColumn;
 }

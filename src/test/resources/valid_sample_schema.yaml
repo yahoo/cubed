@@ -2,6 +2,7 @@
 schemas:
   - name: alpha
     database: test
+    datetimePartitionColumn: beta
     tables:
       hourly_table: hourly_data
       hourly_partition: dt=${YEAR}${MONTH}${DAY}${HOUR}

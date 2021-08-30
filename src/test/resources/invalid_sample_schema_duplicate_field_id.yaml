@@ -1,6 +1,7 @@
 --- # Sample schema
 schemas:
   - name: alpha
+    datetimePartitionColumn: "dt"
     database: test
     tables:
       hourly_table: hourly_data

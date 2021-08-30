@@ -7,6 +7,7 @@ package com.yahoo.cubed.templating;
 import com.yahoo.cubed.model.Pipeline;
 import com.yahoo.cubed.model.PipelineProjection;
 import com.yahoo.cubed.model.PipelineProjectionVM;
+import com.yahoo.cubed.service.ServiceFactory;
 import com.yahoo.cubed.util.Constants;
 import java.util.Iterator;
 import java.util.List;
@@ -24,6 +25,7 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
     private static final String TRANSFORMATIONS_ATTRIBUTE = "transformations";
     private static final String FILTERS_ATTRIBUTE = "filters";
     private static final String GROUP_BY_ATTRIBUTE = "group_by_option";
+    private static final String DATETIME_PARTITION_COLUMN_ATTRIBUTE = "datetime_partition_column";
 
     // Other settings
     private static final String GROUP_BY_KEYWORD = "GROUP BY";
@@ -65,6 +67,7 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
         }
 
         template.setAttribute(GROUP_BY_ATTRIBUTE, strOfGroupBy(model));
+        template.setAttribute(DATETIME_PARTITION_COLUMN_ATTRIBUTE, ServiceFactory.schemaService().fetchByName(model.getPipelineSchemaName()).getSchemaDatetimePartitionColumn());
 
         return template.toString();
     }

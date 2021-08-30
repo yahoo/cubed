@@ -7,4 +7,5 @@
   <include file="database-change/database-changelog-init.xml"/>
   <include file="database-change/database-changelog-20210822-add-default-vm-alias-to-pipeline-projection.xml"/>
   <include file="database-change/database-changelog-20210823-add-value-mapping-operator.xml"/>
+  <include file="database-change/database-changelog-20210830-add-datetime-partition-column-to-all-schemas.xml"/>
 </databaseChangeLog>

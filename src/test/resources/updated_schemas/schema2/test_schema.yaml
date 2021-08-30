@@ -32,3 +32,4 @@ schemas:
     id: 7
   name: "schema2"
   database: "schema2"
+  datetimePartitionColumn: "dt"

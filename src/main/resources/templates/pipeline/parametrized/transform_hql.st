@@ -10,5 +10,5 @@ SELECT
        $transformations$
 WHERE
       $filters$
-      dt = '\${hivevar:DATE_FILTER}'
+      $datetime_partition_column$ = '\${hivevar:DATE_FILTER}'
 $group_by_option$;

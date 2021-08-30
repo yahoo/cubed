@@ -90,6 +90,11 @@ public class Schema implements AbstractModel {
     @Getter @Setter
     private String schemaTimestampColumnParam;
 
+    /** Schema datetime partition column name, such as 'dt'. */
+    @Column(name = "schema_datetime_partition_column")
+    @Getter @Setter
+    private String schemaDatetimePartitionColumn;
+
     /** Fields for maps. */
     @Fetch(value = FetchMode.SELECT)
     @OneToMany(mappedBy = "schemaName", cascade = {}, fetch = FetchType.EAGER)

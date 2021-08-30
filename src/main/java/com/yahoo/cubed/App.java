@@ -354,6 +354,7 @@ public class App {
             schema.setSchemaName(yamlSchema.getName());
             schema.setSchemaDatabase(yamlSchema.getDatabase());
             schema.setSchemaTables(mapper.writeValueAsString(yamlSchema.getTables()));
+            schema.setSchemaDatetimePartitionColumn(yamlSchema.getDatetimePartitionColumn());
             schema.setSchemaOozieJobType(operationalParams.getOozieJobType());
             schema.setSchemaOozieBackfillJobType(operationalParams.getOozieBackfillJobType());
 

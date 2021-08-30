@@ -71,3 +71,4 @@ schemas:
     id: 16
   name: "schema4"
   database: "schema4"
+  datetimePartitionColumn: "dt"
