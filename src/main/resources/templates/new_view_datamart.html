@@ -422,6 +422,16 @@
                     <div class="modal-body">
                         <form id="addVMForm" class="form-horizontal" role="form">
                             <div class="form-group">
+                                <label class="col-sm-2 control-label" for="vaOperatorSelector">Operator</label>
+                                <div class="col-sm-10">
+                                    <select id="vaOperatorSelector" name="vaOperatorSelector" type="text" class="form-control">
+                                        <option value="equal" selected="selected">equal</option>
+                                        <option value="like">like</option>
+                                        <option value="regex match">regex match</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
                                 <label class="col-sm-2 control-label" for="vaValue">Value</label>
                                 <div class="col-sm-10">
                                     <input type="text" class="form-control" id="vaValue" pattern="[a-z_ 0-9.A-Z]*" required="required" placeholder="Value of the field"/>
@@ -832,9 +842,23 @@
                             // First element of data indicates the default mapping value (or null))
                             var defaultVM = data[1];
                             for (var i = 0; i < projectionVMsSize; i++) {
+                                vmOperator = data[0][i][2];
+                                selectedOperatorHtml = null;
+                                switch (vmOperator) {
+                                    case "equal":
+                                        selectedOperatorHtml = '<select onclick="handleVaInputOnClick(event)" onchange="updateProjectionVMs(event)" type="text" class="form-control" id="vmop-' + meta.row + '-' + i + '"><option value="equal" selected="selected">equal</option><option value="like">like</option><option value="regex match">regex match</option></select>\n';
+                                        break;
+                                    case "like":
+                                        selectedOperatorHtml = '<select onclick="handleVaInputOnClick(event)" onchange="updateProjectionVMs(event)" type="text" class="form-control" id="vmop-' + meta.row + '-' + i + '"><option value="equal">equal</option><option value="like" selected="selected">like</option><option value="regex match">regex match</option></select>\n';
+                                        break;
+                                    case "regex match":
+                                        selectedOperatorHtml = '<select onclick="handleVaInputOnClick(event)" onchange="updateProjectionVMs(event)" type="text" class="form-control" id="vmop-' + meta.row + '-' + i + '"><option value="equal">equal</option><option value="like">like</option><option value="regex match" selected="selected">regex match</option></select>\n';
+                                        break;
+                                }
                                 result +=
                                     '<li style="margin-top:10px">\n' +
                                     '<div>\n' +
+                                    selectedOperatorHtml +
                                     '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" class="form-control va-input" value="'+ data[0][i][0] + '" id="val-' + meta.row + '-' + i + '"/>\n' +
                                     '<i class="glyphicon glyphicon-arrow-right"></i>\n' +
                                     '<input onclick="handleVaInputOnClick(event)" oninput="updateProjectionVMs(event)" type="text" class="form-control va-input" value="'+ data[0][i][1] + '" id="ali-' + meta.row + '-' + i + '"/>\n' +
@@ -1491,11 +1515,12 @@
         // Prevent submit action
         e.preventDefault();
 
+        var vaOperator = $('#vaOperatorSelector').val();
         var vaValue = $('#vaValue').val();
         var vaAlias = $('#vaAlias').val();
         if (rowIndexToModify !== -1) {
             var rowContent = projectionTable.row(rowIndexToModify).data();
-            rowContent[2][0].push([vaValue, vaAlias]);
+            rowContent[2][0].push([vaValue, vaAlias, vaOperator]);
             projectionTable.row(rowIndexToModify).data(rowContent);
         }
         // Close modal
@@ -1568,7 +1593,7 @@
      var columnId = projections[i].field.fieldId;
      var aggregateId = projections[i].aggregationName;
      var valueAlias = projections[i].projectionVMs.map(function(d) {
-        return [d.fieldValue, d.fieldValueMapping];
+        return [d.fieldValue, d.fieldValueMapping, d.operator];
      });
 
      valueAlias = [valueAlias.slice(), null];
@@ -1631,7 +1656,7 @@
                         $("#defaultVM-"+rowIdx).addClass('hidden');
                     }
                     for (var i = 0; i < numOfVMs; i ++) {
-                        temp[0].push([$("#val-"+rowIdx+"-"+i).val(), $("#ali-"+rowIdx+"-"+i).val()]);
+                        temp[0].push([$("#val-"+rowIdx+"-"+i).val(), $("#ali-"+rowIdx+"-"+i).val(), $("#vmop-"+rowIdx+"-"+i).val()]);
                     }
                     this.data()[2] = temp;
                 } else {

@@ -138,8 +138,8 @@ public class RoutesTest {
                 " ],                                   " +
                 " 'projectionVMs': [                   " +
                 "     [                                " +
-                "        [ 'value1', 'value_alias1'],  " +
-                "        [ 'value2', 'value_alias2']   " +
+                "        [ 'value1', 'value_alias1', 'equal'],  " +
+                "        [ 'value2', 'value_alias2', 'equal']   " +
                 "     ]                                " +
                 " ],                                   " +
                 " 'filter':{                           " +
@@ -277,10 +277,10 @@ public class RoutesTest {
     public void previewDatamartEtlTest() {
         // Test success
         String jsonRequest = "{\n" +
-                "  \"name\": \"\",\n" +
+                "  \"name\": \"name\",\n" +
                 "  \"schemaName\": \"schema1\",\n" +
-                "  \"description\": \"\",\n" +
-                "  \"owner\": \"\",\n" +
+                "  \"description\": \"desc\",\n" +
+                "  \"owner\": \"owner\",\n" +
                 "  \"projections\": [{\n" +
                 "    \"column_id\": \"2\",\n" +
                 "    \"key\": \"\",\n" +
@@ -383,8 +383,8 @@ public class RoutesTest {
                         " ],                                   " +
                         " 'projectionVMs': [                   " +
                         "     [                                " +
-                        "        [ 'value1', 'value_alias1'],  " +
-                        "        [ 'value2', 'value_alias2']   " +
+                        "        [ 'value1', 'value_alias1', 'equal'],  " +
+                        "        [ 'value2', 'value_alias2', 'equal']   " +
                         "     ]                                " +
                         " ],                                   " +
                         " 'filter':{                           " +
@@ -801,8 +801,8 @@ public class RoutesTest {
                             " ],                                   " +
                             " 'projectionVMs': [                   " +
                             "     [                                " +
-                            "        [ 'value3', 'value_alias3'],  " +
-                            "        [ 'value4', 'value_alias4']   " +
+                            "        [ 'value3', 'value_alias3', 'equal'],  " +
+                            "        [ 'value4', 'value_alias4', 'equal']   " +
                             "     ]                                " +
                             " ]                                    " +
                             "}                                     ";
@@ -1046,8 +1046,8 @@ public class RoutesTest {
                             " 'projectionVMs': [                   " +
                             "     [],                              " +
                             "     [                                " +
-                            "        [ 'value3', 'value_alias3'],  " +
-                            "        [ 'value4', 'value_alias4']   " +
+                            "        [ 'value3', 'value_alias3', 'equal'],  " +
+                            "        [ 'value4', 'value_alias4', 'equal']   " +
                             "     ]                                " +
                             " ]                                    " +
                             "}                                     ";
@@ -1203,8 +1203,8 @@ public class RoutesTest {
                       " ],                                   " +
                       " 'projectionVMs': [                   " +
                       "     [                                " +
-                      "        [ 'value1', 'value_alias1'],  " +
-                      "        [ 'value2', 'value_alias2']   " +
+                      "        [ 'value1', 'value_alias1', 'equal'],  " +
+                      "        [ 'value2', 'value_alias2', 'equal']   " +
                       "     ]                                " +
                       " ],                                   " +
                       " 'filter':{                           " +
@@ -1579,8 +1579,8 @@ public class RoutesTest {
                 " ],                                   " +
                 " 'projectionVMs': [                   " +
                 "     [                                " +
-                "        [ 'value1', 'value_alias1'], " +
-                "        [ 'value1', 'value_alias2']   " +
+                "        [ 'value1', 'value_alias1', 'equal'], " +
+                "        [ 'value1', 'value_alias2', 'equal']   " +
                 "     ]                                " +
                 " ]                                    " +
                 "}                                     ";
