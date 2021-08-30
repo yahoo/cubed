@@ -4,11 +4,13 @@
 
 package com.yahoo.cubed.templating;
 
+import com.yahoo.cubed.App;
 import com.yahoo.cubed.model.Field;
 import com.yahoo.cubed.model.Pipeline;
 import com.yahoo.cubed.model.PipelineProjection;
 import com.yahoo.cubed.model.filter.PipelineLogicalRule;
 import com.yahoo.cubed.model.filter.PipelineRelationalRule;
+import com.yahoo.cubed.settings.CLISettings;
 import com.yahoo.cubed.util.Aggregation;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,6 +31,10 @@ public class ScriptsTransformHqlTest {
     @BeforeClass
     public void initialize() throws Exception {
         tg = new ScriptsTransformHql();
+        CLISettings.DB_CONFIG_FILE = "src/test/resources/database-configuration.properties";
+        App.prepareDatabase();
+        App.dropAllFields();
+        App.loadSchemas("src/test/resources/schemas/");
     }
 
     /**
@@ -196,6 +202,7 @@ public class ScriptsTransformHqlTest {
         pipeline.setPipelineDescription("newpipeline description");
         pipeline.setProjections(projections);
         pipeline.setPipelineFilterObject(logical3);
+        pipeline.setPipelineSchemaName("schema1");
 
         String template = tg.generateFile(pipeline, System.currentTimeMillis());
         String expected = TemplateTestUtils.loadTemplateInstance("templates/transform.hql");

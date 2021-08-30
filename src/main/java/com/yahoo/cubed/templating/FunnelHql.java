@@ -48,6 +48,7 @@ public class FunnelHql {
     private static final String IN_DATABASE_ATTRIBUTE = "IN_DATABASE";
     private static final String TARGET_TABLE_ATTRIBUTE = "TARGET_TABLE";
     private static final String WINDOW_FUNCTIONS_ATTRIBUTE = "WINDOW_FUNCTIONS";
+    private static final String DATETIME_PARTITION_COLUMN_ATTRIBUTE = "DATETIME_PARTITION_COLUMN";
 
     // Constants
     private static final String FILTER_DELIMITER = " \n ";
@@ -99,6 +100,7 @@ public class FunnelHql {
         template.setAttribute(USER_ID_COLUMN_ATTRIBUTE, model.getUserIdColumn());
         template.setAttribute(START_DATE_ATTRIBUTE, model.getStartDate());
         template.setAttribute(END_DATE_ATTRIBUTE, model.getEndDate());
+        template.setAttribute(DATETIME_PARTITION_COLUMN_ATTRIBUTE, schema.getSchemaDatetimePartitionColumn());
         List<String> hiveQueryList = new ArrayList<>();
         List<String> stepsFilter = new ArrayList<>();
         for (int i = 0; i < model.getSteps().size(); i++) {

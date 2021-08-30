@@ -22,7 +22,7 @@ FROM (SELECT user_id, funnel(step, array($NUM_STEPS$)) as funnels
                          $USER_ID_COLUMN$ AS user_id
                   FROM \${hivevar:IN_DATABASE_AND_TABLE}
                   WHERE $FILTERS$ $STEP_FILTERS$
-                        dt >= '\${hivevar:QUERY_START_DATE}' AND dt < '\${hivevar:QUERY_END_DATE}'
+                        $DATETIME_PARTITION_COLUMN$ >= '\${hivevar:QUERY_START_DATE}' AND $DATETIME_PARTITION_COLUMN$ < '\${hivevar:QUERY_END_DATE}'
                         $SAMPLING$
                   DISTRIBUTE BY user_id
                   SORT BY user_id, ts, step ASC) AS sorted_data_for_funnel

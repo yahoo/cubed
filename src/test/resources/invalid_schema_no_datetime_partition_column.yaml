@@ -1,8 +1,6 @@
---- # Sample schema
 schemas:
   - name: alpha
-    datetimePartitionColumn: "dt"
-    database: test
+    database: beta
     tables:
       hourly_table: hourly_data
       hourly_partition: dt=${YEAR}${MONTH}${DAY}${HOUR}
@@ -22,9 +20,4 @@ schemas:
         type: string
       - name: three
         id: 3
-        type: string
-  - name: alpha
-    fields:
-      - name: zetta
-        id: 4
         type: string

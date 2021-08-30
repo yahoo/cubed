@@ -14,7 +14,7 @@ FROM (SELECT funnel(step, array($NUM_STEPS$)) as funnels
                    $USER_ID_COLUMN$ AS user_id
             FROM $IN_DATABASE$.$TARGET_TABLE$
             WHERE $FILTERS$ $STEP_FILTERS$
-                  dt >= '$START_DATE$' AND dt < '$END_DATE$'
+                  $DATETIME_PARTITION_COLUMN$ >= '$START_DATE$' AND $DATETIME_PARTITION_COLUMN$ < '$END_DATE$'
                   $SAMPLING$
             DISTRIBUTE BY user_id
             SORT BY user_id, ts, step ASC) AS sorted_data_for_funnel

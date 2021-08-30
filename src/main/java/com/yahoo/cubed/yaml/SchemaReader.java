@@ -103,6 +103,11 @@ public class SchemaReader {
                 log.error("No database name provided.");
                 return false;
             }
+            // Must provide a datetime partition column
+            if (schemaDefintion.getDatetimePartitionColumn() == null) {
+                log.error("No datetime partition column provided.");
+                return false;
+            }
         }
         return true;
     }

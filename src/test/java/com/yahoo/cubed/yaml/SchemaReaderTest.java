@@ -88,4 +88,12 @@ public class SchemaReaderTest {
     public void testDuplicateKeyIdSchemaRead() throws Exception {
         Schemas schemas = SchemaReader.readSchema("src/test/resources/invalid_sample_schema_duplicate_key_id.yaml");
     }
+
+    /**
+     * Test read of a schema file with no datetime partition column specified.
+     */
+    @Test(expectedExceptions = Exception.class)
+    public void testSchemaReadNoDatetimePartitionColumn() throws Exception {
+        Schemas schemas = SchemaReader.readSchema("src/test/resources/invalid_schema_no_datetime_partition_column.yaml");
+    }
 }

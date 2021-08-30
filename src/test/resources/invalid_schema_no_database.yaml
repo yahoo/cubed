@@ -1,5 +1,6 @@
 schemas:
   - name: alpha
+    datetimePartitionColumn: "dt"
     tables:
       hourly_table: hourly_data
       hourly_partition: dt=${YEAR}${MONTH}${DAY}${HOUR}
