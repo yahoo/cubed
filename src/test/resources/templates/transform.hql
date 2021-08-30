@@ -15,7 +15,8 @@ SELECT
        COALESCE(regexp_replace(
         CASE
           WHEN string_field_3 = 'value1' THEN 'alias1'
-          WHEN string_field_3 = 'value2' THEN 'alias2'
+          WHEN string_field_3 LIKE 'value2' THEN 'alias2'
+          WHEN string_field_3 RLIKE 'value3' THEN 'alias3'
           ELSE 'alias'
         END, '[\\t\\r\\n]', ''), '')
 WHERE
@@ -33,4 +34,10 @@ WHERE
         )
       ) AND 
       dt = '${hivevar:DATE_FILTER}'
-GROUP BY string_field_1,bool_map_field_1['key_1'],string_map_field_1['_fieldkey3'],string_field_3;
+GROUP BY string_field_1,bool_map_field_1['key_1'],string_map_field_1['_fieldkey3'],COALESCE(regexp_replace(
+  CASE
+    WHEN string_field_3 = 'value1' THEN 'alias1'
+    WHEN string_field_3 LIKE 'value2' THEN 'alias2'
+    WHEN string_field_3 RLIKE 'value3' THEN 'alias3'
+    ELSE 'alias'
+  END, '[\\t\\r\\n]', ''), '');

@@ -58,6 +58,12 @@ public class PipelineProjectionVM implements AbstractModel {
     @Column(name = "field_value_mapping")
     private String fieldValueMapping;
 
+    /**
+     * Value mapping operator. Currently supporting equal, like, and regex match.
+     */
+    @Getter @Setter
+    @Column(name = "operator")
+    private String operator;
 
     /**
      * Get Primary Index.

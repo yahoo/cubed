@@ -125,11 +125,13 @@ public class ScriptsTransformHqlTest {
         PipelineProjection projection6 = new PipelineProjection();
         projection6.setAlias("pi");
         projection6.setField(field8);
-        List<String> va1 = Arrays.asList("value1", "alias1");
-        List<String> va2 = Arrays.asList("value2", "alias2");
+        List<String> va1 = Arrays.asList("value1", "alias1", "equal");
+        List<String> va2 = Arrays.asList("value2", "alias2", "like");
+        List<String> va3 = Arrays.asList("value3", "alias3", "regex match");
         List<List<String>> vas = new ArrayList<>();
         vas.add(va1);
         vas.add(va2);
+        vas.add(va3);
         projection6.setProjectionVMs(vas);
         projection6.setDefaultVMAlias("alias");
 

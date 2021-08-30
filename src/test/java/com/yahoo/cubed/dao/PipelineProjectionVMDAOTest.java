@@ -81,15 +81,15 @@ public class PipelineProjectionVMDAOTest {
         projection2.setAlias("fieldAlias2");
         projection2.setKey("key2");
 
-        List<String> pair1 = new ArrayList<>(Arrays.asList("fieldValue1", "fieldValueMapping1"));
-        List<String> pair2 = new ArrayList<>(Arrays.asList("fieldValue2", "fieldValueMapping2"));
+        List<String> pair1 = new ArrayList<>(Arrays.asList("fieldValue1", "fieldValueMapping1", "equal"));
+        List<String> pair2 = new ArrayList<>(Arrays.asList("fieldValue2", "fieldValueMapping2", "like"));
         List<List<String>> vas1 = new ArrayList<>();
         vas1.add(pair1);
         vas1.add(pair2);
 
         projection1.setProjectionVMs(vas1);
 
-        List<String> pair3 = new ArrayList<>(Arrays.asList("fieldValue3", "fieldValueMapping3"));
+        List<String> pair3 = new ArrayList<>(Arrays.asList("fieldValue3", "fieldValueMapping3", "regex match"));
         List<List<String>> vas2 = new ArrayList<>();
         vas2.add(pair3);
         projection2.setProjectionVMs(vas2);
@@ -119,8 +119,10 @@ public class PipelineProjectionVMDAOTest {
                     Assert.assertEquals(v.getPipelineProjectionId(), projection.getPipelineProjectionId());
                     if (v.getFieldValue() == "fieldValue1") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping1");
+                        Assert.assertEquals(v.getOperator(), "equal");
                     } else if (v.getFieldValue() == "fieldValue2") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping2");
+                        Assert.assertEquals(v.getOperator(), "like");
                     }
                 }
             }
@@ -131,6 +133,7 @@ public class PipelineProjectionVMDAOTest {
                     Assert.assertEquals(v.getPipelineProjectionId(), projection.getPipelineProjectionId());
                     Assert.assertEquals(v.getFieldValue(), "fieldValue3");
                     Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping3");
+                    Assert.assertEquals(v.getOperator(), "regex match");
                 }
             }
 
@@ -164,11 +167,11 @@ public class PipelineProjectionVMDAOTest {
         projection4.setAlias("fieldAlias4");
         projection4.setKey("key4");
 
-        List<String> pair4 = new ArrayList<>(Arrays.asList("fieldValue4", "fieldValueMapping4"));
+        List<String> pair4 = new ArrayList<>(Arrays.asList("fieldValue4", "fieldValueMapping4", "regex match"));
         vas1.add(pair4);
 
-        List<String> pair5 = new ArrayList<>(Arrays.asList("fieldValue5", "fieldValueMapping5"));
-        List<String> pair6 = new ArrayList<>(Arrays.asList("fieldValue6", "fieldValueMapping6"));
+        List<String> pair5 = new ArrayList<>(Arrays.asList("fieldValue5", "fieldValueMapping5", "like"));
+        List<String> pair6 = new ArrayList<>(Arrays.asList("fieldValue6", "fieldValueMapping6", "equal"));
 
         vas2.add(pair5);
         vas2.add(pair6);
@@ -197,10 +200,13 @@ public class PipelineProjectionVMDAOTest {
                     Assert.assertEquals(v.getPipelineProjectionId(), projection.getPipelineProjectionId());
                     if (v.getFieldValue() == "fieldValue1") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping1");
+                        Assert.assertEquals(v.getOperator(), "equal");
                     } else if (v.getFieldValue() == "fieldValue2") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping2");
+                        Assert.assertEquals(v.getOperator(), "like");
                     } else if (v.getFieldValue() == "fieldValue4") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping4");
+                        Assert.assertEquals(v.getOperator(), "regex match");
                     }
                 }
             }
@@ -211,10 +217,13 @@ public class PipelineProjectionVMDAOTest {
                     Assert.assertEquals(v.getPipelineProjectionId(), projection.getPipelineProjectionId());
                     if (v.getFieldValue() == "fieldValue3") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping3");
+                        Assert.assertEquals(v.getOperator(), "regex match");
                     } else if (v.getFieldValue() == "fieldValue5") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping5");
+                        Assert.assertEquals(v.getOperator(), "like");
                     } else if (v.getFieldValue() == "fieldValue6") {
                         Assert.assertEquals(v.getFieldValueMapping(), "fieldValueMapping6");
+                        Assert.assertEquals(v.getOperator(), "equal");
                     }
                 }
             }

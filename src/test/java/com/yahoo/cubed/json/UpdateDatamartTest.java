@@ -56,7 +56,7 @@ public class UpdateDatamartTest {
                 "\"endTimeDate\":null}";
         ObjectMapper mapper = new ObjectMapper();
         tg = mapper.readValue(req, UpdateDatamart.class);
-        Assert.assertEquals(tg.isValid(), "Missing description");
+        Assert.assertEquals(tg.isValid(), "Missing data mart description");
     }
 
     /**
@@ -84,7 +84,7 @@ public class UpdateDatamartTest {
                 "\"endTimeDate\":null}";
         ObjectMapper mapper = new ObjectMapper();
         tg = mapper.readValue(req, UpdateDatamart.class);
-        Assert.assertEquals(tg.isValid(), "Missing owner");
+        Assert.assertEquals(tg.isValid(), "Missing data mart owner");
     }
 
     /**
@@ -210,7 +210,7 @@ public class UpdateDatamartTest {
                 "\"description\":\"test\"," +
                 "\"owner\":\"test\"," +
                 "\"projections\":[{\"column_id\":\"9\",\"key\":\"\",\"alias\":\"bcookie\",\"aggregate\":\"NONE\", \"schema_name\":\"schema1\"}]," +
-                "\"projectionVMs\":[[[\"testv\", \"testa\"], [\"testv\", \"testb\"]]]," +
+                "\"projectionVMs\":[[[\"testv\", \"testa\", \"equal\"], [\"testv\", \"testb\", \"equal\"]]]," +
                 "\"filter\":{" +
                 "\"condition\":\"AND\"," +
                 "\"rules\":[" +

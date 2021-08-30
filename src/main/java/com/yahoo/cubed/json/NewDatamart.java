@@ -5,11 +5,7 @@
 package com.yahoo.cubed.json;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import org.apache.commons.lang3.ObjectUtils;
-import com.yahoo.cubed.util.Utils;
-import java.util.List;
-import java.util.HashSet;
-import java.util.Set;
+import org.apache.commons.lang3.StringUtils;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,68 +34,9 @@ public class NewDatamart extends Funnelmart {
      * @return null if valid, error message if invalid
      */
     public String isValid() {
-        String regularTextFieldErrorMessage = ObjectUtils.firstNonNull(
-                Utils.validateRegularTextJsonField(name, Utils.NAME_JSON_FIELD),
-                Utils.validateRegularTextJsonField(description, Utils.DESCRIPTION_JSON_FIELD),
-                Utils.validateRegularTextJsonField(owner, Utils.OWNER_JSON_FIELD));
-        if (regularTextFieldErrorMessage != null) {
-            return regularTextFieldErrorMessage;
+        if (StringUtils.isEmpty(name)) {
+            return "Missing data mart name";
         }
-
-        // Check for projection name collisions, etc
-        String projectionValidationErrorMessage = Utils.validateProjections(projections);
-        if (projectionValidationErrorMessage != null) {
-            return projectionValidationErrorMessage;
-        }
-
-        // Validate filters if they exist
-        if (filter != null) {
-            String filterValidationErrorMessage = Utils.validateFilters(filter);
-            if (filterValidationErrorMessage != null) {
-                return filterValidationErrorMessage;
-            }
-        }
-        
-        // validate backfill
-        if (backfillEnabled) {
-            if (backfillStartDate == null || backfillStartDate.isEmpty()) {
-                return "Missing backfill start date";
-            }
-        }
-
-        // validate end time
-        if (endTimeEnabled) {
-            if (endTimeDate == null || endTimeDate.isEmpty()) {
-                return "Missing end time date";
-            }
-        }
-
-        // validate value mapping
-        if (projectionVMs != null) {
-            // Set of all VM values
-            Set<String> vAValueSet = new HashSet<>();
-            for (List<List<String>> p: projectionVMs) {
-                if (p != null) {
-                    for (List<String> v: p) {
-                        if (v != null && v.size() != 2) {
-                            return "Wrong format of value mapping";
-                        }
-                        String value = v.get(0);
-                        String alias = v.get(1);
-                        String vmFieldErrorMessage = ObjectUtils.firstNonNull(
-                                Utils.validateRegularTextJsonField(value, Utils.VM_VALUE_JSON_FIELD),
-                                Utils.validateRegularTextJsonField(alias, Utils.VM_ALIAS_JSON_FIELD));
-                        if (vmFieldErrorMessage != null) {
-                            return vmFieldErrorMessage;
-                        }
-                        if (vAValueSet.contains(v.get(0))) {
-                            return "Ambiguous value mapping for value:" + v.get(0);
-                        }
-                        vAValueSet.add(v.get(0));
-                    }
-                }
-            }
-        }
-        return null;
+        return validateDatamartBody();
     }
 }

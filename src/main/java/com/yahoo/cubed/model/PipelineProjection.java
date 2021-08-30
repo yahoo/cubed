@@ -153,6 +153,7 @@ public class PipelineProjection implements AbstractModel {
             PipelineProjectionVM p = new PipelineProjectionVM();
             p.setFieldValue(va.get(0));
             p.setFieldValueMapping(va.get(1));
+            p.setOperator(va.get(2));
             p.setPipelineProjectionId(this.pipelineProjectionId);
             p.setFieldName(this.field.getFieldName());
             this.projectionVMs.add(p);

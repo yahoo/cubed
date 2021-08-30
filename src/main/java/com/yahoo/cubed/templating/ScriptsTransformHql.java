@@ -44,6 +44,13 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
     // Projection format for standard columns
     private static final String STANDARD_PROJECTION = "%s";
 
+    // Value mapping operators
+    private static final String EQUAL_VM_OPERATOR = "equal";
+    private static final String LIKE_VM_OPERATOR = "like";
+    private static final String LIKE = "LIKE";
+    private static final String EQUAL = "=";
+    private static final String RLIKE = "RLIKE";
+
     @Override
     public String generateFile(Pipeline model, long version) throws Exception {
         StringTemplate template = new StringTemplate(TemplateUtils.getParametrizedTemplateAsString(TemplateUtils.OOZIE_TEMPLATES_DIR + HIVE_TRANSFORM_AND_FILTER_TEMPLATE_FILE));
@@ -78,7 +85,12 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
         ret.append(" ");
         Iterator<PipelineProjection> iter = projections.iterator();
         while (iter.hasNext()) {
-            ret.append(iter.next().getField().strOfSimpleName());
+            PipelineProjection projection = iter.next();
+            if (projection.getProjectionVMs() != null && projection.getProjectionVMs().size() > 0) {
+                ret.append(getValueMappingProjectionQuery(projection));
+            } else {
+                ret.append(projection.getField().strOfSimpleName());
+            }
             if (iter.hasNext()) {
                 ret.append(Constants.COMMA_DELIMITER);
             }
@@ -103,36 +115,8 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
         }
 
         // Check for existing value mapping
-        List<PipelineProjectionVM> vas = projection.getProjectionVMs();
-        String defaultVMAlias = projection.getDefaultVMAlias();
-        if (vas != null && vas.size() > 0) {
-            // Add CASE WHEN statement for value mapping pairs
-            StringBuilder caseStatement = new StringBuilder("\n\tCASE");
-            for (PipelineProjectionVM va : vas) {
-                caseStatement.append("\n\t\tWHEN ");
-                caseStatement.append(fieldName);
-                caseStatement.append(" = '");
-                caseStatement.append(va.getFieldValue());
-                caseStatement.append("' THEN '");
-                caseStatement.append(va.getFieldValueMapping());
-                caseStatement.append("'");
-            }
-            if (defaultVMAlias != null) {
-                caseStatement.append("\n\t\tELSE '");
-                caseStatement.append(defaultVMAlias);
-                caseStatement.append("'\n\tEND");
-            } else {
-                caseStatement.append("\n\t\tELSE ");
-                caseStatement.append(fieldName);
-                caseStatement.append("\n\tEND");
-            }
-            if (Constants.STRING.equals(projection.getField().getFieldType())) {
-                // String type projection, perform cleanup regex
-                return String.format(STRING_CLEANUP_PROJECTION, caseStatement.toString());
-            } else {
-                // Else, do the standard projection
-                return String.format(STANDARD_PROJECTION, caseStatement.toString());
-            }
+        if (projection.getProjectionVMs() != null && projection.getProjectionVMs().size() > 0) {
+            return getValueMappingProjectionQuery(projection);
         } else {
             // No value mapping exists
             if (Constants.STRING.equals(projection.getField().getFieldType())) {
@@ -142,6 +126,56 @@ public class ScriptsTransformHql implements TemplateFile<Pipeline> {
                 // Else, do the standard projection
                 return String.format(STANDARD_PROJECTION, fieldName);
             }
+        }
+    }
+
+    /**
+     * Get matching value mapping SQL operator.
+     * @param operatorStr User specified operator in the front end and database
+     * @return String corresponding SQL operator
+     */
+    private String getValueMappingOperator(String operatorStr) {
+        return operatorStr.equals(EQUAL_VM_OPERATOR) ? EQUAL : operatorStr.equals(LIKE_VM_OPERATOR) ? LIKE : RLIKE;
+    }
+
+    /**
+     * Get projection query that has value mapping.
+     * @param projection A PipelineProjection object that contains value mapping
+     * @return The formatted projection query
+     */
+    private String getValueMappingProjectionQuery(PipelineProjection projection) {
+        List<PipelineProjectionVM> vms = projection.getProjectionVMs();
+        String fieldName = projection.getField().toString();
+        String defaultVMAlias = projection.getDefaultVMAlias();
+        // Add CASE WHEN statement for value mapping pairs
+        StringBuilder caseStatement = new StringBuilder("\n\tCASE");
+        for (PipelineProjectionVM vm : vms) {
+            caseStatement.append("\n\t\tWHEN ");
+            caseStatement.append(fieldName);
+            caseStatement.append(" ");
+            caseStatement.append(getValueMappingOperator(vm.getOperator()));
+            caseStatement.append(" '");
+            caseStatement.append(vm.getFieldValue());
+            caseStatement.append("' THEN '");
+            caseStatement.append(vm.getFieldValueMapping());
+            caseStatement.append("'");
+        }
+        if (defaultVMAlias != null) {
+            caseStatement.append("\n\t\tELSE '");
+            caseStatement.append(defaultVMAlias);
+            caseStatement.append("'\n\tEND");
+        } else {
+            caseStatement.append("\n\t\tELSE ");
+            caseStatement.append(fieldName);
+            caseStatement.append("\n\tEND");
+        }
+
+        if (Constants.STRING.equals(projection.getField().getFieldType())) {
+            // String type projection, perform cleanup regex
+            return String.format(STRING_CLEANUP_PROJECTION, caseStatement.toString());
+        } else {
+            // Else, do the standard projection
+            return String.format(STANDARD_PROJECTION, caseStatement.toString());
         }
     }
 }
