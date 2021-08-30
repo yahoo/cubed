@@ -48,6 +48,8 @@ public class RelationalRule extends Filter {
         SYMBOLS.put("is_not_null", "!=");
         SYMBOLS.put("rlike", "RLIKE");
         SYMBOLS.put("like", "LIKE");
+        SYMBOLS.put("not_like", "NOT LIKE");
+        SYMBOLS.put("not_rlike", "NOT RLIKE");
     }
 
     private String id;
